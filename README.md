@@ -1,8 +1,10 @@
 # Method extraction for JavaScript
 ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
-* Specification: Not yet
+* **[Formal specification][]**
 * Babel plugin: Not yet
+
+[formal specification]: http://jschoi.org/21/es-method-extraction/
 
 ## Why a method-extraction operator
 [`Function.prototype.bind`][bind] is very common in object-oriented JavaScript code.
@@ -41,7 +43,7 @@ to an older proposal for a bind operator `::`.
 This older proposal did address method extraction, but it is now inactive.
 
 ## Description
-(A formal draft specification is not yet available.)
+(A [formal specification][] is available.)
 
 **Method extraction** `&.` is a **left-associative infix operator**
 that binds its right-hand side (a method identifier
