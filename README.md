@@ -17,7 +17,7 @@ object-oriented and functional APIs in JavaScript.
 Why then would an operator that does the same thing?
 Because there is an important difference.
 
-### Status quo: `Function.prototype.bind` is insecure
+### `Function.prototype.bind` is insecure
 When we run our code in an untrusted environment, global objects may be modified.
 In particular, `Function.prototype.call`…
 
@@ -27,12 +27,16 @@ In particular, `Function.prototype.call`…
 
 > JHD: Defense model here is that you run code in an environment you trust, but after that anything could happen. I use Function.bind.call to protect against this.
 
-### No other current TC39 proposal addresses method extraction
-There is a proposal for an extension-method operator `::`.
-However, this proposal does not address method extraction as an explicit non-goal,
-and it does not overlap with this proposal.
+### Method extraction is common but clunky
+???
 
-The extension-method proposal is a successor
+### No other current TC39 proposal addresses method extraction
+There is a proposal for an extension-method operator `::`
+that ostensibly addresses a similar problem.
+However, the extension-method proposal does not solve method extraction
+and explicitly calls it out as an orthogonal non-goal.
+
+In addition, the extension-method proposal is a successor
 to an older proposal for a bind operator `::`.
 This older proposal did address method extraction, but it is now inactive.
 
@@ -70,8 +74,8 @@ and optional chains.
 
 Similarly to the `?.` optional-chaining token,
 the `&.` token may be padded by whitespace.
-For example, `a &. b`\
-is equivalent to `a&.b`,\
+For example, `a &. m`\
+is equivalent to `a&.m`,\
 and `a &. [Symbol.iterator]`\
 is equivalent to `a&.[Symbol.iterator]`.
 
