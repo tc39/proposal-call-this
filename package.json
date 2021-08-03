@@ -1,13 +1,13 @@
 {
   "private": true,
-  "name": "proposal-method-extraction",
-  "description": "Draft specification for method-extraction operator in JavaScript.",
+  "name": "proposal-bind-operator",
+  "description": "Draft specification for a bind operator in JavaScript.",
   "author": "J. S. Choi <jschoi@jschoi.org> (https://jschoi.org/)",
   "license": "MIT",
-  "repository": "github:js-choi/proposal-method-extraction",
+  "repository": "github:js-choi/proposal-bind-operator",
   "scripts": {
     "prespec": "mkdir -p out/",
-    "spec": "ecmarkup spec.html out/index.html --assets inline --contributors \"J. S. Choi, Ecma International\" --copyright true --title \"ES method extraction (2021)\" --status \"proposal\" --stage 0",
+    "spec": "ecmarkup spec.html out/index.html --assets inline --contributors \"J. S. Choi, Ecma International\" --copyright true --title \"ES bind operator (2021)\" --status \"proposal\" --stage 0",
     "prewatch": "npm run prespec",
     "watch": "npm run spec -- --watch"
   },

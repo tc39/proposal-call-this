@@ -1,8 +1,8 @@
 <pre class=metadata>
-title: ES method extraction (2021)
+title: ES bind operator (2021)
 status: proposal
 stage: 0
-location: https://github.com/js-choi/proposal-method-extraction
+location: https://github.com/js-choi/proposal-bind-operator
 copyright: false
 contributors: J. S. Choi
 </pre>
@@ -12,11 +12,11 @@ contributors: J. S. Choi
 <emu-intro id=introduction>
   <h1>Introduction</h1>
   <p>This is the formal specification
-  for a proposed method-extraction operator `&amp;.` in JavaScript.
+  for a proposed bind operator `!.` in JavaScript.
   It modifies the original <a
   href=https://tc39.github.io/ecma262/>ECMAScript specification</a> with
   several new or revised clauses. See <a
-  href=https://github.com/js-choi/proposal-method-extraction/blob/main/README.md>the
+  href=https://github.com/js-choi/proposal-bind-operator/blob/main/README.md>the
   proposal's explainer</a>
   for the proposal's background, motivation, and usage examples.</p>
 </emu-intro>
@@ -47,8 +47,8 @@ contributors: J. S. Choi
           `new` MemberExpression Arguments
           MemberExpression `.` PrivateIdentifier
           <ins class="block">
-          MemberExpression `&amp;.` `[` Expression `]`
-          MemberExpression `&amp;.` IdentifierName
+          MemberExpression `!.` `[` Expression `]`
+          MemberExpression `!.` IdentifierReference
           MemberExpression TemplateLiteral
           </ins>
       </emu-grammar>
@@ -77,9 +77,9 @@ contributors: J. S. Choi
           `new` MemberExpression Arguments
           MemberExpression `.` PrivateIdentifier
           <ins class="block">
-          MemberExpression `&amp;.` `[` Expression `]`
-          MemberExpression `&amp;.` IdentifierName
-          MemberExpression `&amp;.` TemplateLiteral
+          MemberExpression `!.` `[` Expression `]`
+          MemberExpression `!.` IdentifierReference
+          MemberExpression `!.` TemplateLiteral
           </ins>
       </emu-grammar>
       <emu-alg>
@@ -104,7 +104,7 @@ contributors: J. S. Choi
       <emu-grammar>
       MemberExpression :
         MemberExpression `.` IdentifierName
-        <ins>MemberExpression `&amp;.` IdentifierName</ins>
+        <ins>MemberExpression `!.` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. If |MemberExpression| Contains _symbol_ is *true*, return *true*.
@@ -114,7 +114,7 @@ contributors: J. S. Choi
       <emu-grammar>
       CallExpression :
         CallExpression `.` IdentifierName
-        <ins>CallExpression `&amp;.` IdentifierName</ins>
+        <ins>CallExpression `!.` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. If |CallExpression| Contains _symbol_ is *true*, return *true*.
@@ -124,7 +124,7 @@ contributors: J. S. Choi
       <emu-grammar>
       OptionalChain :
         OptionalChain `.` IdentifierName
-        <ins>OptionalChain `&amp;.` IdentifierName</ins>
+        <ins>OptionalChain `!.` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. If |OptionalChain| Contains _symbol_ is *true*, return *true*.
@@ -150,8 +150,8 @@ contributors: J. S. Choi
         MemberExpression :
           MemberExpression TemplateLiteral
           `new` MemberExpression Arguments
-          <ins>MemberExpression `&amp;.` `[` Expression `]`</ins>
-          <ins>MemberExpression `&amp;.` IdentifierName</ins>
+          <ins>MemberExpression `!.` `[` Expression `]`</ins>
+          <ins>MemberExpression `!.` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. Return ~invalid~.
@@ -175,19 +175,19 @@ contributors: J. S. Choi
     <emu-grammar>
       OtherPunctuator :: one of
         `{` `(` `)` `[` `]`
-        `.` <ins>`&amp;.`</ins> `...` `;` `,`
+        `.` <ins>`!.`</ins> `...` `;` `,`
         `&lt;` `&gt;` `&lt;=` `&gt;=`
         `==` `!=` `===` `!==`
         `+` `-` `*` `%` `**`
         `++` `--`
         `&lt;&lt;` `&gt;&gt;` `&gt;&gt;&gt;`
-        `&amp;` `|` `^`
+        `!` `|` `^`
         `!` `~`
-        `&amp;&amp;` `||` `??`
+        `!!` `||` `??`
         `?` `:`
         `=` `+=` `-=` `*=` `%=` `**=`
-        `&lt;&lt;=` `&gt;&gt;=` `&gt;&gt;&gt;=` `&amp;=` `|=` `^=`
-        `&amp;&amp;=` `||=` `??=`
+        `&lt;&lt;=` `&gt;&gt;=` `&gt;&gt;&gt;=` `!=` `|=` `^=`
+        `!!=` `||=` `??=`
         `=&gt;`
     </emu-grammar>
   </emu-clause>
@@ -217,9 +217,9 @@ contributors: J. S. Choi
         `new` MemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]
         MemberExpression[?Yield, ?Await] `.` PrivateIdentifier
         <ins class="block">
-        MemberExpression[?Yield, ?Await] `&amp;.` `[` Expression[+In, ?Yield, ?Await] `]`
-        MemberExpression[?Yield, ?Await] `&amp;.` IdentifierName
-        MemberExpression[?Yield, ?Await] `&amp;.` TemplateLiteral[?Yield, ?Await, +Tagged]
+        MemberExpression[?Yield, ?Await] `!.` `[` Expression[+In, ?Yield, ?Await] `]`
+        MemberExpression[?Yield, ?Await] `!.` IdentifierReference
+        MemberExpression[?Yield, ?Await] `!.` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
 
       CallExpression[Yield, Await] :
@@ -232,9 +232,9 @@ contributors: J. S. Choi
         CallExpression[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
         CallExpression[?Yield, ?Await] `.` PrivateIdentifier
         <ins class="block">
-        CallExpression[?Yield, ?Await] `&amp;.` `[` Expression[+In, ?Yield, ?Await] `]`
-        CallExpression[?Yield, ?Await] `&amp;.` IdentifierName
-        CallExpression[?Yield, ?Await] `&amp;.` TemplateLiteral[?Yield, ?Await, +Tagged]
+        CallExpression[?Yield, ?Await] `!.` `[` Expression[+In, ?Yield, ?Await] `]`
+        CallExpression[?Yield, ?Await] `!.` IdentifierReference
+        CallExpression[?Yield, ?Await] `!.` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
 
       OptionalChain[Yield, Await] :
@@ -249,9 +249,9 @@ contributors: J. S. Choi
         OptionalChain[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
         OptionalChain[?Yield, ?Await] `.` PrivateIdentifier
         <ins class="block">
-        OptionalChain[?Yield, ?Await] `&amp;.` `[` Expression[+In, ?Yield, ?Await] `]`
-        OptionalChain[?Yield, ?Await] `&amp;.` IdentifierName
-        OptionalChain[?Yield, ?Await] `&amp;.` TemplateLiteral[?Yield, ?Await, +Tagged]
+        OptionalChain[?Yield, ?Await] `!.` `[` Expression[+In, ?Yield, ?Await] `]`
+        OptionalChain[?Yield, ?Await] `!.` IdentifierReference
+        OptionalChain[?Yield, ?Await] `!.` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
     </emu-grammar>
 
@@ -271,7 +271,7 @@ contributors: J. S. Choi
         <ins class="block">
         <emu-grammar>
           MemberExpression :
-            MemberExpression `&amp;.` TemplateLiteral
+            MemberExpression `!.` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -279,14 +279,14 @@ contributors: J. S. Choi
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with method extraction:</p>
+          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind operator:</p>
           <pre><code class="javascript">
-            a&amp;.b
+            a!.b
             `c`
           </code></pre>
-          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without method extraction:</p>
+          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind operator:</p>
           <pre><code class="javascript">
-            a&amp;b
+            a.b
             `c`
           </code></pre>
           <p>which is a valid statement and where automatic semicolon insertion does not apply.</p>
@@ -294,7 +294,7 @@ contributors: J. S. Choi
 
         <emu-grammar>
           CallExpression :
-            CallExpression `&amp;.` TemplateLiteral
+            CallExpression `!.` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -302,14 +302,14 @@ contributors: J. S. Choi
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with method extraction:</p>
+          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind operator:</p>
           <pre><code class="javascript">
-            a()&amp;.b
+            a()!.b
             `c`
           </code></pre>
-          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without method extraction:</p>
+          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind operator:</p>
           <pre><code class="javascript">
-            a()&amp;b
+            a().b
             `c`
           </code></pre>
           <p>which is a valid statement and where automatic semicolon insertion does not apply.</p>
@@ -317,7 +317,7 @@ contributors: J. S. Choi
 
         <emu-grammar>
           OptionalChain :
-            OptionalChain `&amp;.` TemplateLiteral
+            OptionalChain `!.` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -325,14 +325,14 @@ contributors: J. S. Choi
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with method extraction:</p>
+          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind operator:</p>
           <pre><code class="javascript">
-            a?.()&amp;.b
+            a?.()!.b
             `c`
           </code></pre>
-          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without method extraction:</p>
+          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind operator:</p>
           <pre><code class="javascript">
-            a()&amp;b
+            a?.().b
             `c`
           </code></pre>
           <p>which is a valid statement and where automatic semicolon insertion does not apply.</p>
@@ -341,67 +341,63 @@ contributors: J. S. Choi
       </emu-clause>
     </emu-clause>
 
-    <emu-clause id="sec-method-extraction">
-      <h1>Method Extraction</h1>
+    <emu-clause id="sec-bind-operator">
+      <h1>Bind Operator</h1>
 
       <emu-note type=editor>
         <p>This section is a wholly new subclause to be inserted after the <a
         href=https://tc39.github.io/ecma262/#sec-left-hand-side-expressions>`new` Operator clause</a>.</p>
       </emu-note>
 
-      <emu-clause id="sec-method-extraction-runtime-semantics-evaluation">
+      <emu-clause id="sec-bind-operator-runtime-semantics-evaluation">
         <h1>Runtime Semantics: Evaluation</h1>
 
         <emu-clause id="sec-property-accessors-runtime-semantics-evaluation">
           <h1>Runtime Semantics: Evaluation</h1>
-          <emu-grammar>MemberExpression : MemberExpression `&amp;.` `[` Expression `]`</emu-grammar>
+          <emu-grammar>MemberExpression : MemberExpression `!.` `[` Expression `]`</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. If the code matched by this |MemberExpression| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
-            1. Let _methodReference_ be ? EvaluatePropertyAccessWithExpressionKey(_baseValue_, |Expression|, _strict_).
-            1. Return ExtractMethod(_methodReference_).
+            1. Let _property_ be the result of evaluating |Expression|.
+            1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
 
-          <emu-grammar>MemberExpression : MemberExpression `&amp;.` IdentifierName</emu-grammar>
+          <emu-grammar>MemberExpression : MemberExpression `!.` IdentifierReference</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. If the code matched by this |MemberExpression| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
-            1. Let _methodReference_ be ? EvaluatePropertyAccessWithIdentifierKey(_baseValue_, |IdentifierName|, _strict_).
-            1. Return ExtractMethod(_methodReference_).
+            1. Let _property_ be the result of evaluating |IdentifierReference|.
+            1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
 
-          <emu-grammar>CallExpression : CallExpression `&amp;.` `[` Expression `]`</emu-grammar>
+          <emu-grammar>CallExpression : CallExpression `!.` `[` Expression `]`</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. If the code matched by this |CallExpression| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
-            1. Let _methodReference_ be ? EvaluatePropertyAccessWithExpressionKey(_baseValue_, |Expression|, _strict_).
-            1. Return ExtractMethod(_methodReference_).
+            1. Let _property_ be the result of evaluating |Expression|.
+            1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
 
-          <emu-grammar>CallExpression : CallExpression `&amp;.` IdentifierName</emu-grammar>
+          <emu-grammar>CallExpression : CallExpression `!.` IdentifierReference</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. If the code matched by this |CallExpression| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
-            1. Let _methodReference_ be ? EvaluatePropertyAccessWithIdentifierKey(_baseValue_, |IdentifierName|, _strict_).
-            1. Return ExtractMethod(_methodReference_).
+            1. Let _property_ be the result of evaluating |IdentifierReference|.
+            1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
         </emu-clause>
 
         <emu-clause id="sec-extract-method" type="abstract operation">
           <h1>
-            ExtractMethod (
-              _methodReference_: a Reference Record,
+            BindMethod (
+              _baseValue_: an ECMAScript language value,
+              _property_: another ECMAScript language value,
             )
           </h1>
           <dl class="header">
           </dl>
           <emu-alg>
-            1. Let _method_ be ? GetValue(_methodReference_.[[ReferencedName]]).
-            1. If IsCallable(_method_) is *false*, throw a *TypeError* exception.
+            1. If IsCallable(_property_) is *false*, throw a *TypeError* exception.
             1. Let _F_ be ? BoundFunctionCreate(_method_, _methodReference_.[[Base]], « »).
             1. Let _L_ be 0.
             1. Let _methodHasLength_ be ? HasOwnProperty(_method_, *"length"*).
@@ -421,7 +417,7 @@ contributors: J. S. Choi
             1. Return _F_.
           </emu-alg>
           <emu-note>
-            <p>Function objects created using method extraction are exotic objects. They also do not have a *"prototype"* property.</p>
+            <p>Function objects created using the bind operator are exotic objects. They also do not have a *"prototype"* property.</p>
           </emu-note>
         </emu-clause>
       </emu-clause>
@@ -441,23 +437,21 @@ contributors: J. S. Choi
         <p>With parameters _baseValue_ and _baseReference_.</p>
 
         <ins class="block">
-        <emu-grammar>OptionalChain : OptionalChain `&amp;.` `[` Expression `]`</emu-grammar>
+        <emu-grammar>OptionalChain : OptionalChain `!.` `[` Expression `]`</emu-grammar>
         <emu-alg>
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
           1. Let _newValue_ be ? GetValue(_newReference_).
-          1. If the code matched by this |OptionalChain| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
-          1. Let _methodReference_ be ? EvaluatePropertyAccessWithExpressionKey(_newValue_, |Expression|, _strict_).
-          1. Return ExtractMethod(_methodReference_).
+          1. Let _property_ be the result of evaluating |Expression|.
+          1. Return BindProperty(_newValue_, _property_).
         </emu-alg>
-        <emu-grammar>OptionalChain : OptionalChain `&amp;.` IdentifierName</emu-grammar>
+        <emu-grammar>OptionalChain : OptionalChain `!.` IdentifierReference</emu-grammar>
         <emu-alg>
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
           1. Let _newValue_ be ? GetValue(_newReference_).
-          1. If the code matched by this |OptionalChain| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
-          1. Let _methodReference_ be ? EvaluatePropertyAccessWithIdentifierKey(_newValue_, |IdentifierName|, _strict_).
-          1. Return ExtractMethod(_methodReference_).
+          1. Let _property_ be the result of evaluating |Expression|.
+          1. Return BindProperty(_newValue_, _property_).
         </emu-alg>
         </ins>
       </emu-clause>
