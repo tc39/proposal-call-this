@@ -9,22 +9,22 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 ## Description
 (A [formal specification][] is available.)
 
-**Method binding** `!.` is a **left-associative infix operator**.
+**Method binding** `->` is a **left-associative infix operator**.
 Its right-hand side is an **identifier**
-or an **expression** in `[` `]`,
+or an **expression** in `(` `)`,
 either of which must evaluate to a **function**.
 Its left-hand side is some expression that evaluates to an **object**.
-The `!.` operator **binds** its left-hand side
+The `->` operator **binds** its left-hand side
 to its right-hand side’s `this` value,
 creating a **bound function** in the same manner
 as [`Function.prototype.bind`][bind].
 
-For example, `arr!.fn` would be roughly
+For example, `arr->fn` would be roughly
 equivalent to `fn.bind(arr)`,
 except that its behavior does **not change**
 if code elsewhere **reassigns** the **global method** `Function.prototype.bind`.
 
-Likewise, `obj!.[createMethod()]` would be roughly
+Likewise, `obj->(createMethod())` would be roughly
 equivalent to `createMethod().bind(obj)`.
 
 If the operator’s right-hand side does not evaluate to a function during runtime,
@@ -38,11 +38,11 @@ and optional chains.
 
 | Left-hand side                  | Example       |
 | ------------------------------- | ------------- |
-| Primary expressions             | `a!.fn`       |
-| Member expressions              | `a.b!.fn`     |
-| Call expressions                | `a()!.fn`     |
-|`new` expressions with arguments | `new C()!.fn` |
-| Optional chains                 | `a?.b!.fn`    |
+| Primary expressions             | `a->fn`       |
+| Member expressions              | `a.b->fn`     |
+| Call expressions                | `a()->fn`     |
+|`new` expressions with arguments | `new C()->fn` |
+| Optional chains                 | `a?.b->fn`    |
 
 The bound functions created by the bind operator
 are **indistinguishable** from the bound functions
@@ -51,11 +51,11 @@ Both are **exotic objects** that do not have a `prototype` property,
 and which may be called like any typical function.
 
 Similarly to the `?.` optional-chaining token,
-the `!.` token may be **padded by whitespace**.\
-For example, `a !. m`\
-is equivalent to `a!.fn`,\
-and `a !. [createFn()]`\
-is equivalent to `a!.[createFn()]`.
+the `->` token may be **padded by whitespace**.\
+For example, `a -> m`\
+is equivalent to `a->fn`,\
+and `a -> (createFn())`\
+is equivalent to `a->(createFn())`.
 
 There are **no other special rules**.
 
@@ -136,7 +136,7 @@ delete Function.prototype.call;
 // Our own trusted code, running later.
 // In spite of the adversary, this no longer throws an error.
 // It also is considerably more readable.
-[0, 1, 2]!.slice(1, 2);
+[0, 1, 2]->slice(1, 2);
 ```
 
 As a bonus, the syntax is also considerably more readable
@@ -151,16 +151,16 @@ function extensionMethod () {
 }
 
 obj.actualMethod();
-obj!.extensionMethod();
+obj->extensionMethod();
 // Compare with extensionMethod.call(obj).
 ```
 
 The bind operator can also **extract** a **method** from a **class**
 into a function whose first parameter becomes its `this` binding:\
-for example, `const { slice } = Array.prototype; arr!.slice(1, 3);`.\
+for example, `const { slice } = Array.prototype; arr->slice(1, 3);`.\
 It can also similarly extract a method from an **instance**
 into a function that always uses that instance as its `this` binding:\
-for example, `const arr = arr!.[arr.slice]; slice(1, 3);`.
+for example, `const arr = arr->(arr.slice); slice(1, 3);`.
 
 ## Real-world examples
 Only minor formatting changes have been made to the status-quo examples.
@@ -197,7 +197,7 @@ does *not* address the following use cases.
 (like `arr&.slice` for `arr.slice.bind(arr.slice)` hypothetically)
 would be **nice to have**,
 but method extraction is **already possible** with this proposal.\
-`const slice = arr!.[arr.slice]; slice(1, 3);`\
+`const slice = arr->(arr.slice); slice(1, 3);`\
 is not much wordier than\
 `const slice = arr&.slice; slice(1, 3);`
 
@@ -206,7 +206,7 @@ is not much wordier than\
 **without mutating** the object)
 may **also** be useful,
 and this proposal would be **forward compatible** with such a feature
-using the **same operator** `!.` for **property-object binding**,
+using the **same operator** `->` for **property-object binding**,
 in addition to this proposal’s **method binding**.
 Getter/setter binding could be added in a separate proposal
 using `{ get () {}, set () {} }` objects.
@@ -217,7 +217,7 @@ const allDivs = {
 	get () { return this.querySelectorAll('div'); }
 };
 
-document!.allDivs;
+document->allDivs;
 ```
 
 **Function/expression application**,
@@ -226,5 +226,5 @@ are untangled into **linear pipelines**,
 is important but not addressed by this proposal.
 Instead, it is addressed by the **pipe operator**,
 with which this proposal’s syntax **works well**.\
-For example, we could untangle `h(await g(o&.f(0, v)), 1)`\
-into `v |> o&.f(0, %) |> await g(%) |> h(%, 1)`.
+For example, we could untangle `h(await g(o->f(0, v)), 1)`\
+into `v |> o->f(0, %) |> await g(%) |> h(%, 1)`.
