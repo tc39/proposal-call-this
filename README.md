@@ -34,6 +34,17 @@ equivalent to `createMethod().bind(obj)`.
 If the operator’s right-hand side does not evaluate to a function during runtime,
 then the program throws a `TypeError`.
 
+The bound functions created by the bind-`this` operator
+are **indistinguishable** from the bound functions
+that are already created by [`Function.prototype.bind`][bind].
+Both are **exotic objects** that do not have a `prototype` property,
+and which may be called like any typical function.
+
+From this definition, `o->f(...args)`
+is **indistinguishable** from `Function.prototype.call(o, ...args)`,
+except that its behavior does **not change**
+if code elsewhere **reassigns** the global method `Function.prototype.call`.
+
 Function binding has equal **[precedence][]** with
 **member expressions**, call expressions, `new` expressions with arguments,
 and optional chains.
@@ -48,14 +59,8 @@ and optional chains.
 |`new` expressions with arguments | `new C()->fn` |
 | Optional chains                 | `a?.b->fn`    |
 
-The bound functions created by the bind-`this` operator
-are **indistinguishable** from the bound functions
-that are already created by [`Function.prototype.bind`][bind].
-Both are **exotic objects** that do not have a `prototype` property,
-and which may be called like any typical function.
-
-Similarly to the `?.` optional-chaining token,
-the `->` token may be **padded by whitespace**.\
+Similarly to the `.` and `?.` operators,
+the `->` operator may be **padded by whitespace**.\
 For example, `a -> m`\
 is equivalent to `a->fn`,\
 and `a -> (createFn())`\
@@ -111,7 +116,7 @@ delete Array.prototype.slice;
 slice.call([0, 1, 2], 1, 2);
 ```
 
-But this is still vulnerable to mutation of `Function.prototype`:
+But this approach is still vulnerable to mutation of `Function.prototype`:
 
 ```js
 // Our own trusted code, running before any adversary.
