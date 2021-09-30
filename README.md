@@ -10,8 +10,8 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 (A [formal specification][] is available.)
 
 **Method binding** `->` is a **left-associative infix operator**.
-Its right-hand side is a **chain of identifiers**, **identifier** (like `f` or `o.x.y`),
-or an **expression** in `(` `)` (like `hof()`),
+Its right-hand side is an **identifier** (like `f`)
+or a parenthesized **expression** (like `hof()`),
 either of which must evaluate to a **function**.
 Its left-hand side is some expression that evaluates to an **object**.
 The `->` operator **binds** its left-hand side
@@ -23,10 +23,6 @@ For example, `arr->fn` would be roughly
 equivalent to `fn.bind(arr)`,
 except that its behavior does **not change**
 if code elsewhere **reassigns** the **global method** `Function.prototype.bind`.
-
-The right-hand side may be a property-access chain.
-`arr->o.x.y` would be roughly
-equivalent to `o.x.y.bind(arr)`.
 
 Likewise, `obj->(createMethod())` would be roughly
 equivalent to `createMethod().bind(obj)`.
