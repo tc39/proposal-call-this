@@ -37,7 +37,7 @@ Both are **exotic objects** that do not have a `prototype` property,
 and which may be called like any typical function.
 
 From this definition, `o->f(...args)`
-is **indistinguishable** from `Function.prototype.call(f, o, ...args)`,
+is **indistinguishable** from `f.call(o, ...args)`,
 except that its behavior does **not change**
 if code elsewhere **reassigns** the global method `Function.prototype.call`.
 
