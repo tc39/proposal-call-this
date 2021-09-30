@@ -189,7 +189,10 @@ ArrayPrototypePush: uncurryThis(Array.prototype.push),
 ArrayPrototypePushApply: UncurryThisStaticApply<typeof Array.prototype.push>
 ArrayPrototypeReverse: uncurryThis(Array.prototype.reverse),
 ```
-…and so on, where `uncurryThis` is `Function.bind.bind(Function.call)` (also called ["call-binding"](https://npmjs.com/call-bind)).
+…and so on, where `uncurryThis` is `Function.bind.bind(Function.call)`
+(also called [“call-binding”][call-bind]).
+
+[call-bind]: https://npmjs.com/call-bind
 
 In other words, Node.js must **wrap** every global intrinsic method
 in a `this`-uncurried **wrapper function**,
