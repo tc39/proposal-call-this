@@ -45,19 +45,26 @@ is **indistinguishable** from `Function.prototype.call(o, ...args)`,
 except that its behavior does **not change**
 if code elsewhere **reassigns** the global method `Function.prototype.call`.
 
-Function binding has equal **[precedence][]** with
+The `this`-bind operator has equal **[precedence][]** with
 **member expressions**, call expressions, `new` expressions with arguments,
 and optional chains.
+Like those operators, the `this`-bind operator also may be short-circuited
+by optional chains in its left-hand side.
 
 [precedence]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 
-| Left-hand side                  | Example       |
-| ------------------------------- | ------------- |
-| Primary expressions             | `a->fn`       |
-| Member expressions              | `a.b->fn`     |
-| Call expressions                | `a()->fn`     |
-|`new` expressions with arguments | `new C()->fn` |
-| Optional chains                 | `a?.b->fn`    |
+| Left-hand side                     | Example      | Grouping
+| ---------------------------------- | ------------ | --------------
+| Member expressions                 |`a.b->fn.c`   |`((a.b)->fn).c`
+| Call expressions                   |`a()->fn()`   |`((a())->fn)()`
+| Optional chains                    |`a?.b->fn`    |`(a?.b)->fn`
+|`new` expressions with arguments    |`new C(a)->fn`|`(new C(a))->fn`
+|`new` expressions without arguments*|`new a->fn`   |`new (a->fn)`
+
+\* Like `.` and `?.`, the `this`-bind operator also have tighter precedence
+than `new` expressions without arguments.
+Of course, `new a->fn` is not a very useful expression,
+just like how `new (fn.bind(a))` is not a very useful expression.
 
 Similarly to the `.` and `?.` operators,
 the `->` operator may be **padded by whitespace**.\
