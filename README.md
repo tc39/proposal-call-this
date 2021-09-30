@@ -194,7 +194,7 @@ ArrayPrototypeReverse: uncurryThis(Array.prototype.reverse),
 
 [call-bind]: https://npmjs.com/call-bind
 
-In other words, Node.js must **wrap** every global intrinsic method
+In other words, Node.js must **wrap** every `this` sensitive intrinsic method
 in a `this`-uncurried **wrapper function**,
 whose first argument is the method’s `this` value,
 using the `uncurryThis` helper function.
