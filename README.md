@@ -11,7 +11,7 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
 **Method binding** `->` is a **left-associative infix operator**.
 Its right-hand side is an **identifier** (like `f`)
-or a parenthesized **expression** (like `hof()`),
+or a parenthesized **expression** (like `(hof())`),
 either of which must evaluate to a **function**.
 Its left-hand side is some expression that evaluates to an **object**.
 The `->` operator **binds** its left-hand side
