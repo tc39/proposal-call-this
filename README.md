@@ -189,11 +189,12 @@ ArrayPrototypeFindIndex: uncurryThis(Array.prototype.findIndex),
 ArrayPrototypeLastIndexOf: uncurryThis(Array.prototype.lastIndexOf),
 ArrayPrototypePop: uncurryThis(Array.prototype.pop),
 ArrayPrototypePush: uncurryThis(Array.prototype.push),
-ArrayPrototypePushApply: UncurryThisStaticApply<typeof Array.prototype.push>
+ArrayPrototypePushApply: applyBind(Array.prototype.push),
 ArrayPrototypeReverse: uncurryThis(Array.prototype.reverse),
 ```
-…and so on, where `uncurryThis` is `Function.bind.bind(Function.call)`
-(also called [“call-binding”][call-bind]).
+…and so on, where `uncurryThis` is `Function.prototype.call.bind`
+(also called [“call-binding”][call-bind]),
+and `applyBind` is the similar `Function.prototype.apply.bind`.
 
 [call-bind]: https://npmjs.com/call-bind
 
@@ -205,11 +206,10 @@ using the `uncurryThis` helper function.
 The result is that code that uses these global intrinsic methods,
 like this code adapted from [node/lib/internal/v8_prof_processor.js][]:
 ```js
-  // specifier is a string.
+  // `specifier` is a string.
   const file = specifier.slice(2, -4);
-```
-…
-```js
+
+  // Later…
   if (process.platform === 'darwin') {
     tickArguments.push('--mac');
   } else if (process.platform === 'win32') {
@@ -222,27 +222,25 @@ like this code adapted from [node/lib/internal/v8_prof_processor.js][]:
 // Note: This module assumes that it runs before any third-party code.
 const {
   ArrayPrototypePush,
+  ArrayPrototypePushApply,
   ArrayPrototypeSlice,
   StringPrototypeSlice,
 } = primordials;
-```
-…
-```js
+
+  // Later…
   const file = StringPrototypeSlice(specifier, 2, -4);
-```
-…
-```js
+
+  // Later…
   if (process.platform === 'darwin') {
     ArrayPrototypePush(tickArguments, '--mac');
   } else if (process.platform === 'win32') {
     ArrayPrototypePush(tickArguments, '--windows');
   }
-  ArrayPrototypePush(tickArguments,
-                     ...ArrayPrototypeSlice(process.argv, 1));
+  ArrayPrototypePushApply(tickArguments, ArrayPrototypeSlice(process.argv, 1));
 ```
 
 This code is now protected against prototype pollution by accident and by adversaries
-(e.g., `delete Array.prototype.push`).
+(e.g., `delete Array.prototype.push` or `delete Array.prototype[Symbol.iterator]`).
 However, this protection comes at two costs:
 
 1. These [uncurried wrapper functions sometimes dramatically reduce performance][#38248].
@@ -262,22 +260,21 @@ without worrying about `Function.prototype.call` mutation:
 
 ```js
 // Note: This module assumes that it runs before any third-party code.
+const $apply = Function.prototype.apply;
 const $push = Array.prototype.push;
 const $arraySlice = Array.prototype.slice;
 const $stringSlice = String.prototype.slice;
-```
-…
-```js
-  const file = specifier->stringSlice(2, -4);
-```
-…
-```js
+
+  // Later…
+  const file = specifier->$stringSlice(2, -4);
+
+  // Later…
   if (process.platform === 'darwin') {
-    tickArguments->push('--mac');
+    tickArguments->$push('--mac');
   } else if (process.platform === 'win32') {
-    tickArguments->push('--windows');
+    tickArguments->$push('--windows');
   }
-  tickArguments->push(...process.argv->slice(1));
+  $push->$apply(tickArguments, process.argv->$arraySlice(1));
 ```
 
 Performance has improved, and readability has improved.
