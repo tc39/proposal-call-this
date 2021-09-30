@@ -1,4 +1,4 @@
-# Bind operator for JavaScript
+# Bind-`this` operator for JavaScript
 ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
 * **[Formal specification][]**
@@ -10,8 +10,8 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 (A [formal specification][] is available.)
 
 **Method binding** `->` is a **left-associative infix operator**.
-Its right-hand side is an **identifier**
-or an **expression** in `(` `)`,
+Its right-hand side is a **chain of identifiers identifier** (like `f` or `o.x.y`)
+or an **expression** in `(` `)` (like `hof()`),
 either of which must evaluate to a **function**.
 Its left-hand side is some expression that evaluates to an **object**.
 The `->` operator **binds** its left-hand side
@@ -23,6 +23,10 @@ For example, `arr->fn` would be roughly
 equivalent to `fn.bind(arr)`,
 except that its behavior does **not change**
 if code elsewhere **reassigns** the **global method** `Function.prototype.bind`.
+
+The right-hand side may be a property-access chain.
+`arr->o.x.y` would be roughly
+equivalent to `o.x.y.bind(arr)`.
 
 Likewise, `obj->(createMethod())` would be roughly
 equivalent to `createMethod().bind(obj)`.
@@ -44,7 +48,7 @@ and optional chains.
 |`new` expressions with arguments | `new C()->fn` |
 | Optional chains                 | `a?.b->fn`    |
 
-The bound functions created by the bind operator
+The bound functions created by the bind-`this` operator
 are **indistinguishable** from the bound functions
 that are already created by [`Function.prototype.bind`][bind].
 Both are **exotic objects** that do not have a `prototype` property,
@@ -59,7 +63,7 @@ is equivalent to `a->(createFn())`.
 
 There are **no other special rules**.
 
-## Why a bind operator
+## Why a bind-`this` operator
 [`Function.prototype.bind`][call] and [`Function.prototype.call`][bind]
 are very common in **object-oriented JavaScript** code.
 They are useful methods that allows us to apply functions to any object,
@@ -155,7 +159,7 @@ obj->extensionMethod();
 // Compare with extensionMethod.call(obj).
 ```
 
-The bind operator can also **extract** a **method** from a **class**
+The bind-`this` operator can also **extract** a **method** from a **class**
 into a function whose first parameter becomes its `this` binding:\
 for example, `const { slice } = Array.prototype; arr->slice(1, 3);`.\
 It can also similarly extract a method from an **instance**

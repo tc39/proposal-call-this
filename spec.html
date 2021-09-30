@@ -1,5 +1,5 @@
 <pre class=metadata>
-title: ES bind operator (2021)
+title: ES bind-this operator (2021)
 status: proposal
 stage: 0
 location: https://github.com/js-choi/proposal-bind-operator
@@ -12,7 +12,7 @@ contributors: J. S. Choi
 <emu-intro id=introduction>
   <h1>Introduction</h1>
   <p>This is the formal specification
-  for a proposed bind operator `->` in JavaScript.
+  for a proposed bind-`this` operator `->` in JavaScript.
   It modifies the original <a
   href=https://tc39.github.io/ecma262/>ECMAScript specification</a> with
   several new or revised clauses. See <a
@@ -48,7 +48,7 @@ contributors: J. S. Choi
           MemberExpression `.` PrivateIdentifier
           <ins class="block">
           MemberExpression `->` `(` Expression `)`
-          MemberExpression `->` IdentifierReference
+        MemberExpression `->` IdentifierReference
           </ins>
       </emu-grammar>
       <emu-alg>
@@ -277,12 +277,12 @@ contributors: J. S. Choi
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind operator:</p>
+          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-`this` operator:</p>
           <pre><code class="javascript">
             a->b
             `c`
           </code></pre>
-          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind operator:</p>
+          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-`this` operator:</p>
           <pre><code class="javascript">
             a.b
             `c`
@@ -300,12 +300,12 @@ contributors: J. S. Choi
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind operator:</p>
+          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-`this` operator:</p>
           <pre><code class="javascript">
             a()->b
             `c`
           </code></pre>
-          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind operator:</p>
+          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-`this` operator:</p>
           <pre><code class="javascript">
             a().b
             `c`
@@ -323,12 +323,12 @@ contributors: J. S. Choi
           </li>
         </ul>
         <emu-note>
-          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind operator:</p>
+          <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-`this` operator:</p>
           <pre><code class="javascript">
             a?.()->b
             `c`
           </code></pre>
-          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind operator:</p>
+          <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-`this` operator:</p>
           <pre><code class="javascript">
             a?.().b
             `c`
@@ -340,7 +340,7 @@ contributors: J. S. Choi
     </emu-clause>
 
     <emu-clause id="sec-bind-operator">
-      <h1>Bind Operator</h1>
+      <h1>Bind-`this` operator</h1>
 
       <emu-note type=editor>
         <p>This section is a wholly new subclause to be inserted after the <a
@@ -415,7 +415,7 @@ contributors: J. S. Choi
             1. Return _F_.
           </emu-alg>
           <emu-note>
-            <p>Function objects created using the bind operator are exotic objects. They also do not have a *"prototype"* property.</p>
+            <p>Function objects created using the bind-`this` operator are exotic objects. They also do not have a *"prototype"* property.</p>
           </emu-note>
         </emu-clause>
       </emu-clause>
@@ -454,5 +454,28 @@ contributors: J. S. Choi
         </ins>
       </emu-clause>
     </emu-clause>
+  </emu-clause>
+
+  <emu-clause id="sec-decorators">
+    <h1>Decorators</h1>
+    <h2>Syntax</h2>
+    <emu-grammar type="definition">
+      DecoratorList[Yield, Await] :
+        DecoratorList[?Yield, ?Await]? Decorator[?Yield, ?Await]
+
+      Decorator[Yield, Await] :
+        `@init:` DecoratorMemberExpression[?Yield, ?Await]
+        `@init:` DecoratorCallExpression[?Yield, ?Await]
+        `@` DecoratorMemberExpression[?Yield, ?Await]
+        `@` DecoratorCallExpression[?Yield, ?Await]
+
+      DecoratorMemberExpression[Yield, Await] :
+        IdentifierReference[?Yield, ?Await]
+        DecoratorMemberExpression[?Yield, ?Await] `.` IdentifierName
+        `(` Expression[+In, ?Yield, ?Await] `)`
+
+      DecoratorCallExpression[Yield, Await] :
+        DecoratorMemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]
+    </emu-grammar>
   </emu-clause>
 </emu-clause>
