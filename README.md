@@ -174,9 +174,12 @@ Only minor formatting changes have been made to the status-quo examples.
 Node.js’s runtime depends on many built-in JavaScript global intrinsic objects
 that are vulnerable to mutation or prototype pollution by third-party libraries.
 When initializing a JavaScript runtime, Node.js therefore caches
-wrapped versions of all global intrinsic objects (and their methods)
+wrapped versions of every global intrinsic object (and its methods)
 in a [large `primordials` object][primordials.js].
-This `primordials` object contains numerous entries that look like this:
+
+Many of the global intrinsic methods inside of the `primordials` object
+rely on the `this` binding.
+`primordials` therefore contains numerous entries that look like this:
 ```js
 ArrayPrototypeConcat: uncurryThis(Array.prototype.concat),
 ArrayPrototypeCopyWithin: uncurryThis(Array.prototype.copyWithin),
@@ -194,12 +197,12 @@ ArrayPrototypeReverse: uncurryThis(Array.prototype.reverse),
 
 [call-bind]: https://npmjs.com/call-bind
 
-In other words, Node.js must **wrap** every `this` sensitive intrinsic method
+In other words, Node.js must **wrap** every `this`-sensitive global intrinsic method
 in a `this`-uncurried **wrapper function**,
 whose first argument is the method’s `this` value,
 using the `uncurryThis` helper function.
 
-The result is that code that uses these global intrinsics,
+The result is that code that uses these global intrinsic methods,
 like this code adapted from [node/lib/internal/v8_prof_processor.js][]:
 ```js
   // specifier is a string.
