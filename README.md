@@ -205,23 +205,27 @@ but method extraction is **already possible** with this proposal.\
 is not much wordier than\
 `const slice = arr&.slice; slice(1, 3);`
 
-**Extension getters and setters**
-(i.e., extending objects with new property getters or setters
-**without mutating** the object)
-may **also** be useful,
-and this proposal would be **forward compatible** with such a feature
-using the **same operator** `->` for **property-object binding**,
-in addition to this proposal’s **method binding**.
-Getter/setter binding could be added in a separate proposal
-using `{ get () {}, set () {} }` objects.
-For example, we could add an extension getter `allDivs`
-to a `document` object like so:
-```js
-const allDivs = {
-	get () { return this.querySelectorAll('div'); }
-};
+**Extracting property accessors** (i.e., getters and setters)
+is not a goal of this proposal.
+Get/set accessors are **not like** methods. Methods are **values**.
+Accessors themselves are **not values**;
+they are functions that activate when getting or setting properties.
+Getters/setters have to be extracted using `Object.getOwnPropertyDescriptor`;
+they are not handled in a special way.
+This verbosity may be considered to be desirable [syntactic salt][]:
+it makes the developer’s intention (to extract getters/setters – and not methods)
+more explicit.
 
-document->allDivs;
+```js
+const { get: $getSize } =
+  Object.getOwnPropertyDescriptor(
+    Set.prototype, 'size');
+
+// The adversary’s code.
+delete Set; delete Function;
+
+// Our own trusted code, running later.
+new Set([0, 1, 2])->$getSize();
 ```
 
 **Function/expression application**,
@@ -232,3 +236,5 @@ Instead, it is addressed by the **pipe operator**,
 with which this proposal’s syntax **works well**.\
 For example, we could untangle `h(await g(o->f(0, v)), 1)`\
 into `v |> o->f(0, %) |> await g(%) |> h(%, 1)`.
+
+[syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
