@@ -6,6 +6,15 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
 [formal specification]: http://jschoi.org/21/es-bind-operator/
 
+This proposal is a **resurrection**
+of the old [Stage-0 Bind Operator proposal][old bind].
+It is also an alternative, **competing** proposal
+to the [Stage-1 Extensions proposal][extensions].
+For more information, see [§ Related proposals](#related-proposals).
+
+[old bind]: https://github.com/tc39/proposal-bind-operator
+[extensions]: https://github.com/tc39/proposal-extensions
+
 ## Description
 (A [formal specification][] is available.)
 
@@ -333,3 +342,18 @@ into `v |> o->f(0, %) |> await g(%) |> h(%, 1)`.
 
 [syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
 [primordials.js]: https://github.com/nodejs/node/blob/master/lib/internal/per_context/primordials.js
+
+## Related proposals
+
+### Old bind operator
+This proposal is a **resurrection**
+of the old [Stage-0 Bind Operator proposal][old bind].
+[TODO]
+
+### Extensions
+This proposal is an alternative, **competing** proposal
+to the [Stage-1 Extensions proposal][extensions].
+[TODO]
+
+### Pipe operator
+[TODO]
