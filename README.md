@@ -81,219 +81,162 @@ is equivalent to `a->(createFn())`.
 There are **no other special rules**.
 
 ## Why a bind-`this` operator
-[`Function.prototype.bind`][call] and [`Function.prototype.call`][bind]
-are very common in **object-oriented JavaScript** code.
-They are useful methods that allows us to apply functions to any object,
-binding their first arguments to the `this` bindings within those functions,
-no matter the current object environment.
-`bind` and `call` allow us to **extend** an **object** with a function
-as if that function were **its own method**.
-They serve as an important link between
-the **object-oriented** and **functional** styles in JavaScript.
+In short:
+
+1. [`.bind`][bind], [`.call`][call], and [`.apply`][apply]
+   are very useful and very common in JavaScript codebases.
+2. But `.bind`, `.call`, and `.apply` are clunky and unergonomic.
 
 [bind]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 [call]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
+[apply]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply
 
-Why then would we need an operator that does the same thing?
-Because `bind` and `call` are vulnerable to **global mutation**.
+### `.bind`, `.call`, and `.apply` are very common
+The dynamic `this` binding is a fundamental part of JavaScript design and practice today.
+Because of this, developers frequently need to change the `this` binding.
+`.bind`, `.call`, and `.apply` are arguably three of the most commonly used functions
+in all JavaScript.
 
-For example, when we run our code in an untrusted environment,
-an adversary may mutate global prototype objects
-such as `Array.prototype`,
-reassigning or deleting their methods.
+We can estimate `.bind`, `.call`, and `.apply`’s prevalences using [Node Gzemnid][].
+Although [Gzemnid can be deceptive][], we are only seeking rough estimations.
 
-```js
-// The adversary’s code.
-delete Array.prototype.slice;
+[Node Gzemnid]: https://github.com/nodejs/Gzemnid
+[Gzemnid can be deceptive]: https://github.com/nodejs/Gzemnid/blob/main/README.md#deception
 
-// Our own trusted code, running later.
-// Due to the adversary, this unexpectedly throws an error.
-[0, 1, 2].slice(1, 2);
+First, we download the 2019-06-04 [pre-built Gzemnid dataset][]
+for the top-1000 downloaded NPM packages.
+We also need Gzemnid’s `search.topcode.sh` script in the same active directory,
+which in turn requires the lz4 command suite.
+`search.topcode.sh` will output lines of code from the top-1000 packages
+that match the given regular expression.
+
+[pre-built Gzemnid dataset]: https://gzemnid.nodejs.org/datasets/
+
+```bash
+./search.topcode.sh '\.call\b' | head
+grep -aE  "\.call\b"
+177726827	debug@4.1.1/src/common.js:101:					match = formatter.call(self, val);
+177726827	debug@4.1.1/src/common.js:111:			createDebug.formatArgs.call(self, args);
+154772106	kind-of@6.0.2/index.js:54:  type = toString.call(val);
+139612972	readable-stream@3.4.0/errors-browser.js:26:      return _Base.call(this, getMessage(arg1, arg2, arg3)) || this;
+139612972	readable-stream@3.4.0/lib/_stream_duplex.js:60:  Readable.call(this, options);
+139612972	readable-stream@3.4.0/lib/_stream_duplex.js:61:  Writable.call(this, options);
+139612972	readable-stream@3.4.0/lib/_stream_passthrough.js:34:  Transform.call(this, options);
+139612972	readable-stream@3.4.0/lib/_stream_readable.js:183:  Stream.call(this);
+139612972	readable-stream@3.4.0/lib/_stream_readable.js:786:  var res = Stream.prototype.on.call(this, ev, fn);
 ```
 
-In order to harden JavaScript applications against this attack,
-we can extract critical global prototype methods into variables
-before any untrusted code may run.
-We would then use our critical methods with their `call` methods.
+We use `awk` to count those matching lines of code
+and compare their numbers for `bind`, `call`, `apply`,
+and several other frequently used functions.
 
-```js
-// Our own trusted code, running before any adversary.
-const { slice } = Array.prototype;
-
-// The adversary’s code.
-delete Array.prototype.slice;
-
-// Our own trusted code, running later.
-// In spite of the adversary, this no longer throws an error.
-slice.call([0, 1, 2], 1, 2);
+```bash
+> ls
+search.topcode.sh
+slim.topcode.1000.txt.lz4
+> ./search.topcode.sh '\.call\b' | awk 'END { print NR }'
+500084
+> ./search.topcode.sh '\.apply\b' | awk 'END { print NR }'
+225315
+> ./search.topcode.sh '\.bind\b' | awk 'END { print NR }'
+170248
+> ./search.topcode.sh '\b.map\b' | awk 'END { print NR }'
+1016503
+> ./search.topcode.sh '\bconsole.log\b' | awk 'END { print NR }'
+271915
+> ./search.topcode.sh '\.set\b' | awk 'END { print NR }'
+168872
+> ./search.topcode.sh '\.push\b' | awk 'END { print NR }'
+70116
 ```
 
-But this approach is still vulnerable to mutation of `Function.prototype`:
+These results suggest that usage of `.call`, `.bind`, and `.apply`
+are comparable to usage of other frequently used standard functions.
+In this dataset, their combined usage even exceeds that of `console.log`.
+
+Obviously, [this methodology has many pitfalls][Gzemnid can be deceptive],
+but we are only looking for roughly estimated orders of magnitude
+relative to other baseline functions.
+Gzemnid counts each library’s codebase only once; it does not double-count dependencies.
+
+In fact, this method definitely underestimates the prevalences
+of `.bind`, `.call`, and `.apply`
+by excluding the large JavaScript codebases of Node and Deno.
+Node and Deno [copiously use bound functions for security][security-use-case]
+hundreds or thousands of times.
+
+[security-use-case]: https://github.com/js-choi/proposal-bind-this/blob/main/security-use-case.md
+
+### `.bind`, `.call`, and `.apply` are clunky
+JavaScript developers are used to using methods in a [noun–verb–noun word order][]
+that resembles English and other [SVO human languages][]: `obj.fn(arg)`.
+
+[SVO human languages]: https://en.wikipedia.org/wiki/Category:Subject–verb–object_languages
+
+However, `.bind`, `.call`, and `.apply` flip this “natural” word order,
+They flip the first noun and the verb,
+and they interpose the verb’s `Function.prototype` method between them:
+`obj.call(arg)`.
+
+Consider the following real-life code using `.bind` or `.call`,
+and compare them to versions that use the `->` operator.
+The difference is especially evident when you read them aloud.
 
 ```js
-// Our own trusted code, running before any adversary.
-const { slice } = Array.prototype;
+// kind-of@6.0.2/index.js
+type = toString.call(val);
+type = val->toString();
 
-// The adversary’s code.
-delete Array.prototype.slice;
-delete Function.prototype.call;
+// debug@4.1.1/src/common.js
+match = formatter.call(self, val);
+match = self->formatter(val);
 
-// Our own trusted code, running later.
-// Due to the adversary, this throws an error again.
-slice.call([0, 1, 2], 1, 2);
+createDebug.formatArgs.call(self, args);
+self->(createDebug.formatArgs)(args);
+
+// readable-stream@3.4.0/errors-browser.js
+return _Base.call(this, getMessage(arg1, arg2, arg3)) || this;
+return this->_Base(getMessage(arg1, arg2, arg3)) || this;
+
+// readable-stream@3.4.0/lib/_stream_readable.js
+var res = Stream.prototype.on.call(this, ev, fn);
+var res = this->(Stream.prototype.on)(ev, fn);
+
+var res = Stream.prototype.removeAllListeners.apply(this, arguments);
+var res = this->(Stream.prototype.removeAllListeners)(...arguments);
+
+// yargs@13.2.4/lib/middleware.js
+Array.prototype.push.apply(globalMiddleware, callback)
+globalMiddleware->(Array.prototype.push)(...callback)
+
+// yargs@13.2.4/lib/command.js
+[].push.apply(positionalKeys, parsed.aliases[key])
+
+// pretty-format@24.8.0/build-es5/index.js
+var code = fn.apply(colorConvert, arguments);
+var code = colorConvert->fn(...arguments);
+
+// q@1.5.1/q.js
+return value.apply(thisp, args);
+return thisp->value(...args);
+
+// rxjs@6.5.2/src/internal/operators/every.ts
+result = this.predicate.call(this.thisArg, value, this.index++, this.source);
+result = this.thisArg->(this.predicate)(value, this.index++, this.source);
+
+// bluebird@3.5.5/js/release/synchronous_inspection.js
+return isPending.call(this._target());
+return this._target()->isPending();
+
+var matchesPredicate = tryCatch(item).call(boundTo, e);
+var matchesPredicate = boundTo->(tryCatch(item))(e);
+
+// graceful-fs@4.1.15/polyfills.js
+return fs$read.call(fs, fd, buffer, offset, length, position, callback)
+return fs->fs$read(fd, buffer, offset, length, position, callback)
 ```
 
-There is currently no way to harden code against mutation of `Function.prototype`.
-A new operator, however, would not be vulnerable to mutation:
-
-```js
-// Our own trusted code, running before any adversary.
-const { slice } = Array.prototype;
-
-// The adversary’s code.
-delete Array.prototype.slice;
-delete Function.prototype.call;
-
-// Our own trusted code, running later.
-// In spite of the adversary, this no longer throws an error.
-// It also is considerably more readable.
-[0, 1, 2]->slice(1, 2);
-```
-
-As a bonus, the syntax is also considerably more readable
-than code that uses `bind` or `call`.
-A bound function could be called inline
-as if it were **actually a method** in the object
-whose **property key** is the **function itself**:
-
-```js
-function extensionMethod () {
-  return this;
-}
-
-obj.actualMethod();
-obj->extensionMethod();
-// Compare with extensionMethod.call(obj).
-```
-
-## Real-world examples
-Only minor formatting changes have been made to the status-quo examples.
-
-### Node.js
-Node.js’s runtime depends on many built-in JavaScript global intrinsic objects
-that are vulnerable to mutation or prototype pollution by third-party libraries.
-When initializing a JavaScript runtime, Node.js therefore caches
-wrapped versions of every global intrinsic object (and its methods)
-in a [large `primordials` object][primordials.js].
-
-Many of the global intrinsic methods inside of the `primordials` object
-rely on the `this` binding.
-`primordials` therefore contains numerous entries that look like this:
-```js
-ArrayPrototypeConcat: uncurryThis(Array.prototype.concat),
-ArrayPrototypeCopyWithin: uncurryThis(Array.prototype.copyWithin),
-ArrayPrototypeFill: uncurryThis(Array.prototype.fill),
-ArrayPrototypeFind: uncurryThis(Array.prototype.find),
-ArrayPrototypeFindIndex: uncurryThis(Array.prototype.findIndex),
-ArrayPrototypeLastIndexOf: uncurryThis(Array.prototype.lastIndexOf),
-ArrayPrototypePop: uncurryThis(Array.prototype.pop),
-ArrayPrototypePush: uncurryThis(Array.prototype.push),
-ArrayPrototypePushApply: applyBind(Array.prototype.push),
-ArrayPrototypeReverse: uncurryThis(Array.prototype.reverse),
-```
-…and so on, where `uncurryThis` is `Function.prototype.call.bind`
-(also called [“call-binding”][call-bind]),
-and `applyBind` is the similar `Function.prototype.apply.bind`.
-
-[call-bind]: https://npmjs.com/call-bind
-
-In other words, Node.js must **wrap** every `this`-sensitive global intrinsic method
-in a `this`-uncurried **wrapper function**,
-whose first argument is the method’s `this` value,
-using the `uncurryThis` helper function.
-
-The result is that code that uses these global intrinsic methods,
-like this code adapted from [node/lib/internal/v8_prof_processor.js][]:
-```js
-  // `specifier` is a string.
-  const file = specifier.slice(2, -4);
-
-  // Later…
-  if (process.platform === 'darwin') {
-    tickArguments.push('--mac');
-  } else if (process.platform === 'win32') {
-    tickArguments.push('--windows');
-  }
-  tickArguments.push(...process.argv.slice(1));
-```
-…must instead look like this:
-```js
-// Note: This module assumes that it runs before any third-party code.
-const {
-  ArrayPrototypePush,
-  ArrayPrototypePushApply,
-  ArrayPrototypeSlice,
-  StringPrototypeSlice,
-} = primordials;
-
-  // Later…
-  const file = StringPrototypeSlice(specifier, 2, -4);
-
-  // Later…
-  if (process.platform === 'darwin') {
-    ArrayPrototypePush(tickArguments, '--mac');
-  } else if (process.platform === 'win32') {
-    ArrayPrototypePush(tickArguments, '--windows');
-  }
-  ArrayPrototypePushApply(tickArguments, ArrayPrototypeSlice(process.argv, 1));
-```
-
-This code is now protected against prototype pollution by accident and by adversaries
-(e.g., `delete Array.prototype.push` or `delete Array.prototype[Symbol.iterator]`).
-However, this protection comes at two costs:
-
-1. These [uncurried wrapper functions sometimes dramatically reduce performance][#38248].
-   This would not be a problem if Node.js could cache
-   and use the intrinsic methods directly.
-   But the only current way to use intrinsic methods
-   would be with `Function.prototype.call`, which is also vulnerable to mutation.
-
-2. The Node.js community has had [much concern about barriers to contribution][#30697]
-   by ordinary JavaScript developers, due to the unidiomatic code encouraged by these
-   uncurried wrapper functions.
-
-Both of these problems are much improved by the bind-`this` operator.
-Instead of wrapping every global method with `uncurryThis`,
-Node.js could cached and used **directly**
-without worrying about `Function.prototype.call` mutation:
-
-```js
-// Note: This module assumes that it runs before any third-party code.
-const $apply = Function.prototype.apply;
-const $push = Array.prototype.push;
-const $arraySlice = Array.prototype.slice;
-const $stringSlice = String.prototype.slice;
-
-  // Later…
-  const file = specifier->$stringSlice(2, -4);
-
-  // Later…
-  if (process.platform === 'darwin') {
-    tickArguments->$push('--mac');
-  } else if (process.platform === 'win32') {
-    tickArguments->$push('--windows');
-  }
-  $push->$apply(tickArguments, process.argv->$arraySlice(1));
-```
-
-Performance has improved, and readability has improved.
-There are no more uncurried wrapper functions;
-instead, the code uses the intrinsic methods in a notation
-similar to normal method calling with `.`.
-
-[node/lib/internal/v8_prof_processor.js]: https://github.com/nodejs/node/blob/e46c680bf2b211bbd52cf959ca17ee98c7f657f5/lib/internal/v8_prof_processor.js
-[#38248]: https://github.com/nodejs/node/pull/38248
-[#30697]: https://github.com/nodejs/node/issues/30697
+[noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
 
 ## Non-goals
 A goal of this proposal is **simplicity**.
