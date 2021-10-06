@@ -357,47 +357,51 @@ contributors: J. S. Choi
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. Let _property_ be the result of evaluating |Expression|.
-            1. Return BindMethod(_baseValue_, _property_).
+            1. Let _funcRef_ be the result of evaluating |Expression|.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Return BindThis(_baseValue_, _func_).
           </emu-alg>
 
           <emu-grammar>MemberExpression : MemberExpression `::` IdentifierReference</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. Let _property_ be the result of evaluating |IdentifierReference|.
-            1. Return BindMethod(_baseValue_, _property_).
+            1. Let _funcRef_ be the result of evaluating |IdentifierReference|.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Return BindThis(_baseValue_, _func_).
           </emu-alg>
 
           <emu-grammar>CallExpression : CallExpression `::` `(` Expression `)`</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. Let _property_ be the result of evaluating |Expression|.
-            1. Return BindMethod(_baseValue_, _property_).
+            1. Let _funcRef_ be the result of evaluating |Expression|.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Return BindThis(_baseValue_, _func_).
           </emu-alg>
 
           <emu-grammar>CallExpression : CallExpression `::` IdentifierReference</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
-            1. Let _property_ be the result of evaluating |IdentifierReference|.
-            1. Return BindMethod(_baseValue_, _property_).
+            1. Let _funcRef_ be the result of evaluating |IdentifierReference|.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Return BindThis(_baseValue_, _func_).
           </emu-alg>
         </emu-clause>
 
         <emu-clause id="sec-extract-method" type="abstract operation">
           <h1>
-            BindMethod (
+            BindThis (
               _baseValue_: an ECMAScript language value,
-              _property_: another ECMAScript language value,
+              _func_: another ECMAScript language value,
             )
           </h1>
           <dl class="header">
           </dl>
           <emu-alg>
-            1. If IsCallable(_property_) is *false*, throw a *TypeError* exception.
-            1. Let _F_ be ? BoundFunctionCreate(_method_, _methodReference_.[[Base]], « »).
+            1. If IsCallable(_func_) is *false*, throw a *TypeError* exception.
+            1. Let _F_ be ? BoundFunctionCreate(_func_, _baseValue_, « »).
             1. Let _L_ be 0.
             1. Let _methodHasLength_ be ? HasOwnProperty(_method_, *"length"*).
             1. If _methodHasLength_ is *true*, then
@@ -441,16 +445,18 @@ contributors: J. S. Choi
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
           1. Let _newValue_ be ? GetValue(_newReference_).
-          1. Let _property_ be the result of evaluating |Expression|.
-          1. Return BindMethod(_newValue_, _property_).
+          1. Let _funcRef_ be the result of evaluating |Expression|.
+          1. Let _func_ be ? GetValue(_funcRef_).
+          1. Return BindThis(_newValue_, _func_).
         </emu-alg>
         <emu-grammar>OptionalChain : OptionalChain `::` IdentifierReference</emu-grammar>
         <emu-alg>
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
           1. Let _newValue_ be ? GetValue(_newReference_).
-          1. Let _property_ be the result of evaluating |Expression|.
-          1. Return BindMethod(_newValue_, _property_).
+          1. Let _funcRef_ be the result of evaluating |Expression|.
+          1. Let _func_ be ? GetValue(_funcRef_).
+          1. Return BindThis(_newValue_, _func_).
         </emu-alg>
         </ins>
       </emu-clause>
