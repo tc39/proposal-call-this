@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "proposal-bind-operator",
-  "description": "Draft specification for a bind operator in JavaScript.",
+  "name": "proposal-bind-this",
+  "description": "Draft specification for a bind-this operator in JavaScript.",
   "author": "J. S. Choi <jschoi@jschoi.org> (https://jschoi.org/)",
   "license": "MIT",
   "repository": "github:js-choi/proposal-bind-operator",
