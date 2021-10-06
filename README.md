@@ -18,20 +18,19 @@ For more information, see [§ Related proposals](#related-proposals).
 ## Description
 (A [formal specification][] is available.)
 
-**Method binding** `->` is a **left-associative infix operator**.
+Method binding `->` is a **left-associative** binary operator.
 Its right-hand side is an **identifier** (like `f`)
 or a parenthesized **expression** (like `(hof())`),
 either of which must evaluate to a **function**.
 Its left-hand side is some expression that evaluates to an **object**.
-The `->` operator **binds** its left-hand side
+The `->` operator binds its left-hand side
 to its right-hand side’s `this` value,
 creating a **bound function** in the same manner
 as [`Function.prototype.bind`][bind].
 
-For example, `arr->fn` would be roughly
-equivalent to `fn.bind(arr)`,
-except that its behavior does **not change**
-if code elsewhere **reassigns** the **global method** `Function.prototype.bind`.
+For example, `arr->fn` would equivalent to `fn.bind(arr)`
+(except that its behavior does not change
+if code elsewhere reassigns the global method `Function.prototype.bind`).
 
 Likewise, `obj->(createMethod())` would be roughly
 equivalent to `createMethod().bind(obj)`.
@@ -46,9 +45,9 @@ Both are **exotic objects** that do not have a `prototype` property,
 and which may be called like any typical function.
 
 From this definition, `o->f(...args)`
-is **indistinguishable** from `f.call(o, ...args)`,
-except that its behavior does **not change**
-if code elsewhere **reassigns** the global method `Function.prototype.call`.
+is also **indistinguishable** from `f.call(o, ...args)`
+(except that its behavior does not change
+if code elsewhere reassigns the global method `Function.prototype.call`).
 
 The `this`-bind operator has equal **[precedence][]** with
 **member expressions**, call expressions, `new` expressions with arguments,
@@ -78,7 +77,7 @@ is equivalent to `a->fn`,\
 and `a -> (createFn())`\
 is equivalent to `a->(createFn())`.
 
-There are **no other special rules**.
+There are **no other** special rules.
 
 ## Why a bind-`this` operator
 In short:
@@ -245,16 +244,17 @@ does *not* address the following use cases.
 
 **Tacit method extraction** with another operator
 (like `arr&.slice` for `arr.slice.bind(arr.slice)` hypothetically)
-would be **nice to have**,
-but method extraction is **already possible** with this proposal.\
+would be nice to have,
+but method extraction is already possible with this proposal.\
 `const slice = arr->(arr.slice); slice(1, 3);`\
 is not much wordier than\
 `const slice = arr&.slice; slice(1, 3);`
 
 **Extracting property accessors** (i.e., getters and setters)
 is not a goal of this proposal.
-Get/set accessors are **not like** methods. Methods are **values**.
-Accessors themselves are **not values**;
+Get/set accessors are **not like** methods.
+Methods are **properties** (which happen to be functions).
+Accessors themselves are **not** properties;
 they are functions that activate when getting or setting properties.
 Getters/setters have to be extracted using `Object.getOwnPropertyDescriptor`;
 they are not handled in a special way.
@@ -275,11 +275,11 @@ new Set([0, 1, 2])->$getSize();
 ```
 
 **Function/expression application**,
-in which **deeply nested** function calls and other expressions
-are untangled into **linear pipelines**,
+in which deeply nested function calls and other expressions
+are untangled into linear pipelines,
 is important but not addressed by this proposal.
 Instead, it is addressed by the **pipe operator**,
-with which this proposal’s syntax **works well**.\
+with which this proposal’s syntax works well.\
 For example, we could untangle `h(await g(o->f(0, v)), 1)`\
 into `v |> o->f(0, %) |> await g(%) |> h(%, 1)`.
 
