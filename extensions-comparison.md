@@ -3,7 +3,7 @@ There are two proposals that do similar things.
 
 * A [proposal for an extensions system][extensions system]:
   `::{ extFn } = obj`, `obj::extFn`, and `obj::extNamespace:extFn`.
-* A [proposal for a bind-`this` operator][bind-this]: `obj->fn` and `obj->(fn)`.
+* A [proposal for a bind-`this` operator][bind-this]: `obj::fn` and `obj::(fn)`.
 
 In brief, the concrete differences are:
 
@@ -52,7 +52,7 @@ does not **[shadow][shadowing]** any other variables.
 ```js
 const $has = Set.prototype.has;
 
-s->$has(1);
+s::$has(1);
 ```
 This is **nothing new**:
 developers **already** have to be careful with their variables’ names,
@@ -90,7 +90,7 @@ const { get: getSize } =
     Set.prototype, 'size');
 
 // Calls the size getter.
-s->getSize();
+s::getSize();
 ```
 We would use the getter/setter functions **as usual**
 with no special syntax.
@@ -136,8 +136,8 @@ const { get: $getSize } =
   Object.getOwnPropertyDescriptor(
     Set.prototype, 'size');
 
-s->$has(1);
-s->$getSize();
+s::$has(1);
+s::$getSize();
 ```
 
 <tr>
@@ -192,8 +192,8 @@ delete Set;
 delete Function;
 
 // Our own trusted code, running later.
-s->$has(1);
-s->$getSize();
+s::$has(1);
+s::$getSize();
 ```
 
 <tr>
@@ -285,8 +285,8 @@ const $ = {
     getIntrinsic('Set.prototype.size'),
 };
 const s = new Set([0, 1, 2]);
-s->($.has)(1);
-s->($.getSize)();
+s::($.has)(1);
+s::($.getSize)();
 ```
 
 <tr>
@@ -330,7 +330,7 @@ let map = new Map();
 
 function foo() {
   // $map is verb
-  a->$map(f);
+  a::$map(f);
 }
 ```
 
@@ -358,10 +358,10 @@ Because it may be an arbitrary expression,
 it is both more verbose, more explicit, and more flexible.
 
 ```js
-s->(Set.has)(1);
+s::(Set.has)(1);
 // This is equivalent:
 const $has = Set.has;
-s->$has(1);
+s::$has(1);
 ```
 
 <tr>
@@ -394,15 +394,15 @@ serving as more [syntactic salt][].
 The bind-`this` operator would encourage such clarity and explicitness.
 
 ```js
-indexed->(Array.prototype.map)(x => x * x);
-indexed->(Array.prototype.filter)(x => x > 0);
+indexed::(Array.prototype.map)(x => x * x);
+indexed::(Array.prototype.filter)(x => x > 0);
 
 const {
   map: $map, filter: $filter,
 } = Array.prototype;
 
-indexed->$map(x => x * x);
-indexed->$filter(x => x > 0);
+indexed::$map(x => x * x);
+indexed::$filter(x => x > 0);
 ```
 
 <tr>
@@ -492,7 +492,7 @@ If we want to convert a static-method call into a postfix chaining form,
 we can use the [pipe operator][] again.
 
 ```js
-obj->(Object.prototype.toString)();
+obj::(Object.prototype.toString)();
 obj |> Object.keys(^);
 ```
 
@@ -622,8 +622,8 @@ export const at = function (i) {
 // Another module
 import $at from 'foo';
 'Hello world'.split(' ')
-  ->$at(0).toUpperCase()
-  ->$at(-1);
+  ::$at(0).toUpperCase()
+  ::$at(-1);
 ```
 Libraries may export only to the single ordinary variable namespace.
 There is therefore little risk of ecosystem schism.
@@ -665,7 +665,7 @@ const user = {
   name: 'hax',
   greet () { return `Hi ${this.name}!`; }
 };
-const f = user->greet;
+const f = user::greet;
 f(); // 'Hi hax!'
 ```
 

@@ -18,21 +18,21 @@ For more information, see [§ Related proposals](#related-proposals).
 ## Description
 (A [formal specification][] is available.)
 
-Method binding `->` is a **left-associative** binary operator.
+Method binding `::` is a **left-associative** binary operator.
 Its right-hand side is an **identifier** (like `f`)
 or a parenthesized **expression** (like `(hof())`),
 either of which must evaluate to a **function**.
 Its left-hand side is some expression that evaluates to an **object**.
-The `->` operator binds its left-hand side
+The `::` operator binds its left-hand side
 to its right-hand side’s `this` value,
 creating a **bound function** in the same manner
 as [`Function.prototype.bind`][bind].
 
-For example, `arr->fn` would equivalent to `fn.bind(arr)`
+For example, `arr::fn` would be equivalent to `fn.bind(arr)`
 (except that its behavior does not change
 if code elsewhere reassigns the global method `Function.prototype.bind`).
 
-Likewise, `obj->(createMethod())` would be roughly
+Likewise, `obj::(createMethod())` would be roughly
 equivalent to `createMethod().bind(obj)`.
 
 If the operator’s right-hand side does not evaluate to a function during runtime,
@@ -44,7 +44,7 @@ that are already created by [`Function.prototype.bind`][bind].
 Both are **exotic objects** that do not have a `prototype` property,
 and which may be called like any typical function.
 
-From this definition, `o->f(...args)`
+From this definition, `o::f(...args)`
 is also **indistinguishable** from `f.call(o, ...args)`
 (except that its behavior does not change
 if code elsewhere reassigns the global method `Function.prototype.call`).
@@ -59,23 +59,23 @@ by optional chains in its left-hand side.
 
 | Left-hand side                     | Example      | Grouping
 | ---------------------------------- | ------------ | --------------
-| Member expressions                 |`a.b->fn.c`   |`((a.b)->fn).c`
-| Call expressions                   |`a()->fn()`   |`((a())->fn)()`
-| Optional chains                    |`a?.b->fn`    |`(a?.b)->fn`
-|`new` expressions with arguments    |`new C(a)->fn`|`(new C(a))->fn`
-|`new` expressions without arguments*|`new a->fn`   |`new (a->fn)`
+| Member expressions                 |`a.b::fn.c`   |`((a.b)::fn).c`
+| Call expressions                   |`a()::fn()`   |`((a())::fn)()`
+| Optional chains                    |`a?.b::fn`    |`(a?.b)::fn`
+|`new` expressions with arguments    |`new C(a)::fn`|`(new C(a))::fn`
+|`new` expressions without arguments*|`new a::fn`   |`new (a::fn)`
 
 \* Like `.` and `?.`, the `this`-bind operator also have tighter precedence
 than `new` expressions without arguments.
-Of course, `new a->fn` is not a very useful expression,
+Of course, `new a::fn` is not a very useful expression,
 just like how `new (fn.bind(a))` is not a very useful expression.
 
 Similarly to the `.` and `?.` operators,
-the `->` operator may be **padded by whitespace**.\
-For example, `a -> m`\
-is equivalent to `a->fn`,\
-and `a -> (createFn())`\
-is equivalent to `a->(createFn())`.
+the `::` operator may be **padded by whitespace**.\
+For example, `a :: m`\
+is equivalent to `a::fn`,\
+and `a :: (createFn())`\
+is equivalent to `a::(createFn())`.
 
 There are **no other** special rules.
 
@@ -178,61 +178,61 @@ and they interpose the verb’s `Function.prototype` method between them:
 `obj.call(arg)`.
 
 Consider the following real-life code using `.bind` or `.call`,
-and compare them to versions that use the `->` operator.
+and compare them to versions that use the `::` operator.
 The difference is especially evident when you read them aloud.
 
 ```js
 // kind-of@6.0.2/index.js
 type = toString.call(val);
-type = val->toString();
+type = val::toString();
 
 // debug@4.1.1/src/common.js
 match = formatter.call(self, val);
-match = self->formatter(val);
+match = self::formatter(val);
 
 createDebug.formatArgs.call(self, args);
-self->(createDebug.formatArgs)(args);
+self::(createDebug.formatArgs)(args);
 
 // readable-stream@3.4.0/errors-browser.js
 return _Base.call(this, getMessage(arg1, arg2, arg3)) || this;
-return this->_Base(getMessage(arg1, arg2, arg3)) || this;
+return this::_Base(getMessage(arg1, arg2, arg3)) || this;
 
 // readable-stream@3.4.0/lib/_stream_readable.js
 var res = Stream.prototype.on.call(this, ev, fn);
-var res = this->(Stream.prototype.on)(ev, fn);
+var res = this::(Stream.prototype.on)(ev, fn);
 
 var res = Stream.prototype.removeAllListeners.apply(this, arguments);
-var res = this->(Stream.prototype.removeAllListeners)(...arguments);
+var res = this::(Stream.prototype.removeAllListeners)(...arguments);
 
 // yargs@13.2.4/lib/middleware.js
 Array.prototype.push.apply(globalMiddleware, callback)
-globalMiddleware->(Array.prototype.push)(...callback)
+globalMiddleware::(Array.prototype.push)(...callback)
 
 // yargs@13.2.4/lib/command.js
 [].push.apply(positionalKeys, parsed.aliases[key])
 
 // pretty-format@24.8.0/build-es5/index.js
 var code = fn.apply(colorConvert, arguments);
-var code = colorConvert->fn(...arguments);
+var code = colorConvert::fn(...arguments);
 
 // q@1.5.1/q.js
 return value.apply(thisp, args);
-return thisp->value(...args);
+return thisp::value(...args);
 
 // rxjs@6.5.2/src/internal/operators/every.ts
 result = this.predicate.call(this.thisArg, value, this.index++, this.source);
-result = this.thisArg->(this.predicate)(value, this.index++, this.source);
+result = this.thisArg::(this.predicate)(value, this.index++, this.source);
 
 // bluebird@3.5.5/js/release/synchronous_inspection.js
 return isPending.call(this._target());
-return this._target()->isPending();
+return this._target()::isPending();
 
 var matchesPredicate = tryCatch(item).call(boundTo, e);
-var matchesPredicate = boundTo->(tryCatch(item))(e);
+var matchesPredicate = boundTo::(tryCatch(item))(e);
 
 // graceful-fs@4.1.15/polyfills.js
 return fs$read.call(fs, fd, buffer, offset, length, position, callback)
-return fs->fs$read(fd, buffer, offset, length, position, callback)
+return fs::fs$read(fd, buffer, offset, length, position, callback)
 ```
 
 [noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
@@ -246,7 +246,7 @@ does *not* address the following use cases.
 (like `arr&.slice` for `arr.slice.bind(arr.slice)` hypothetically)
 would be nice to have,
 but method extraction is already possible with this proposal.\
-`const slice = arr->(arr.slice); slice(1, 3);`\
+`const slice = arr::(arr.slice); slice(1, 3);`\
 is not much wordier than\
 `const slice = arr&.slice; slice(1, 3);`
 
@@ -271,7 +271,7 @@ const { get: $getSize } =
 delete Set; delete Function;
 
 // Our own trusted code, running later.
-new Set([0, 1, 2])->$getSize();
+new Set([0, 1, 2])::$getSize();
 ```
 
 **Function/expression application**,
@@ -280,8 +280,8 @@ are untangled into linear pipelines,
 is important but not addressed by this proposal.
 Instead, it is addressed by the **pipe operator**,
 with which this proposal’s syntax works well.\
-For example, we could untangle `h(await g(o->f(0, v)), 1)`\
-into `v |> o->f(0, %) |> await g(%) |> h(%, 1)`.
+For example, we could untangle `h(await g(o::f(0, v)), 1)`\
+into `v |> o::f(0, %) |> await g(%) |> h(%, 1)`.
 
 [syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
 [primordials.js]: https://github.com/nodejs/node/blob/master/lib/internal/per_context/primordials.js
@@ -348,7 +348,7 @@ Object.keys(envars)
 // Adapted from chalk@2.4.2/index.js
 return this._styles
   |> (^ ? ^.concat(codes) : [codes])
-  |> this->build(^, this._empty, key);
+  |> this::build(^, this._empty, key);
 ```
 
 [pipe operator]: https://github.com/tc39/proposal-pipeline-operator

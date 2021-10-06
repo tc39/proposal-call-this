@@ -12,7 +12,7 @@ contributors: J. S. Choi
 <emu-intro id=introduction>
   <h1>Introduction</h1>
   <p>This is the formal specification
-  for a proposed bind-`this` operator `->` in JavaScript.
+  for a proposed bind-`this` operator `::` in JavaScript.
   It modifies the original <a
   href=https://tc39.github.io/ecma262/>ECMAScript specification</a> with
   several new or revised clauses. See <a
@@ -47,8 +47,8 @@ contributors: J. S. Choi
           `new` MemberExpression Arguments
           MemberExpression `.` PrivateIdentifier
           <ins class="block">
-          MemberExpression `->` `(` Expression `)`
-        MemberExpression `->` IdentifierReference
+          MemberExpression `::` `(` Expression `)`
+        MemberExpression `::` IdentifierReference
           </ins>
       </emu-grammar>
       <emu-alg>
@@ -76,8 +76,8 @@ contributors: J. S. Choi
           `new` MemberExpression Arguments
           MemberExpression `.` PrivateIdentifier
           <ins class="block">
-          MemberExpression `->` `(` Expression `)`
-          MemberExpression `->` IdentifierReference
+          MemberExpression `::` `(` Expression `)`
+          MemberExpression `::` IdentifierReference
           </ins>
       </emu-grammar>
       <emu-alg>
@@ -102,7 +102,7 @@ contributors: J. S. Choi
       <emu-grammar>
       MemberExpression :
         MemberExpression `.` IdentifierName
-        <ins>MemberExpression `->` IdentifierReference</ins>
+        <ins>MemberExpression `::` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. If |MemberExpression| Contains _symbol_ is *true*, return *true*.
@@ -112,7 +112,7 @@ contributors: J. S. Choi
       <emu-grammar>
       CallExpression :
         CallExpression `.` IdentifierName
-        <ins>CallExpression `->` IdentifierReference</ins>
+        <ins>CallExpression `::` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. If |CallExpression| Contains _symbol_ is *true*, return *true*.
@@ -122,7 +122,7 @@ contributors: J. S. Choi
       <emu-grammar>
       OptionalChain :
         OptionalChain `.` IdentifierName
-        <ins>OptionalChain `->` IdentifierReference</ins>
+        <ins>OptionalChain `::` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. If |OptionalChain| Contains _symbol_ is *true*, return *true*.
@@ -148,8 +148,8 @@ contributors: J. S. Choi
         MemberExpression :
           MemberExpression TemplateLiteral
           `new` MemberExpression Arguments
-          <ins>MemberExpression `->` `(` Expression `)`</ins>
-          <ins>MemberExpression `->` IdentifierReference</ins>
+          <ins>MemberExpression `::` `(` Expression `)`</ins>
+          <ins>MemberExpression `::` IdentifierReference</ins>
       </emu-grammar>
       <emu-alg>
         1. Return ~invalid~.
@@ -173,7 +173,7 @@ contributors: J. S. Choi
     <emu-grammar>
       OtherPunctuator :: one of
         `{` `(` `)` `[` `]`
-        `.` <ins>`->`</ins> `...` `;` `,`
+        `.` <ins>`::`</ins> `...` `;` `,`
         `&lt;` `&gt;` `&lt;=` `&gt;=`
         `==` `!=` `===` `!==`
         `+` `-` `*` `%` `**`
@@ -215,9 +215,9 @@ contributors: J. S. Choi
         `new` MemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]
         MemberExpression[?Yield, ?Await] `.` PrivateIdentifier
         <ins class="block">
-        MemberExpression[?Yield, ?Await] `->` `(` Expression[+In, ?Yield, ?Await] `)`
-        MemberExpression[?Yield, ?Await] `->` IdentifierReference
-        MemberExpression[?Yield, ?Await] `->` TemplateLiteral[?Yield, ?Await, +Tagged]
+        MemberExpression[?Yield, ?Await] `::` `(` Expression[+In, ?Yield, ?Await] `)`
+        MemberExpression[?Yield, ?Await] `::` IdentifierReference
+        MemberExpression[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
 
       CallExpression[Yield, Await] :
@@ -230,9 +230,9 @@ contributors: J. S. Choi
         CallExpression[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
         CallExpression[?Yield, ?Await] `.` PrivateIdentifier
         <ins class="block">
-        CallExpression[?Yield, ?Await] `->` `(` Expression[+In, ?Yield, ?Await] `)`
-        CallExpression[?Yield, ?Await] `->` IdentifierReference
-        CallExpression[?Yield, ?Await] `->` TemplateLiteral[?Yield, ?Await, +Tagged]
+        CallExpression[?Yield, ?Await] `::` `(` Expression[+In, ?Yield, ?Await] `)`
+        CallExpression[?Yield, ?Await] `::` IdentifierReference
+        CallExpression[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
 
       OptionalChain[Yield, Await] :
@@ -247,9 +247,9 @@ contributors: J. S. Choi
         OptionalChain[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
         OptionalChain[?Yield, ?Await] `.` PrivateIdentifier
         <ins class="block">
-        OptionalChain[?Yield, ?Await] `->` `(` Expression[+In, ?Yield, ?Await] `)`
-        OptionalChain[?Yield, ?Await] `->` IdentifierReference
-        OptionalChain[?Yield, ?Await] `->` TemplateLiteral[?Yield, ?Await, +Tagged]
+        OptionalChain[?Yield, ?Await] `::` `(` Expression[+In, ?Yield, ?Await] `)`
+        OptionalChain[?Yield, ?Await] `::` IdentifierReference
+        OptionalChain[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
     </emu-grammar>
 
@@ -269,7 +269,7 @@ contributors: J. S. Choi
         <ins class="block">
         <emu-grammar>
           MemberExpression :
-            MemberExpression `->` TemplateLiteral
+            MemberExpression `::` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -279,7 +279,7 @@ contributors: J. S. Choi
         <emu-note>
           <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-`this` operator:</p>
           <pre><code class="javascript">
-            a->b
+            a::b
             `c`
           </code></pre>
           <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-`this` operator:</p>
@@ -292,7 +292,7 @@ contributors: J. S. Choi
 
         <emu-grammar>
           CallExpression :
-            CallExpression `->` TemplateLiteral
+            CallExpression `::` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -302,7 +302,7 @@ contributors: J. S. Choi
         <emu-note>
           <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-`this` operator:</p>
           <pre><code class="javascript">
-            a()->b
+            a()::b
             `c`
           </code></pre>
           <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-`this` operator:</p>
@@ -315,7 +315,7 @@ contributors: J. S. Choi
 
         <emu-grammar>
           OptionalChain :
-            OptionalChain `->` TemplateLiteral
+            OptionalChain `::` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -325,7 +325,7 @@ contributors: J. S. Choi
         <emu-note>
           <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-`this` operator:</p>
           <pre><code class="javascript">
-            a?.()->b
+            a?.()::b
             `c`
           </code></pre>
           <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-`this` operator:</p>
@@ -352,7 +352,7 @@ contributors: J. S. Choi
 
         <emu-clause id="sec-property-accessors-runtime-semantics-evaluation">
           <h1>Runtime Semantics: Evaluation</h1>
-          <emu-grammar>MemberExpression : MemberExpression `->` `(` Expression `)`</emu-grammar>
+          <emu-grammar>MemberExpression : MemberExpression `::` `(` Expression `)`</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -360,7 +360,7 @@ contributors: J. S. Choi
             1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
 
-          <emu-grammar>MemberExpression : MemberExpression `->` IdentifierReference</emu-grammar>
+          <emu-grammar>MemberExpression : MemberExpression `::` IdentifierReference</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -368,7 +368,7 @@ contributors: J. S. Choi
             1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
 
-          <emu-grammar>CallExpression : CallExpression `->` `(` Expression `)`</emu-grammar>
+          <emu-grammar>CallExpression : CallExpression `::` `(` Expression `)`</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -376,7 +376,7 @@ contributors: J. S. Choi
             1. Return BindProperty(_baseValue_, _property_).
           </emu-alg>
 
-          <emu-grammar>CallExpression : CallExpression `->` IdentifierReference</emu-grammar>
+          <emu-grammar>CallExpression : CallExpression `::` IdentifierReference</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -435,7 +435,7 @@ contributors: J. S. Choi
         <p>With parameters _baseValue_ and _baseReference_.</p>
 
         <ins class="block">
-        <emu-grammar>OptionalChain : OptionalChain `->` `(` Expression `)`</emu-grammar>
+        <emu-grammar>OptionalChain : OptionalChain `::` `(` Expression `)`</emu-grammar>
         <emu-alg>
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
@@ -443,7 +443,7 @@ contributors: J. S. Choi
           1. Let _property_ be the result of evaluating |Expression|.
           1. Return BindProperty(_newValue_, _property_).
         </emu-alg>
-        <emu-grammar>OptionalChain : OptionalChain `->` IdentifierReference</emu-grammar>
+        <emu-grammar>OptionalChain : OptionalChain `::` IdentifierReference</emu-grammar>
         <emu-alg>
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
