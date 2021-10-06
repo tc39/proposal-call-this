@@ -339,7 +339,104 @@ contributors: J. S. Choi
       </emu-clause>
     </emu-clause>
 
-    <emu-clause id="sec-bind-operator">
+    <emu-clause id="sec-function-calls">
+      <h1>Function Calls</h1>
+
+      <p>This section augments the <a
+      href=https://tc39.es/ecma262/#sec-function-calls>original
+      Function Calls clause</a>.</p>
+
+      <emu-clause id="sec-function-calls-runtime-semantics-evaluation">
+        <h1>Runtime Semantics: Evaluation</h1>
+        <emu-grammar>CallExpression : CoverCallExpressionAndAsyncArrowHead</emu-grammar>
+        <emu-alg>
+          1. Let _expr_ be the |CallMemberExpression| that is covered by |CoverCallExpressionAndAsyncArrowHead|.
+          1. Let _memberExpr_ be the |MemberExpression| of _expr_.
+          1. Let _arguments_ be the |Arguments| of _expr_.
+          1. Let _ref_ be the result of evaluating _memberExpr_.
+          1. Let _func_ be ? GetValue(_ref_).
+          1. If _ref_ is a Reference Record, IsPropertyReference(_ref_) is *false*, and _ref_.[[ReferencedName]] is *"eval"*, then
+            1. If SameValue(_func_, %eval%) is *true*, then
+              1. Let _argList_ be ? ArgumentListEvaluation of _arguments_.
+              1. If _argList_ has no elements, return *undefined*.
+              1. Let _evalArg_ be the first element of _argList_.
+              1. If the source code matching this |CallExpression| is strict mode code, let _strictCaller_ be *true*. Otherwise let _strictCaller_ be *false*.
+              1. Let _evalRealm_ be the current Realm Record.
+              1. [id="step-callexpression-evaluation-direct-eval"] Return ? PerformEval(_evalArg_, _evalRealm_, _strictCaller_, *true*).
+          1. Let _thisCall_ be this |CallExpression|.
+          1. Let _tailCall_ be IsInTailPosition(_thisCall_).
+          1. Return ? EvaluateCall(_func_, _ref_, _arguments_, _tailCall_).
+        </emu-alg>
+        <p>A |CallExpression| evaluation that executes step <emu-xref href="#step-callexpression-evaluation-direct-eval"></emu-xref> is a <dfn variants="direct evals">direct eval</dfn>.</p>
+        <ins class=block>
+        <emu-note>
+          <p>If _memberExpr_ is a production defined in
+          <emu-xref href=#sec-bind-this-operator></emu-xref>,
+          then the preceding algorithm is indistinguishable
+          from an algorithm that:</p>
+          <ol>
+            <li>Evaluates the
+            <emu-xref href=#sec-bind-this-operator></emu-xref>'s left-hand side,
+            its right-hand side, then _arguments_.</li>
+            <li>Instead of evaluating _memberExpr_,
+            uses Call with the <emu-xref href=#sec-bind-this-operator></emu-xref>'s
+            left-hand side as its *this* value,
+            its right-hand side as its function object, as its,
+            and _arguments_ as its arguments.</li>
+          </ol>
+
+          <p>For example, if _memberExpr_ matches the production
+          <emu-grammar>MemberExpression `::` `(` Expression `)`</emu-grammar>,
+          the preceding algorithm is indistinguishable from the following.</p>
+          <emu-alg>
+            1. Let _expr_ be the |CallMemberExpression| that is covered by |CoverCallExpressionAndAsyncArrowHead|.
+            1. Let _memberExpr_ be the |MemberExpression| of _expr_.
+            1. Let _thisExpr_ be the |MemberExpression| of _memberExpr_.
+            1. Let _funcExpr_ be the |Expression| of _memberExpr_.
+            1. Let _arguments_ be the |Arguments| of _expr_.
+            1. Let _thisRef_ be the result of evaluating _thisExpr_.
+            1. Let _thisValue_ be ? GetValue(_thisRef_).
+            1. Let _funcRef_ be the result of evaluating _funcExpr_.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Let _argList_ be ? ArgumentListEvaluation of _arguments_.
+            1. Let _thisCall_ be this |CallExpression|.
+            1. If IsInTailPosition(_thisCall_) is *true*, perform PrepareForTailCall().
+            1. Return Call(_func_, _thisValue_, _argList_, _tailCall_).
+          </emu-alg>
+
+          <p>If _memberExpr_ matches the production
+          <emu-grammar>MemberExpression `::` IdentifierReference</emu-grammar>,
+          the preceding algorithm is indistinguishable from the following.</p>
+          <emu-alg>
+            1. Let _expr_ be the |CallMemberExpression| that is covered by |CoverCallExpressionAndAsyncArrowHead|.
+            1. Let _memberExpr_ be the |MemberExpression| of _expr_.
+            1. Let _thisExpr_ be the |MemberExpression| of _memberExpr_.
+            1. Let _funcExpr_ be the |Expression| of _memberExpr_.
+            1. Let _arguments_ be the |Arguments| of _expr_.
+            1. Let _thisRef_ be the result of evaluating _thisExpr_.
+            1. Let _thisValue_ be ? GetValue(_thisRef_).
+            1. Let _funcRef_ be the result of evaluating _funcExpr_.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Let _argList_ be ? ArgumentListEvaluation of _arguments_.
+            1. Let _thisCall_ be this |CallExpression|.
+            1. If IsInTailPosition(_thisCall_) is *true*, perform PrepareForTailCall().
+            1. Return Call(_func_, _thisValue_, _argList_, _tailCall_).
+          </emu-alg>
+        </emu-note>
+        </ins>
+
+        <emu-grammar>CallExpression : CallExpression Arguments</emu-grammar>
+        <emu-alg>
+          1. Let _ref_ be the result of evaluating |CallExpression|.
+          1. Let _func_ be ? GetValue(_ref_).
+          1. Let _thisCall_ be this |CallExpression|.
+          1. Let _tailCall_ be IsInTailPosition(_thisCall_).
+          1. Return ? EvaluateCall(_func_, _ref_, |Arguments|, _tailCall_).
+        </emu-alg>
+      </emu-clause>
+    </emu-clause>
+
+    <emu-clause id="sec-bind-this-operator">
       <h1>Bind-`this` operator</h1>
 
       <emu-note type=editor>
