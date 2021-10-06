@@ -304,11 +304,11 @@ to the [Stage-1 extensions proposal][extensions].
 An [in-depth comparison is also available][extensions compare].
 The concrete differences briefly are:
 
-1. bind-`this` has no special variable namespace.
-2. bind-`this` has no implicit syntactic handling of property accessors.
-3. bind-`this` has no polymorphic `const ::{ … } from …;` syntax.
-4. bind-`this` has no polymorphic `…::…:…` syntax.
-5. bind-`this` has no `Symbol.extension` metaprogramming system.
+1. Bind-`this` has no special variable namespace.
+2. Bind-`this` has no implicit syntactic handling of property accessors.
+3. Bind-`this` has no polymorphic `const ::{ … } from …;` syntax.
+4. Bind-`this` has no polymorphic `…::…:…` syntax.
+5. Bind-`this` has no `Symbol.extension` metaprogramming system.
 
 [extensions compare]: https://github.com/js-choi/proposal-bind-this/blob/main/extensions-comparison.md
 
