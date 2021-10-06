@@ -352,12 +352,13 @@ contributors: J. S. Choi
 
         <emu-clause id="sec-property-accessors-runtime-semantics-evaluation">
           <h1>Runtime Semantics: Evaluation</h1>
+
           <emu-grammar>MemberExpression : MemberExpression `::` `(` Expression `)`</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
             1. Let _property_ be the result of evaluating |Expression|.
-            1. Return BindProperty(_baseValue_, _property_).
+            1. Return BindMethod(_baseValue_, _property_).
           </emu-alg>
 
           <emu-grammar>MemberExpression : MemberExpression `::` IdentifierReference</emu-grammar>
@@ -365,7 +366,7 @@ contributors: J. S. Choi
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
             1. Let _property_ be the result of evaluating |IdentifierReference|.
-            1. Return BindProperty(_baseValue_, _property_).
+            1. Return BindMethod(_baseValue_, _property_).
           </emu-alg>
 
           <emu-grammar>CallExpression : CallExpression `::` `(` Expression `)`</emu-grammar>
@@ -373,7 +374,7 @@ contributors: J. S. Choi
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
             1. Let _property_ be the result of evaluating |Expression|.
-            1. Return BindProperty(_baseValue_, _property_).
+            1. Return BindMethod(_baseValue_, _property_).
           </emu-alg>
 
           <emu-grammar>CallExpression : CallExpression `::` IdentifierReference</emu-grammar>
@@ -381,7 +382,7 @@ contributors: J. S. Choi
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
             1. Let _property_ be the result of evaluating |IdentifierReference|.
-            1. Return BindProperty(_baseValue_, _property_).
+            1. Return BindMethod(_baseValue_, _property_).
           </emu-alg>
         </emu-clause>
 
@@ -441,7 +442,7 @@ contributors: J. S. Choi
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
           1. Let _newValue_ be ? GetValue(_newReference_).
           1. Let _property_ be the result of evaluating |Expression|.
-          1. Return BindProperty(_newValue_, _property_).
+          1. Return BindMethod(_newValue_, _property_).
         </emu-alg>
         <emu-grammar>OptionalChain : OptionalChain `::` IdentifierReference</emu-grammar>
         <emu-alg>
@@ -449,33 +450,10 @@ contributors: J. S. Choi
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
           1. Let _newValue_ be ? GetValue(_newReference_).
           1. Let _property_ be the result of evaluating |Expression|.
-          1. Return BindProperty(_newValue_, _property_).
+          1. Return BindMethod(_newValue_, _property_).
         </emu-alg>
         </ins>
       </emu-clause>
     </emu-clause>
-  </emu-clause>
-
-  <emu-clause id="sec-decorators">
-    <h1>Decorators</h1>
-    <h2>Syntax</h2>
-    <emu-grammar type="definition">
-      DecoratorList[Yield, Await] :
-        DecoratorList[?Yield, ?Await]? Decorator[?Yield, ?Await]
-
-      Decorator[Yield, Await] :
-        `@init:` DecoratorMemberExpression[?Yield, ?Await]
-        `@init:` DecoratorCallExpression[?Yield, ?Await]
-        `@` DecoratorMemberExpression[?Yield, ?Await]
-        `@` DecoratorCallExpression[?Yield, ?Await]
-
-      DecoratorMemberExpression[Yield, Await] :
-        IdentifierReference[?Yield, ?Await]
-        DecoratorMemberExpression[?Yield, ?Await] `.` IdentifierName
-        `(` Expression[+In, ?Yield, ?Await] `)`
-
-      DecoratorCallExpression[Yield, Await] :
-        DecoratorMemberExpression[?Yield, ?Await] Arguments[?Yield, ?Await]
-    </emu-grammar>
   </emu-clause>
 </emu-clause>
