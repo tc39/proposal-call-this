@@ -292,11 +292,15 @@ into `v |> o::f(0, %) |> await g(%) |> h(%, 1)`.
 ### Old bind operator
 This proposal is a **resurrection**
 of the old [Stage-0 bind-operator proposal][old bind].
+A [champion of the old proposal has recommended restarting with a new proposal][fresh]
+instead of using the old proposal.
+
+[fresh]: https://github.com/tc39/proposal-bind-operator/issues/56#issuecomment-698444297
 
 This means it’s basically the same as the old proposal.
 The only big difference is that there is no unary form
 for tacit method extraction.
-See also [non-goals].
+See also [non-goals](#non-goals).
 
 ### Extensions
 The extensions system is an alternative, **competing** proposal
