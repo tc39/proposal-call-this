@@ -5,6 +5,14 @@ There are two proposals that do similar things.
   `::{ extFn } = obj`, `obj::extFn`, and `obj::extNamespace:extFn`.
 * A [proposal for a bind-`this` operator][bind-this]: `obj->fn` and `obj->(fn)`.
 
+In brief, the concrete differences are:
+
+1. bind-`this` has no special variable namespace.
+2. bind-`this` has no implicit syntactic handling of property accessors.
+3. bind-`this` has no polymorphic `const ::{ … } from …;` syntax.
+4. bind-`this` has no polymorphic `…::…:…` syntax.
+5. bind-`this` has no `Symbol.extension` metaprogramming system.
+
 <table>
 
 <thead>

@@ -7,9 +7,9 @@ ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 [formal specification]: http://jschoi.org/21/es-bind-operator/
 
 This proposal is a **resurrection**
-of the old [Stage-0 Bind Operator proposal][old bind].
+of the old [Stage-0 bind-operator proposal][old bind].
 It is also an alternative, **competing** proposal
-to the [Stage-1 Extensions proposal][extensions].
+to the [Stage-1 extensions proposal][extensions].
 For more information, see [§ Related proposals](#related-proposals).
 
 [old bind]: https://github.com/tc39/proposal-bind-operator
@@ -290,13 +290,65 @@ into `v |> o->f(0, %) |> await g(%) |> h(%, 1)`.
 
 ### Old bind operator
 This proposal is a **resurrection**
-of the old [Stage-0 Bind Operator proposal][old bind].
-[TODO]
+of the old [Stage-0 bind-operator proposal][old bind].
+
+This means it’s basically the same as the old proposal.
+The only big difference is that there is no unary form
+for tacit method extraction.
+See also [non-goals].
 
 ### Extensions
-This proposal is an alternative, **competing** proposal
-to the [Stage-1 Extensions proposal][extensions].
-[TODO]
+The extensions system is an alternative, **competing** proposal
+to the [Stage-1 extensions proposal][extensions].
+
+An [in-depth comparison is also available][extensions compare].
+The concrete differences briefly are:
+
+1. bind-`this` has no special variable namespace.
+2. bind-`this` has no implicit syntactic handling of property accessors.
+3. bind-`this` has no polymorphic `const ::{ … } from …;` syntax.
+4. bind-`this` has no polymorphic `…::…:…` syntax.
+5. bind-`this` has no `Symbol.extension` metaprogramming system.
+
+[extensions compare]: https://github.com/js-choi/proposal-bind-this/blob/main/extensions-comparison.md
 
 ### Pipe operator
-[TODO]
+The [pipe operator][] can be used to linearize deeply nested expressions
+like `f(0, g([h()], 1), 2)` into `h() |> g(^, 1) |> f(0, ^, 2)`.
+
+This is fundamentally different than the bind-`this` operator’s purpose,
+which would be much closer to property access `.`.
+
+It is true that property access `.`, bind-`this`, and the pipe operator
+all may be used to linearize code.
+
+But this is a mere happy side effect for the first two operators.
+
+Property access is tightly coupled to object membership.
+
+And bind-`this` is designed to change the `this` binding of a function,
+which requires that the function use a `this` binding.
+
+In contrast, the pipe operator is designed specifically
+to linearize all other kinds of expressions.
+
+Just like how the pipe operator coexists with property access:
+```js
+// Adapted from react@17.0.2/scripts/jest/jest-cli.js
+Object.keys(envars)
+  .map(envar => `${envar}=${envars[envar]}`)
+  .join(' ')
+  |> `$ ${^}`
+  |> chalk.dim(^, 'node', args.join(' '))
+  |> console.log(^);
+```
+
+…so too can it coexist with bind-`this`:
+```js
+// Adapted from chalk@2.4.2/index.js
+return this._styles
+  |> (^ ? ^.concat(codes) : [codes])
+  |> this->build(^, this._empty, key);
+```
+
+[pipe operator]: https://github.com/tc39/proposal-pipeline-operator
