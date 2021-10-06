@@ -210,6 +210,7 @@ globalMiddleware::(Array.prototype.push)(...callback)
 
 // yargs@13.2.4/lib/command.js
 [].push.apply(positionalKeys, parsed.aliases[key])
+positionalKeys::([].push)(parsed.aliases[key])
 
 // pretty-format@24.8.0/build-es5/index.js
 var code = fn.apply(colorConvert, arguments);
