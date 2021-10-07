@@ -226,13 +226,26 @@ A goal of this proposal is **simplicity**.
 Therefore, this proposal purposefully
 does *not* address the following use cases.
 
-**Tacit method extraction** with another operator
-(like `arr&.slice` for `arr.slice.bind(arr.slice)` hypothetically)
-would be nice to have,
-but method extraction is already possible with this proposal.\
-`const slice = arr::(arr.slice); slice(1, 3);`\
-is not much wordier than\
-`const slice = arr&.slice; slice(1, 3);`
+**Method extraction with implicit binding**
+is not a goal of this proposal.
+When extracting a method from an object
+and then calling it on the **same** object
+requires that that object be **repeated**.
+```js
+const { fn } = obj;
+obj::fn(...args);
+```
+This is **not** a big problem.
+In general, methods are extracted from **prototype** objects
+and then called on **instance** objects,
+so the extraction’s source object and the call’s receiver object
+are usually different anyway.
+const { slice } = Array.prototype;
+arr::slice(...args);
+
+We are deferring any special syntax
+for method extraction with implicit binding
+to a future proposal.
 
 **Extracting property accessors** (i.e., getters and setters)
 is not a goal of this proposal.
@@ -258,32 +271,31 @@ delete Set; delete Function;
 new Set([0, 1, 2])::$getSize();
 ```
 
+[syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
+
 **Function/expression application**,
 in which deeply nested function calls and other expressions
 are untangled into linear pipelines,
 is important but not addressed by this proposal.
-Instead, it is addressed by the **pipe operator**,
-with which this proposal’s syntax works well.\
-For example, we could untangle `h(await g(o::f(0, v)), 1)`\
-into `v |> o::f(0, %) |> await g(%) |> h(%, 1)`.
+Instead, it is addressed by the [pipe operator][],
+with which this proposal’s syntax works well.
 
-[syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
-[primordials.js]: https://github.com/nodejs/node/blob/master/lib/internal/per_context/primordials.js
+[pipe operator]: #pipe-operator
 
 ## Related proposals
 
 ### Old bind operator
 This proposal is a **resurrection**
 of the old [Stage-0 bind-operator proposal][old bind].
-A [champion of the old proposal has recommended restarting with a new proposal][fresh]
+A champion of the old proposal has [recommended restarting with a new proposal][fresh]
 instead of using the old proposal.
 
 [fresh]: https://github.com/tc39/proposal-bind-operator/issues/56#issuecomment-698444297
 
-This means it’s basically the same as the old proposal.
+This means it is basically the same as the old proposal.
 The only big difference is that there is no unary form
-for tacit method extraction.
-See also [non-goals](#non-goals).
+for implciit binding of the receiver during method extraction.
+(See also [non-goals](#non-goals).)
 
 ### Extensions
 The extensions system is an alternative, **competing** proposal
@@ -301,7 +313,8 @@ The concrete differences briefly are:
 [extensions compare]: https://github.com/js-choi/proposal-bind-this/blob/main/extensions-comparison.md
 
 ### Pipe operator
-The [pipe operator][] can be used to linearize deeply nested expressions
+The [pipe operator][pipe repo] is a **complementary** proposal
+that can be used to linearize deeply nested expressions
 like `f(0, g([h()], 1), 2)` into `h() |> g(^, 1) |> f(0, ^, 2)`.
 
 This is fundamentally different than the bind-`this` operator’s purpose,
@@ -309,16 +322,13 @@ which would be much closer to property access `.`.
 
 It is true that property access `.`, bind-`this`, and the pipe operator
 all may be used to linearize code.
+But this is a mere happy side effect for the first two operators:
 
-But this is a mere happy side effect for the first two operators.
+* Property access is tightly coupled to object membership.
+* Bind-`this` is simply changes the `this` binding of a function.
 
-Property access is tightly coupled to object membership.
-
-And bind-`this` is designed to change the `this` binding of a function,
-which requires that the function use a `this` binding.
-
-In contrast, the pipe operator is designed specifically
-to linearize all other kinds of expressions.
+In contrast, the pipe operator is designed to generally
+linearize all other kinds of expressions.
 
 Just like how the pipe operator coexists with property access:
 ```js
@@ -339,4 +349,4 @@ return this._styles
   |> this::build(^, this._empty, key);
 ```
 
-[pipe operator]: https://github.com/tc39/proposal-pipeline-operator
+[pipe repo]: https://github.com/tc39/proposal-pipeline-operator
