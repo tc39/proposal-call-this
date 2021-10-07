@@ -143,6 +143,8 @@ slim.topcode.1000.txt.lz4
 1016503
 > ./search.topcode.sh '\bconsole.log\b' | awk 'END { print NR }'
 271915
+> ./search.topcode.sh '\.slice\b' | awk 'END { print NR }'
+182292
 > ./search.topcode.sh '\.set\b' | awk 'END { print NR }'
 168872
 > ./search.topcode.sh '\.push\b' | awk 'END { print NR }'
