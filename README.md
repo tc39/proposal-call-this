@@ -193,25 +193,6 @@ match = self::formatter(val);
 createDebug.formatArgs.call(self, args);
 self::(createDebug.formatArgs)(args);
 
-// readable-stream@3.4.0/errors-browser.js
-return _Base.call(this, getMessage(arg1, arg2, arg3)) || this;
-return this::_Base(getMessage(arg1, arg2, arg3)) || this;
-
-// readable-stream@3.4.0/lib/_stream_readable.js
-var res = Stream.prototype.on.call(this, ev, fn);
-var res = this::(Stream.prototype.on)(ev, fn);
-
-var res = Stream.prototype.removeAllListeners.apply(this, arguments);
-var res = this::(Stream.prototype.removeAllListeners)(...arguments);
-
-// yargs@13.2.4/lib/middleware.js
-Array.prototype.push.apply(globalMiddleware, callback)
-globalMiddleware::(Array.prototype.push)(...callback)
-
-// yargs@13.2.4/lib/command.js
-[].push.apply(positionalKeys, parsed.aliases[key])
-positionalKeys::([].push)(parsed.aliases[key])
-
 // pretty-format@24.8.0/build-es5/index.js
 var code = fn.apply(colorConvert, arguments);
 var code = colorConvert::fn(...arguments);
