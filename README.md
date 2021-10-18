@@ -121,6 +121,10 @@ is equivalent to `receiver::fn`,\
 and `receiver :: (createFn())`\
 is equivalent to `receiver::(createFn())`.
 
+The bind-this operator may be optionally chained with `?.`.
+If `receiver` is `null` or `undefined`, then `receiver?.::fn` and `receiver?.::fn()`
+will both evaluate to `null` or `undefined`.
+
 A `new` expression may **not** contain a bind-this expression without parentheses.
 Both `new x::fn()` and `new x::fn` are SyntaxErrors.
 Otherwise, `new x::fn()` would be visually ambiguous between\

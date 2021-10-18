@@ -267,6 +267,7 @@ contributors: J. S. Choi
 
       OptionalExpression[Yield, Await] :
         MemberExpression[?Yield, ?Await] OptionalChain[?Yield, ?Await]
+        <ins>BindThisExpression[?Yield, ?Await] OptionalChain[?Yield, ?Await]</ins>
         CallExpression[?Yield, ?Await] OptionalChain[?Yield, ?Await]
         OptionalExpression[?Yield, ?Await] OptionalChain[?Yield, ?Await]
 
@@ -274,6 +275,7 @@ contributors: J. S. Choi
         `?.` Arguments[?Yield, ?Await]
         `?.` `[` Expression[+In, ?Yield, ?Await] `]`
         `?.` IdentifierName
+        <ins>`?.` `::` SimpleMemberExpression[?Yield, ?Await]</ins>
         `?.` TemplateLiteral[?Yield, ?Await, +Tagged]
         `?.` PrivateIdentifier
         OptionalChain[?Yield, ?Await] Arguments[?Yield, ?Await]
@@ -461,6 +463,7 @@ contributors: J. S. Choi
 
           <emu-note>
             <p>For evaluation of the production <emu-grammar>CallExpression : BindThisExpression Arguments</emu-grammar>, see clause <emu-xref href=#sec-function-calls-runtime-semantics-evaluation></emu-xref>.</p>
+            <p>For evaluation of the productions <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar> and <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar>, see clause <emu-xref href=#sec-function-calls-runtime-semantics-evaluation></emu-xref>.</p>
           </emu-note>
 
           <emu-grammar>BindThisExpression : MemberExpression `::` SimpleMemberExpression</emu-grammar>
@@ -539,12 +542,157 @@ contributors: J. S. Choi
         Optional Chains clause</a>.</p>
       </emu-note>
 
-      <emu-clause id="sec-optional-chaining-chain-evaluation" type="sdo" aoid="ChainEvaluation">
-        <h1>Runtime Semantics: ChainEvaluation</h1>
-        <p>With parameters _baseValue_ and _baseReference_.</p>
+      <emu-clause id="sec-optional-chaining-evaluation">
+        <h1>Runtime Semantics: Evaluation</h1>
+        <emu-grammar>
+          OptionalExpression :
+            MemberExpression OptionalChain
+        </emu-grammar>
+        <emu-alg>
+          1. Let _baseReference_ be the result of evaluating |MemberExpression|.
+          1. Let _baseValue_ be ? GetValue(_baseReference_).
+          1. If _baseValue_ is *undefined* or *null*, then
+            1. Return *undefined*.
+          1. Return the result of performing ChainEvaluation of |OptionalChain| with arguments _baseValue_ and _baseReference_.
+        </emu-alg>
+        <ins class="block">
+        <emu-grammar>
+          OptionalExpression :
+            BindThisExpression OptionalChain
+        </emu-grammar>
+        <emu-alg>
+          1. Let _baseReference_ be the result of evaluating |BindThisExpression|.
+          1. Let _baseValue_ be ? GetValue(_baseReference_).
+          1. If _baseValue_ is *undefined* or *null*, then
+            1. Return *undefined*.
+          1. Return the result of performing ChainEvaluation of |OptionalChain| with arguments _baseValue_ and _baseReference_.
+        </emu-alg>
+        </ins>
+        <emu-grammar>
+          OptionalExpression :
+            CallExpression OptionalChain
+        </emu-grammar>
+        <emu-alg>
+          1. Let _baseReference_ be the result of evaluating |CallExpression|.
+          1. Let _baseValue_ be ? GetValue(_baseReference_).
+          1. If _baseValue_ is *undefined* or *null*, then
+            1. Return *undefined*.
+          1. Return the result of performing ChainEvaluation of |OptionalChain| with arguments _baseValue_ and _baseReference_.
+        </emu-alg>
+        <emu-grammar>
+          OptionalExpression :
+            OptionalExpression OptionalChain
+        </emu-grammar>
+        <emu-alg>
+          1. Let _baseReference_ be the result of evaluating |OptionalExpression|.
+          1. Let _baseValue_ be ? GetValue(_baseReference_).
+          1. If _baseValue_ is *undefined* or *null*, then
+            1. Return *undefined*.
+          1. Return the result of performing ChainEvaluation of |OptionalChain| with arguments _baseValue_ and _baseReference_.
+        </emu-alg>
+      </emu-clause>
 
+      <emu-clause id="sec-optional-chaining-chain-evaluation" type="sdo">
+        <h1>
+          Runtime Semantics: ChainEvaluation (
+            _baseValue_: unknown,
+            _baseReference_: unknown,
+          )
+        </h1>
+        <dl class="header">
+        </dl>
+        <emu-grammar>OptionalChain : `?.` Arguments</emu-grammar>
+        <emu-alg>
+          1. Let _thisChain_ be this |OptionalChain|.
+          1. Let _tailCall_ be IsInTailPosition(_thisChain_).
+          1. Return ? EvaluateCall(_baseValue_, _baseReference_, |Arguments|, _tailCall_).
+        </emu-alg>
+        <emu-grammar>OptionalChain : `?.` `[` Expression `]`</emu-grammar>
+        <emu-alg>
+          1. If the code matched by this |OptionalChain| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
+          1. Return ? EvaluatePropertyAccessWithExpressionKey(_baseValue_, |Expression|, _strict_).
+        </emu-alg>
+        <emu-grammar>OptionalChain : `?.` IdentifierName</emu-grammar>
+        <emu-alg>
+          1. If the code matched by this |OptionalChain| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
+          1. Return ! EvaluatePropertyAccessWithIdentifierKey(_baseValue_, |IdentifierName|, _strict_).
+        </emu-alg>
+        <ins class="block">
+        <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar>
+        <emu-note>
+          <p>See also the <emu-xref href=#sec-bind-this-operator>bind-this operator</emu-xref>.</p>
+        </emu-note>
+        <emu-alg>
+          1. Let _funcExpr_ be the |MemberExpression| that is covered by |SimpleMemberExpression|.
+          1. Let _funcRef_ be the result of evaluating _funcExpr_.
+          1. Let _func_ be ? GetValue(_funcRef_).
+          1. Return BindThis(_baseValue_, _func_).
+        </emu-alg>
+        </ins>
+        <emu-grammar>OptionalChain : `?.` PrivateIdentifier</emu-grammar>
+        <emu-alg>
+          1. Let _fieldNameString_ be the StringValue of |PrivateIdentifier|.
+          1. Return ! MakePrivateReference(_baseValue_, _fieldNameString_).
+        </emu-alg>
+        <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>
+        <emu-alg>
+          1. Let _optionalChain_ be |OptionalChain|.
+          1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
+          1. Let _newValue_ be ? GetValue(_newReference_).
+          1. Let _thisChain_ be this |OptionalChain|.
+          1. Let _tailCall_ be IsInTailPosition(_thisChain_).
+          1. Return ? EvaluateCall(_newValue_, _newReference_, |Arguments|, _tailCall_).
+        </emu-alg>
+        <emu-note>
+          <p>If |OptionalChain| (in <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>) is, in turn, covering the production <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
+          <emu-alg>
+            1. Let _optionalBindThisChain_ be the <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar> that is covered by |OptionalChain|.
+            1. Let _bindThisRHS_ be the |SimpleMemberExpression| of _optionalBindThisChain_.
+            1. Let _funcExpr_ be the |MemberExpression| that is covered by _bindThisRHS_.
+            1. Let _arguments_ be the |Arguments| of _expr_.
+            1. Let _funcRef_ be the result of evaluating _funcExpr_.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Let _thisChain_ be this |OptionalChain|.
+            1. Let _tailCall_ be IsInTailPosition(_thisChain_).
+            1. Return EvaluateCall(_func_, _baseValue_, _arguments_, _tailCall_).
+          </emu-alg>
+
+          <p>If |OptionalChain| (in <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>) is, in turn, covering the production <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
+          <emu-alg>
+            1. Let _bindThisOptionalChain_ be the <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar> that is covered by |OptionalChain|.
+            1. Let _bindThisRHS_ be the |SimpleMemberExpression| of _bindThisOptionalChain_.
+            1. Let _funcExpr_ be the |MemberExpression| that is covered by _bindThisRHS_.
+            1. Let _arguments_ be the |Arguments| of _expr_.
+            1. Let _thisRef_ be the result of evaluating ? ChainEvaluation of _thisOptionalChain_ with arguments _baseValue_ and _baseReference_.
+            1. Let _thisValue_ be ? GetValue(_thisRef_).
+            1. Let _funcRef_ be the result of evaluating _funcExpr_.
+            1. Let _func_ be ? GetValue(_funcRef_).
+            1. Let _thisChain_ be this |OptionalChain|.
+            1. Let _tailCall_ be IsInTailPosition(_thisChain_).
+            1. Return EvaluateCall(_func_, _thisValue_, _arguments_, _tailCall_).
+          </emu-alg>
+        </emu-note>
+        <emu-grammar>OptionalChain : OptionalChain `[` Expression `]`</emu-grammar>
+        <emu-alg>
+          1. Let _optionalChain_ be |OptionalChain|.
+          1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
+          1. Let _newValue_ be ? GetValue(_newReference_).
+          1. If the code matched by this |OptionalChain| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
+          1. Return ? EvaluatePropertyAccessWithExpressionKey(_newValue_, |Expression|, _strict_).
+        </emu-alg>
+        <emu-grammar>OptionalChain : OptionalChain `.` IdentifierName</emu-grammar>
+        <emu-alg>
+          1. Let _optionalChain_ be |OptionalChain|.
+          1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
+          1. Let _newValue_ be ? GetValue(_newReference_).
+          1. If the code matched by this |OptionalChain| is strict mode code, let _strict_ be *true*; else let _strict_ be *false*.
+          1. Return ! EvaluatePropertyAccessWithIdentifierKey(_newValue_, |IdentifierName|, _strict_).
+        </emu-alg>
         <ins class="block">
         <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar>
+        <emu-note>
+          <p>See also the <emu-xref href=#sec-bind-this-operator>bind-this operator</emu-xref>.</p>
+        </emu-note>
         <emu-alg>
           1. Let _optionalChain_ be |OptionalChain|.
           1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
@@ -555,6 +703,14 @@ contributors: J. S. Choi
           1. Return BindThis(_newValue_, _func_).
         </emu-alg>
         </ins>
+        <emu-grammar>OptionalChain : OptionalChain `.` PrivateIdentifier</emu-grammar>
+        <emu-alg>
+          1. Let _optionalChain_ be |OptionalChain|.
+          1. Let _newReference_ be ? ChainEvaluation of _optionalChain_ with arguments _baseValue_ and _baseReference_.
+          1. Let _newValue_ be ? GetValue(_newReference_).
+          1. Let _fieldNameString_ be the StringValue of |PrivateIdentifier|.
+          1. Return ! MakePrivateReference(_newValue_, _fieldNameString_).
+        </emu-alg>
       </emu-clause>
     </emu-clause>
   </emu-clause>
