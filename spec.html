@@ -427,10 +427,9 @@ contributors: J. S. Choi
           1. Let _thisValue_ be ? GetValue(_thisRef_).
           1. Let _funcRef_ be the result of evaluating _funcExpr_.
           1. Let _func_ be ? GetValue(_funcRef_).
-          1. Let _argList_ be ? ArgumentListEvaluation of _arguments_.
           1. Let _thisCall_ be this |CallExpression|.
-          1. If IsInTailPosition(_thisCall_) is *true*, perform PrepareForTailCall().
-          1. Return Call(_func_, _thisValue_, _argList_, _tailCall_).
+          1. Let _tailCall_ be IsInTailPosition(_thisCall_).
+          1. Return EvaluateCall(_func_, _thisValue_, _arguments_, _tailCall_).
         </emu-alg>
 
         </ins>
