@@ -7,7 +7,7 @@
   "repository": "github:js-choi/proposal-bind-operator",
   "scripts": {
     "prespec": "mkdir -p out/",
-    "spec": "ecmarkup spec.html out/index.html --assets inline --contributors \"J. S. Choi, Ecma International\" --copyright true --title \"ES bind operator (2021)\" --status \"proposal\" --stage 0",
+    "spec": "ecmarkup spec.html out/index.html --assets inline",
     "prewatch": "npm run prespec",
     "watch": "npm run spec -- --watch"
   },
