@@ -15,28 +15,71 @@ For more information, see [§ Related proposals](#related-proposals).
 [old bind]: https://github.com/tc39/proposal-bind-operator
 [extensions]: https://github.com/tc39/proposal-extensions
 
+## Syntax
+```js
+receiver::fn
+receiver::ns.fn
+receiver::(expr)
+```
+
+<dl>
+
+<dt><code>receiver</code></dt>
+<dd>
+
+A member expression, a call expression, an optional expression,
+a `new` expression with arguments, another bind-`this` expression,
+or a parenthesized expression.
+The value to which this expression resolves will be bound
+to the right-hand side’s function object, as that function’s `this` receiver.
+
+</dd>
+
+<dt><code>fn</code></dt>
+<dd>
+
+A variable that must resolve to a function object.
+
+</dd>
+
+<dt><code>ns</code></dt>
+<dd>
+
+Instead of a single variable,
+the right-hand side may be a namespace object’s variable,
+followed by a chain of property identifiers.
+This chain must resolve to a function object.
+
+</dd>
+
+<dt><code>expr</code></dt>
+<dd>
+
+An arbitrary expression within parentheses,
+which must resolve to a function object.
+
+</dd>
+
+</dl>
+
 ## Description
 (A [formal specification][] is available.)
 
-Method binding `::` is a **left-associative** binary operator.
-Its right-hand side is an **identifier** (like `f`)
-or a parenthesized **expression** (like `(hof())`),
-either of which must evaluate to a **function**.
-Its left-hand side is some expression that evaluates to an **object**.
-The `::` operator binds its left-hand side
-to its right-hand side’s `this` value,
+The bind-`this` operator `::` is a **left-associative** binary operator.
+It binds its left-hand side (a **receiver** value)
+to its right-hand side (a **function**)’s `this` value,
 creating a **bound function** in the same manner
 as [`Function.prototype.bind`][bind].
 
-For example, `arr::fn` would be equivalent to `fn.bind(arr)`
+For example, `receiver::fn` would be equivalent to `fn.bind(receiver)`
 (except that its behavior does not change
 if code elsewhere reassigns the global method `Function.prototype.bind`).
 
-Likewise, `obj::(createMethod())` would be roughly
-equivalent to `createMethod().bind(obj)`.
+Likewise, `receiver::(createMethod())` would be roughly
+equivalent to `createMethod().bind(receiver)`.
 
 If the operator’s right-hand side does not evaluate to a function during runtime,
-then the program throws a `TypeError`.
+then the program throws a TypeError.
 
 The bound functions created by the bind-`this` operator
 are **indistinguishable** from the bound functions
@@ -44,40 +87,55 @@ that are already created by [`Function.prototype.bind`][bind].
 Both are **exotic objects** that do not have a `prototype` property,
 and which may be called like any typical function.
 
-From this definition, `o::f(...args)`
-is also **indistinguishable** from `f.call(o, ...args)`
+From this definition, `receiver::fn(...args)`
+is also **indistinguishable** from `fn.call(receiver, ...args)`
 (except that its behavior does not change
 if code elsewhere reassigns the global method `Function.prototype.call`).
 
-The `this`-bind operator has equal **[precedence][]** with
-**member expressions**, call expressions, `new` expressions with arguments,
-and optional chains.
-Like those operators, the `this`-bind operator also may be short-circuited
-by optional chains in its left-hand side.
+The operator’s **left** side has equal **[precedence][]** with
+member expressions, call expressions, `new` expressions with arguments,
+and optional expressions.
+Like those operators, the bind-`this` operator also may be short-circuited
+by optional expressions in its left-hand side.
 
 [precedence]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 
-| Left-hand side                     | Example      | Grouping
-| ---------------------------------- | ------------ | --------------
-| Member expressions                 |`a.b::fn.c`   |`((a.b)::fn).c`
-| Call expressions                   |`a()::fn()`   |`((a())::fn)()`
-| Optional chains                    |`a?.b::fn`    |`(a?.b)::fn`
-|`new` expressions with arguments    |`new C(a)::fn`|`(new C(a))::fn`
-|`new` expressions without arguments*|`new a::fn`   |`new (a::fn)`
+| Left-hand side                     | Example       | Grouping
+| ---------------------------------- | ------------- | -----------------
+| Member expressions                 |`obj.prop::fn` |`(obj.prop)::fn`
+| Call expressions                   |`obj()::fn`    |`(obj())::fn`
+| Optional expressions               |`obj?.prop::fn`|`(obj?.prop)::fn`
+|`new` expressions with arguments    |`new C()::fn`  |`(new C())::fn`
 
-\* Like `.` and `?.`, the `this`-bind operator also have tighter precedence
-than `new` expressions without arguments.
-Of course, `new a::fn` is not a very useful expression,
-just like how `new (fn.bind(a))` is not a very useful expression.
+The operator’s **right**-hand side, as with decorators, may be one of the following:
+* A single **identifier** (like `fn`).
+* A **chain** of identifiers (like `ns.fn`).
+* A parenthesized **expression** (like `(createFn())`).
+
+For example, `receiver::ns.ns.ns.fn` groups as `receiver::(ns.ns.ns.fn)`.
 
 Similarly to the `.` and `?.` operators,
-the `::` operator may be **padded by whitespace**.\
-For example, `a :: m`\
-is equivalent to `a::fn`,\
-and `a :: (createFn())`\
-is equivalent to `a::(createFn())`.
+the bind-`this` operator may be **padded** by whitespace.\
+For example, `receiver :: fn`\
+is equivalent to `receiver::fn`,\
+and `receiver :: (createFn())`\
+is equivalent to `receiver::(createFn())`.
 
-There are **no other** special rules.
+A `new` expression may **not** contain a bind-`this` expression without parentheses.
+Both `new x::fn()` and `new x::fn` are SyntaxErrors.
+Otherwise, `new x::fn()` would be visually ambiguous between\
+`(new x)::fn()`, `new (x::fn)()`, and `new (x::fn())`.
+
+An optional expression may **not** contain a bind-`this` expression without parentheses.
+For example, `receiver::x?.prop`, `receiver::x?.[key]`, and `receiver::x?.()`
+are all SyntaxErrors.
+Otherwise, `receiver::x?.prop` would be visually ambiguous
+between `(receiver::x)?.prop` and `receiver::(x?.prop)`.
+(And both of these possibilities would be useless anyway:\
+A bind-`this` expression will **never** evaluate to `null` or `undefined`,\
+so `(receiver::x)?.prop` is not useful.\
+And `receiver::(null)` and `receiver::(undefined)` will always throw TypeErrors,\
+so `receiver::(x?.prop)` is also not useful.)
 
 ## Why a bind-`this` operator
 In short:
@@ -170,17 +228,17 @@ hundreds or thousands of times.
 
 ### `.bind`, `.call`, and `.apply` are clunky
 JavaScript developers are used to using methods in a [noun–verb–noun word order][]
-that resembles English and other [SVO human languages][]: `obj.fn(arg)`.
+that resembles English and other [SVO human languages][]: `receiver.method(arg)`.
 
 [SVO human languages]: https://en.wikipedia.org/wiki/Category:Subject–verb–object_languages
 
 However, `.bind`, `.call`, and `.apply` flip this “natural” word order,
 They flip the first noun and the verb,
 and they interpose the verb’s `Function.prototype` method between them:
-`obj.call(arg)`.
+`method.call(receiver, arg)`.
 
 Consider the following real-life code using `.bind` or `.call`,
-and compare them to versions that use the `::` operator.
+and compare them to versions that use the bind-`this` operator.
 The difference is especially evident when you read them aloud.
 
 ```js
@@ -193,7 +251,7 @@ match = formatter.call(self, val);
 match = self::formatter(val);
 
 createDebug.formatArgs.call(self, args);
-self::(createDebug.formatArgs)(args);
+self::createDebug.formatArgs(args);
 
 // pretty-format@24.8.0/build-es5/index.js
 var code = fn.apply(colorConvert, arguments);
@@ -205,7 +263,7 @@ return thisp::value(...args);
 
 // rxjs@6.5.2/src/internal/operators/every.ts
 result = this.predicate.call(this.thisArg, value, this.index++, this.source);
-result = this.thisArg::(this.predicate)(value, this.index++, this.source);
+result = this.thisArg::this.predicate(value, this.index++, this.source);
 
 // bluebird@3.5.5/js/release/synchronous_inspection.js
 return isPending.call(this._target());
@@ -232,8 +290,8 @@ When extracting a method from an object
 and then calling it on the **same** object
 requires that that object be **repeated**.
 ```js
-const { fn } = obj;
-obj::fn(...args);
+const { fn } = receiver;
+receiver::fn(...args);
 ```
 This is **not** a big problem.
 In general, methods are extracted from **prototype** objects
