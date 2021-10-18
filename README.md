@@ -1,4 +1,4 @@
-# Bind-`this` operator for JavaScript
+# Bind-this operator for JavaScript
 ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
 
 * **[Formal specification][]**
@@ -28,7 +28,7 @@ receiver::(expr)
 <dd>
 
 A member expression, a call expression, an optional expression,
-a `new` expression with arguments, another bind-`this` expression,
+a `new` expression with arguments, another bind-this expression,
 or a parenthesized expression.
 The value to which this expression resolves will be bound
 to the right-hand side’s function object, as that function’s `this` receiver.
@@ -65,7 +65,7 @@ which must resolve to a function object.
 ## Description
 (A [formal specification][] is available.)
 
-The bind-`this` operator `::` is a **left-associative** binary operator.
+The bind-this operator `::` is a **left-associative** binary operator.
 It binds its left-hand side (a **receiver** value)
 to its right-hand side (a **function**)’s `this` value,
 creating a **bound function** in the same manner
@@ -81,7 +81,7 @@ equivalent to `createMethod().bind(receiver)`.
 If the operator’s right-hand side does not evaluate to a function during runtime,
 then the program throws a TypeError.
 
-The bound functions created by the bind-`this` operator
+The bound functions created by the bind-this operator
 are **indistinguishable** from the bound functions
 that are already created by [`Function.prototype.bind`][bind].
 Both are **exotic objects** that do not have a `prototype` property,
@@ -95,7 +95,7 @@ if code elsewhere reassigns the global method `Function.prototype.call`).
 The operator’s **left** side has equal **[precedence][]** with
 member expressions, call expressions, `new` expressions with arguments,
 and optional expressions.
-Like those operators, the bind-`this` operator also may be short-circuited
+Like those operators, the bind-this operator also may be short-circuited
 by optional expressions in its left-hand side.
 
 [precedence]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
@@ -115,29 +115,29 @@ The operator’s **right**-hand side, as with decorators, may be one of the foll
 For example, `receiver::ns.ns.ns.fn` groups as `receiver::(ns.ns.ns.fn)`.
 
 Similarly to the `.` and `?.` operators,
-the bind-`this` operator may be **padded** by whitespace.\
+the bind-this operator may be **padded** by whitespace.\
 For example, `receiver :: fn`\
 is equivalent to `receiver::fn`,\
 and `receiver :: (createFn())`\
 is equivalent to `receiver::(createFn())`.
 
-A `new` expression may **not** contain a bind-`this` expression without parentheses.
+A `new` expression may **not** contain a bind-this expression without parentheses.
 Both `new x::fn()` and `new x::fn` are SyntaxErrors.
 Otherwise, `new x::fn()` would be visually ambiguous between\
 `(new x)::fn()`, `new (x::fn)()`, and `new (x::fn())`.
 
-An optional expression may **not** contain a bind-`this` expression without parentheses.
+An optional expression may **not** contain a bind-this expression without parentheses.
 For example, `receiver::x?.prop`, `receiver::x?.[key]`, and `receiver::x?.()`
 are all SyntaxErrors.
 Otherwise, `receiver::x?.prop` would be visually ambiguous
 between `(receiver::x)?.prop` and `receiver::(x?.prop)`.
 (And both of these possibilities would be useless anyway:\
-A bind-`this` expression will **never** evaluate to `null` or `undefined`,\
+A bind-this expression will **never** evaluate to `null` or `undefined`,\
 so `(receiver::x)?.prop` is not useful.\
 And `receiver::(null)` and `receiver::(undefined)` will always throw TypeErrors,\
 so `receiver::(x?.prop)` is also not useful.)
 
-## Why a bind-`this` operator
+## Why a bind-this operator
 In short:
 
 1. [`.bind`][bind], [`.call`][call], and [`.apply`][apply]
@@ -238,7 +238,7 @@ and they interpose the verb’s `Function.prototype` method between them:
 `method.call(receiver, arg)`.
 
 Consider the following real-life code using `.bind` or `.call`,
-and compare them to versions that use the bind-`this` operator.
+and compare them to versions that use the bind-this operator.
 The difference is especially evident when you read them aloud.
 
 ```js
@@ -362,11 +362,11 @@ to the [Stage-1 extensions proposal][extensions].
 An [in-depth comparison is also available][extensions compare].
 The concrete differences briefly are:
 
-1. Bind-`this` has no special variable namespace.
-2. Bind-`this` has no implicit syntactic handling of property accessors.
-3. Bind-`this` has no polymorphic `const ::{ … } from …;` syntax.
-4. Bind-`this` has no polymorphic `…::…:…` syntax.
-5. Bind-`this` has no `Symbol.extension` metaprogramming system.
+1. Bind-this has no special variable namespace.
+2. Bind-this has no implicit syntactic handling of property accessors.
+3. Bind-this has no polymorphic `const ::{ … } from …;` syntax.
+4. Bind-this has no polymorphic `…::…:…` syntax.
+5. Bind-this has no `Symbol.extension` metaprogramming system.
 
 [extensions compare]: https://github.com/js-choi/proposal-bind-this/blob/main/extensions-comparison.md
 
@@ -375,15 +375,15 @@ The [pipe operator][pipe repo] is a **complementary** proposal
 that can be used to linearize deeply nested expressions
 like `f(0, g([h()], 1), 2)` into `h() |> g(^, 1) |> f(0, ^, 2)`.
 
-This is fundamentally different than the bind-`this` operator’s purpose,
+This is fundamentally different than the bind-this operator’s purpose,
 which would be much closer to property access `.`.
 
-It is true that property access `.`, bind-`this`, and the pipe operator
+It is true that property access `.`, bind-this, and the pipe operator
 all may be used to linearize code.
 But this is a mere happy side effect for the first two operators:
 
 * Property access is tightly coupled to object membership.
-* Bind-`this` is simply changes the `this` binding of a function.
+* Bind-this is simply changes the `this` binding of a function.
 
 In contrast, the pipe operator is designed to generally
 linearize all other kinds of expressions.
@@ -399,7 +399,7 @@ Object.keys(envars)
   |> console.log(^);
 ```
 
-…so too can it coexist with bind-`this`:
+…so too can it coexist with bind-this:
 ```js
 // Adapted from chalk@2.4.2/index.js
 return this._styles
