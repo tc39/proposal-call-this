@@ -141,6 +141,11 @@ so `(receiver::x)?.prop` is not useful.\
 And `receiver::(null)` and `receiver::(undefined)` will always throw TypeErrors,\
 so `receiver::(x?.prop)` is also not useful.)
 
+There is an optional form of bind-this: `?.::`.\
+`obj::fn` will always result in a bound function, regardless of whether `obj` is nullish.\
+`obj?.::fn` will result in `null` or `undefined` if `obj` is `null` or `undefined`.\
+`obj?.::fn(arg)` also short-circuits as usual if `obj` is nullish.
+
 ## Why a bind-this operator
 In short:
 
@@ -338,6 +343,9 @@ return fs::fs$read(fd, buffer, offset, length, position, callback)
 // needle@2.4.0/lib/needle.js
 process.nextTick(on_socket_end.bind(socket))
 process.nextTick(socket::on_socket_end)
+// typescript@3.5.1/lib/tsc.js
+return fn ? fn.bind(obj) : undefined;
+return obj?.::fn;
 ```
 
 [noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
