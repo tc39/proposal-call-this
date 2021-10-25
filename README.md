@@ -144,21 +144,20 @@ so `receiver::(x?.prop)` is also not useful.)
 ## Why a bind-this operator
 In short:
 
-1. [`.bind`][bind], [`.call`][call], and [`.apply`][apply]
+1. [`.bind`][bind] and [`.call`][call]
    are very useful and very common in JavaScript codebases.
-2. But `.bind`, `.call`, and `.apply` are clunky and unergonomic.
+2. But `.bind` and `.call` are clunky and unergonomic.
 
 [bind]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 [call]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
-[apply]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply
 
-### `.bind`, `.call`, and `.apply` are very common
+### `.bind` and `.call` are very common
 The dynamic `this` binding is a fundamental part of JavaScript design and practice today.
 Because of this, developers frequently need to change the `this` binding.
-`.bind`, `.call`, and `.apply` are arguably three of the most commonly used functions
+`.bind` and `.call` are arguably three of the most commonly used functions
 in all JavaScript.
 
-We can estimate `.bind`, `.call`, and `.apply`’s prevalences using [Node Gzemnid][].
+We can estimate `.bind` and `.call`’s prevalences using [Node Gzemnid][].
 Although [Gzemnid can be deceptive][], we are only seeking rough estimations.
 
 [Node Gzemnid]: https://github.com/nodejs/Gzemnid
@@ -177,7 +176,7 @@ of the top-1000 downloaded NPM packages.
 | 168,872     |`.set`       |
 | 70,116      |`.push`      |
 
-These results suggest that usage of `.call`, `.bind`, and `.apply`
+These results suggest that usage of `.bind` and `.call`
 are comparable to usage of other frequently used standard functions.
 In this dataset, their combined usage even exceeds that of `console.log`.
 
@@ -187,7 +186,7 @@ relative to other baseline functions.
 Gzemnid counts each library’s codebase only once; it does not double-count dependencies.
 
 In fact, this method definitely underestimates the prevalences
-of `.bind`, `.call`, and `.apply`
+of `.bind` and `.call`
 by excluding the large JavaScript codebases of Node and Deno.
 Node and Deno [copiously use bound functions for security][security-use-case]
 hundreds or thousands of times.
@@ -224,7 +223,7 @@ grep -aE  "\.call\b"
 ```
 
 We use `awk` to count those matching lines of code
-and compare their numbers for `bind`, `call`, `apply`,
+and compare their numbers for `bind`, `call`,
 and several other frequently used functions.
 
 ```bash
@@ -233,8 +232,6 @@ search.topcode.sh
 slim.topcode.1000.txt.lz4
 > ./search.topcode.sh '\.call\b' | grep -E --invert-match '//.*\.call|/\*.+\.call|[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this|_super\.call|_super\.prototype\.|_getPrototypeOf|_possibleConstructorReturn|__super__|WEBPACK VAR INJECTION|_objectWithoutProperties|\.hasOwnProperty\.call' | awk 'END { print NR }'
 500084
-> ./search.topcode.sh '\.apply\b' | awk 'END { print NR }'
-225315
 > ./search.topcode.sh '\.bind\b' | awk 'END { print NR }'
 170248
 > ./search.topcode.sh '\b.map\b' | awk 'END { print NR }'
@@ -288,13 +285,13 @@ for the purposes of rough comparison.
 
 </details>
 
-### `.bind`, `.call`, and `.apply` are clunky
+### `.bind` and `.call` are clunky
 JavaScript developers are used to using methods in a [noun–verb–noun word order][]
 that resembles English and other [SVO human languages][]: `receiver.method(arg)`.
 
 [SVO human languages]: https://en.wikipedia.org/wiki/Category:Subject–verb–object_languages
 
-However, `.bind`, `.call`, and `.apply` flip this “natural” word order,
+However, `.bind` and `.call` flip this “natural” word order,
 They flip the first noun and the verb,
 and they interpose the verb’s `Function.prototype` method between them:
 `method.call(receiver, arg)`.
@@ -314,14 +311,6 @@ match = self::formatter(val);
 
 createDebug.formatArgs.call(self, args);
 self::createDebug.formatArgs(args);
-
-// pretty-format@24.8.0/build-es5/index.js
-var code = fn.apply(colorConvert, arguments);
-var code = colorConvert::fn(...arguments);
-
-// q@1.5.1/q.js
-return value.apply(thisp, args);
-return thisp::value(...args);
 
 // rxjs@6.5.2/src/internal/operators/every.ts
 result = this.predicate.call(this.thisArg, value, this.index++, this.source);

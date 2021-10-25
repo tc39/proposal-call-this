@@ -735,7 +735,7 @@ However, several of these points are debatable.
    but clunky. We should improve their ergonomics with syntax.”
 
    Both proposals agree with this statement.
-   [`.bind`, `.call`, and `.apply` are very common][common],
+   [`.bind` and `.call` are very common][common],
    but [they are also very clunky][clunky].
 
 2. “Extracting get/set accessors is also important, so it should get syntax too.”
@@ -775,9 +775,9 @@ However, several of these points are debatable.
 
 In contrast, the [bind-`this` operator][bind-this] is focused on **one problem**:
 
-1. [`.bind`][bind], [`.call`][call], and [`.apply`][apply]
+1. [`.bind`][bind] and [`.call`][call]
    are very **useful** and very **common** in JavaScript codebases…
-2. …but `.bind`, `.call`, and `.apply` are **clunky** and **unergonomic**.
+2. …but `.bind` and `.call` are **clunky** and **unergonomic**.
 
 All the other issues that the extensions system solves
 is either solved by the [pipe operator][] –
@@ -791,7 +791,7 @@ However, it has little hope of advancing in TC39 as it is.
 And it tries to solve more problems than necessary.
 
 But there is still a real need for a syntax
-that makes [`.bind`][bind], [`.call`][call], and [`.apply`][apply]
+that makes [`.bind`][bind] and [`.call`][call]
 less clunky and more ergonomic.
 
 A single, simple [bind-`this` operator][bind-this] without extra features
@@ -816,6 +816,5 @@ and does not carry a risk of ecosystem schism.
 [security use case]: https://github.com/js-choi/proposal-bind-this/blob/main/security-use-case.md
 [bind]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 [call]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
-[apply]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply
-[common]: https://github.com/js-choi/proposal-bind-this/blob/main/README.md#bind-call-and-apply-are-very-common
-[clunky]: https://github.com/js-choi/proposal-bind-this/blob/main/README.md#bind-call-and-apply-are-clunky
+[common]: https://github.com/js-choi/proposal-bind-this/blob/main/README.md#bind-and-call-are-very-common
+[clunky]: https://github.com/js-choi/proposal-bind-this/blob/main/README.md#bind-and-call-are-clunky
