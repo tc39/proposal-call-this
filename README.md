@@ -164,6 +164,42 @@ Although [Gzemnid can be deceptive][], we are only seeking rough estimations.
 [Node Gzemnid]: https://github.com/nodejs/Gzemnid
 [Gzemnid can be deceptive]: https://github.com/nodejs/Gzemnid/blob/main/README.md#deception
 
+The following results are from the checked-in-Git source code
+of the top-1000 downloaded NPM packages.
+
+| Occurrences | Method      |
+| ----------: | ----------- |
+| 1,016,503   |`.map`       |
+| 315,922     |**`.call`**  |
+| 271,915     |`console.log`|
+| 182,292     |`.slice`     |
+| 170,248     |**`.bind`**  |
+| 168,872     |`.set`       |
+| 70,116      |`.push`      |
+
+These results suggest that usage of `.call`, `.bind`, and `.apply`
+are comparable to usage of other frequently used standard functions.
+In this dataset, their combined usage even exceeds that of `console.log`.
+
+Obviously, [this methodology has many pitfalls][Gzemnid can be deceptive],
+but we are only looking for roughly estimated orders of magnitude
+relative to other baseline functions.
+Gzemnid counts each library’s codebase only once; it does not double-count dependencies.
+
+In fact, this method definitely underestimates the prevalences
+of `.bind`, `.call`, and `.apply`
+by excluding the large JavaScript codebases of Node and Deno.
+Node and Deno [copiously use bound functions for security][security-use-case]
+hundreds or thousands of times.
+
+[security-use-case]: https://github.com/js-choi/proposal-bind-this/blob/main/security-use-case.md
+
+<details>
+
+<summary>What methodology was used to get these results?</summary>
+
+***
+
 First, we download the 2019-06-04 [pre-built Gzemnid dataset][]
 for the top-1000 downloaded NPM packages.
 We also need Gzemnid’s `search.topcode.sh` script in the same active directory,
@@ -195,7 +231,7 @@ and several other frequently used functions.
 > ls
 search.topcode.sh
 slim.topcode.1000.txt.lz4
-> ./search.topcode.sh '\.call\b' | awk 'END { print NR }'
+> ./search.topcode.sh '\.call\b' | grep -E --invert-match '//.*\.call|/\*.+\.call|[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this|_super\.call|_super\.prototype\.|_getPrototypeOf|_possibleConstructorReturn|__super__|WEBPACK VAR INJECTION|_objectWithoutProperties|\.hasOwnProperty\.call' | awk 'END { print NR }'
 500084
 > ./search.topcode.sh '\.apply\b' | awk 'END { print NR }'
 225315
@@ -213,22 +249,44 @@ slim.topcode.1000.txt.lz4
 70116
 ```
 
-These results suggest that usage of `.call`, `.bind`, and `.apply`
-are comparable to usage of other frequently used standard functions.
-In this dataset, their combined usage even exceeds that of `console.log`.
+Note that, for `.call`, we use `grep` to exclude
+several irrelevant occurrences of `.call`
+either within comments or from transpiled code.
+We err on the side of false exclusions.
 
-Obviously, [this methodology has many pitfalls][Gzemnid can be deceptive],
-but we are only looking for roughly estimated orders of magnitude
-relative to other baseline functions.
-Gzemnid counts each library’s codebase only once; it does not double-count dependencies.
+| Excluded pattern                             | Reason                                           |
+| -------------------------------------------- | ------------------------------------------------ |
+| `//.*\.call`                                 | Code comment.                                    |
+| `/\*.+\.call`                                | Code comment.                                    |
+| `[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this` | Constructor call obsoleted by `super`. See note. |
+| `_super\.call`                               | Babel-transpiled `super()` artifact.             |
+| `_super\.prototype\.`                        | Babel-transpiled `super.fn()` artifact.          |
+| `_objectWithoutProperties`                   | Babel-transpiled `...` artifact.                 |
+| `_getPrototypeOf`                            | Babel artifact.                                  |
+| `_possibleConstructorReturn`                 | Babel artifact.                                                |
+| `__super__`                                  | CoffeeScript artifact.                           |
+| `WEBPACK VAR INJECTION`                      | Webpack artifact.                                |
+| `\.hasOwnProperty\.call`                     | Obsoleted by `Object.has`.                       |
 
-In fact, this method definitely underestimates the prevalences
-of `.bind`, `.call`, and `.apply`
-by excluding the large JavaScript codebases of Node and Deno.
-Node and Deno [copiously use bound functions for security][security-use-case]
-hundreds or thousands of times.
+These excluded patterns were determined
+by an independent investigator ([Scott Jamison][]),
+after manually reviewing the first 10,000 occurrences of `.call` in the dataset
+for why each occurrence occurred.
 
-[security-use-case]: https://github.com/js-choi/proposal-bind-this/blob/main/security-use-case.md
+The excluded `[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this`
+pattern deserves a special note.
+This pattern matches any capitalized identifier followed by `.call(this`.
+We exclude any such occurrences because any capitalized identifier
+likely refers to a constructor,
+and using `.call` on a constructor is a pattern
+that has largely been obviated by `class` and `super` syntax.
+It is likely that this pattern erroneously excludes many legitimate uses
+of `.call` from our count, but this bias against `.call` is acceptable
+for the purposes of rough comparison.
+
+[Scott Jamison]: https://github.com/theScottyJam
+
+</details>
 
 ### `.bind`, `.call`, and `.apply` are clunky
 JavaScript developers are used to using methods in a [noun–verb–noun word order][]
