@@ -471,3 +471,43 @@ return this._styles
 ```
 
 [pipe repo]: https://github.com/tc39/proposal-pipeline-operator
+
+### PFA syntax
+[PFA (partial function application) syntax][PFA] `~()`
+would tersely create partially applied functions.
+
+PFA syntax `~()` and bind-this `::` are also complementary
+and handle different use cases.
+
+For example, `obj.method~()` would handle method extraction
+with implicit binding, which bind-this does not address.
+In other words, when the receiver object itself
+contains the function to which we wish to bind,
+then we need to repeat the receiver once, with bind-this.
+PFA syntax would allow us to avoid repeating the receiver.
+
+```js
+n.on("click", v.reset.bind(v))
+n.on("click", v::v.reset)
+n.on("click", v.reset~())
+```
+
+In contrast, bind-this changes the receiver of an unbound function: receiver::fn().
+(This unbound function might have already been extracted from another object.)
+PFA syntax does not address this use case.
+
+```js
+// bluebird@3.5.5/js/release/synchronous_inspection.js
+isPending.call(this._target())
+this._target()::isPending()
+```
+
+PFA syntax and bind-this can also work together, when creating bound functions with multiple partially applied arguments.
+
+```js
+// svgo@1.2.2/plugins/convertTransform.js
+floatround = /* … */ smartRound.bind(this, params.floatPrecision) /* … */
+floatround = /* … */ this::smartRound~(this, params.floatPrecision) /* … */
+```
+
+[PFA]: https://github.com/tc39/proposal-partial-application
