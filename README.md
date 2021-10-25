@@ -334,6 +334,10 @@ validate = self::macro(schema, parentSchema, it);
 // graceful-fs@4.1.15/polyfills.js
 return fs$read.call(fs, fd, buffer, offset, length, position, callback)
 return fs::fs$read(fd, buffer, offset, length, position, callback)
+
+// needle@2.4.0/lib/needle.js
+process.nextTick(on_socket_end.bind(socket))
+process.nextTick(socket::on_socket_end)
 ```
 
 [noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
