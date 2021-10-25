@@ -408,14 +408,14 @@ with which this proposal’s syntax works well.
 ### Old bind operator
 This proposal is a **resurrection**
 of the old [Stage-0 bind-operator proposal][old bind].
-A champion of the old proposal has [recommended restarting with a new proposal][fresh]
-instead of using the old proposal.
+(A champion of the old proposal has [recommended restarting with a new proposal][fresh]
+instead of using the old proposal.)
 
 [fresh]: https://github.com/tc39/proposal-bind-operator/issues/56#issuecomment-698444297
 
-This means it is basically the same as the old proposal.
+The new proposal is basically the same as the old proposal.
 The only big difference is that there is no unary form
-for implciit binding of the receiver during method extraction.
+for implicit binding of the receiver during method extraction.
 (See also [non-goals](#non-goals).)
 
 ### Extensions
@@ -462,7 +462,7 @@ Object.keys(envars)
   |> console.log(^);
 ```
 
-…so too can it coexist with bind-this:
+…so too can it work together with bind-this:
 ```js
 // Adapted from chalk@2.4.2/index.js
 return this._styles
