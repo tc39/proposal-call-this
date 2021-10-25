@@ -323,11 +323,11 @@ return this._target()::isPending();
 var matchesPredicate = tryCatch(item).call(boundTo, e);
 var matchesPredicate = boundTo::(tryCatch(item))(e);
 
-// async-3.0.1/internal/initialParams.js
+// async@3.0.1/internal/initialParams.js
 var callback = args.pop(); return fn.call(this, args, callback);
 var callback = args.pop(); return this::fn(args, callback);
 
-// ajv-6.10.0/lib/ajv.js
+// ajv@6.10.0/lib/ajv.js
 validate = macro.call(self, schema, parentSchema, it);
 validate = self::macro(schema, parentSchema, it);
 
