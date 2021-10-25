@@ -528,7 +528,7 @@ PFA syntax and bind-this can also work together, when creating bound functions w
 ```js
 // svgo@1.2.2/plugins/convertTransform.js
 floatround = /* … */ smartRound.bind(this, params.floatPrecision) /* … */
-floatround = /* … */ this::smartRound~(this, params.floatPrecision) /* … */
+floatround = /* … */ this::smartRound~(params.floatPrecision) /* … */
 ```
 
 [PFA]: https://github.com/tc39/proposal-partial-application
