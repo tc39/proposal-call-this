@@ -121,9 +121,13 @@ is equivalent to `receiver::fn`,\
 and `receiver :: (createFn())`\
 is equivalent to `receiver::(createFn())`.
 
-The bind-this operator may be optionally chained with `?.`.
-If `receiver` is `null` or `undefined`, then `receiver?.::fn` and `receiver?.::fn()`
-will both evaluate to `null` or `undefined`.
+The bind-this operator may be optionally chained with `?.` (i.e., `?.::`):\
+`receiver::fn` will always result in a bound function,
+regardless of whether `receiver` is nullish.\
+`receiver?.::fn` will result in `null` or `undefined`
+if `receiver` is `null` or `undefined`.\
+`receiver?.::fn(arg)` also short-circuits as usual, before `arg` is evaluated,
+if `receiver` is nullish.
 
 A `new` expression may **not** contain a bind-this expression without parentheses.
 Both `new x::fn()` and `new x::fn` are SyntaxErrors.
@@ -140,11 +144,6 @@ A bind-this expression will **never** evaluate to `null` or `undefined`,\
 so `(receiver::x)?.prop` is not useful.\
 And `receiver::(null)` and `receiver::(undefined)` will always throw TypeErrors,\
 so `receiver::(x?.prop)` is also not useful.)
-
-There is an optional form of bind-this: `?.::`.\
-`obj::fn` will always result in a bound function, regardless of whether `obj` is nullish.\
-`obj?.::fn` will result in `null` or `undefined` if `obj` is `null` or `undefined`.\
-`obj?.::fn(arg)` also short-circuits as usual if `obj` is nullish.
 
 ## Why a bind-this operator
 In short:
