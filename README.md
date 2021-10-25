@@ -343,6 +343,19 @@ return fs::fs$read(fd, buffer, offset, length, position, callback)
 // needle@2.4.0/lib/needle.js
 process.nextTick(on_socket_end.bind(socket))
 process.nextTick(socket::on_socket_end)
+
+// util.promisify@1.0.0/implementation.js
+slice = Function.call.bind(Array.prototype.slice);
+slice = Array.prototype.slice::Function.call;
+
+// kleur@3.0.3/index.js
+ctx.reset = $.reset.bind(ctx);
+ctx.reset = ctx::$.reset;
+
+// bluebird@3.5.5/js/browser/bluebird.core.js
+return Promise.resolve(value).bind(thisArg);
+return thisArg::(Promise.resolve(value));
+
 // typescript@3.5.1/lib/tsc.js
 return fn ? fn.bind(obj) : undefined;
 return obj?.::fn;
