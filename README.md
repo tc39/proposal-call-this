@@ -75,8 +75,8 @@ For example, `receiver::fn` would be equivalent to `fn.bind(receiver)`
 (except that its behavior does not change
 if code elsewhere reassigns the global method `Function.prototype.bind`).
 
-Likewise, `receiver::(createMethod())` would be roughly
-equivalent to `createMethod().bind(receiver)`.
+Likewise, `receiver::(createFn())` would be roughly
+equivalent to `createFn().bind(receiver)`.
 
 If the operator’s right-hand side does not evaluate to a function during runtime,
 then the program throws a TypeError.
