@@ -231,7 +231,7 @@ and several other frequently used functions.
 search.topcode.sh
 slim.topcode.1000.txt.lz4
 > ./search.topcode.sh '\.call\b' | grep -E --invert-match '//.*\.call|/\*.+\.call|[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this|_super\.call|_super\.prototype\.|_getPrototypeOf|_possibleConstructorReturn|__super__|WEBPACK VAR INJECTION|_objectWithoutProperties|\.hasOwnProperty\.call' | awk 'END { print NR }'
-500084
+315922
 > ./search.topcode.sh '\.bind\b' | awk 'END { print NR }'
 170248
 > ./search.topcode.sh '\b.map\b' | awk 'END { print NR }'
