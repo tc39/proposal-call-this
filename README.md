@@ -271,8 +271,10 @@ We err on the side of false exclusions.
 
 These excluded patterns were determined
 by an independent investigator ([Scott Jamison][]),
-after manually reviewing the first 10,000 occurrences of `.call` in the dataset
+after [manually reviewing the first 10,000 occurrences of `.call` in the dataset][review]
 for why each occurrence occurred.
+
+[review]: https://github.com/js-choi/proposal-bind-this/issues/12
 
 The excluded `[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this`
 pattern deserves a special note.
