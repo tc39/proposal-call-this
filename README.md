@@ -102,8 +102,8 @@ short-circuited by optional expressions in its left-hand side.
 
 The operator’s **right**-hand side, as with decorators, may be one of
 the following:
-* A single **identifier** (like `fn`).
-* A **chain** of identifiers (like `ns.fn`).
+* A single **identifier** or **private field** (like `fn` or `#field`).
+* A **chain** of identifiers and/or private fields (like `ns.fn` or `this.ns.#field`).
 * A parenthesized **expression** (like `(createFn())`).
 
 For example, `receiver::ns.ns.ns.fn` groups as `receiver::(ns.ns.ns.fn)`.
