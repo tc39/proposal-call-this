@@ -1,5 +1,5 @@
 # Bind-this operator for JavaScript
-ECMAScript Stage-0 Proposal. J. S. Choi, 2021.
+ECMAScript Stage-1 Proposal. J. S. Choi, 2021.
 
 * **[Formal specification][]**
 * Babel plugin: Not yet
