@@ -6,11 +6,10 @@ ECMAScript Stage-1 Proposal. J. S. Choi, 2021.
 
 [formal specification]: http://jschoi.org/21/es-bind-operator/
 
-This proposal is a **resurrection**
-of the old [Stage-0 bind-operator proposal][old bind].
-It is also an alternative, **competing** proposal
-to the [Stage-1 extensions proposal][extensions].
-For more information, see [§ Related proposals](#related-proposals).
+This proposal is a **resurrection** of the old [Stage-0 bind-operator
+proposal][old bind]. It is also an alternative, **competing** proposal to the
+[Stage-1 extensions proposal][extensions]. For more information, see [§ Related
+proposals](#related-proposals).
 
 [old bind]: https://github.com/tc39/proposal-bind-operator
 [extensions]: https://github.com/tc39/proposal-extensions
@@ -27,11 +26,10 @@ receiver::(expr)
 <dt><code>receiver</code></dt>
 <dd>
 
-A member expression, a call expression, an optional expression,
-a `new` expression with arguments, another bind-this expression,
-or a parenthesized expression.
-The value to which this expression resolves will be bound
-to the right-hand side’s function object, as that function’s `this` receiver.
+A member expression, a call expression, an optional expression, a `new`
+expression with arguments, another bind-this expression, or a parenthesized
+expression. The value to which this expression resolves will be bound to the
+right-hand side’s function object, as that function’s `this` receiver.
 
 </dd>
 
@@ -45,10 +43,9 @@ A variable that must resolve to a function object.
 <dt><code>ns</code></dt>
 <dd>
 
-Instead of a single variable,
-the right-hand side may be a namespace object’s variable,
-followed by a chain of property identifiers.
-This chain must resolve to a function object.
+Instead of a single variable, the right-hand side may be a namespace object’s
+variable, followed by a chain of property identifiers. This chain must resolve
+to a function object.
 
 </dd>
 
@@ -65,38 +62,34 @@ which must resolve to a function object.
 ## Description
 (A [formal specification][] is available.)
 
-The bind-this operator `::` is a **left-associative** binary operator.
-It binds its left-hand side (a **receiver** value)
-to its right-hand side (a **function**)’s `this` value,
-creating a **bound function** in the same manner
+The bind-this operator `::` is a **left-associative** binary operator. It binds
+its left-hand side (a **receiver** value) to its right-hand side (a
+**function**)’s `this` value, creating a **bound function** in the same manner
 as [`Function.prototype.bind`][bind].
 
-For example, `receiver::fn` would be equivalent to `fn.bind(receiver)`
-(except that its behavior does not change
-if code elsewhere reassigns the global method `Function.prototype.bind`).
+For example, `receiver::fn` would be equivalent to `fn.bind(receiver)` (except
+that its behavior does not change if code elsewhere reassigns the global method
+`Function.prototype.bind`).
 
-Likewise, `receiver::(createFn())` would be roughly
-equivalent to `createFn().bind(receiver)`.
+Likewise, `receiver::(createFn())` would be roughly equivalent to
+`createFn().bind(receiver)`.
 
-If the operator’s right-hand side does not evaluate to a function during runtime,
-then the program throws a TypeError.
+If the operator’s right-hand side does not evaluate to a function during
+runtime, then the program throws a TypeError.
 
-The bound functions created by the bind-this operator
-are **indistinguishable** from the bound functions
-that are already created by [`Function.prototype.bind`][bind].
-Both are **exotic objects** that do not have a `prototype` property,
-and which may be called like any typical function.
+The bound functions created by the bind-this operator are **indistinguishable**
+from the bound functions that are already created by
+[`Function.prototype.bind`][bind]. Both are **exotic objects** that do not have
+a `prototype` property, and which may be called like any typical function.
 
-From this definition, `receiver::fn(...args)`
-is also **indistinguishable** from `fn.call(receiver, ...args)`
-(except that its behavior does not change
-if code elsewhere reassigns the global method `Function.prototype.call`).
+From this definition, `receiver::fn(...args)` is also **indistinguishable** from
+`fn.call(receiver, ...args)` (except that its behavior does not change if code
+elsewhere reassigns the global method `Function.prototype.call`).
 
-The operator’s **left** side has equal **[precedence][]** with
-member expressions, call expressions, `new` expressions with arguments,
-and optional expressions.
-Like those operators, the bind-this operator also may be short-circuited
-by optional expressions in its left-hand side.
+The operator’s **left** side has equal **[precedence][]** with member
+expressions, call expressions, `new` expressions with arguments, and optional
+expressions. Like those operators, the bind-this operator also may be
+short-circuited by optional expressions in its left-hand side.
 
 [precedence]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence
 
@@ -107,7 +100,8 @@ by optional expressions in its left-hand side.
 | Optional expressions               |`obj?.prop::fn`|`(obj?.prop)::fn`
 |`new` expressions with arguments    |`new C()::fn`  |`(new C())::fn`
 
-The operator’s **right**-hand side, as with decorators, may be one of the following:
+The operator’s **right**-hand side, as with decorators, may be one of
+the following:
 * A single **identifier** (like `fn`).
 * A **chain** of identifiers (like `ns.fn`).
 * A parenthesized **expression** (like `(createFn())`).
@@ -129,20 +123,20 @@ if `receiver` is `null` or `undefined`.\
 `receiver?.::fn(arg)` also short-circuits as usual, before `arg` is evaluated,
 if `receiver` is nullish.
 
-A `new` expression may **not** contain a bind-this expression without parentheses.
-Both `new x::fn()` and `new x::fn` are SyntaxErrors.
+A `new` expression may **not** contain a bind-this expression without
+parentheses. Both `new x::fn()` and `new x::fn` are SyntaxErrors.
 Otherwise, `new x::fn()` would be visually ambiguous between\
 `(new x)::fn()`, `new (x::fn)()`, and `new (x::fn())`.
 
-An optional expression may **not** contain a bind-this expression without parentheses.
-For example, `receiver::x?.prop`, `receiver::x?.[key]`, and `receiver::x?.()`
-are all SyntaxErrors.
-Otherwise, `receiver::x?.prop` would be visually ambiguous
-between `(receiver::x)?.prop` and `receiver::(x?.prop)`.
+An optional expression may **not** contain a bind-this expression without
+parentheses. For example, `receiver::x?.prop`, `receiver::x?.[key]`, and
+`receiver::x?.()` are all SyntaxErrors. Otherwise, `receiver::x?.prop` would be
+visually ambiguous between `(receiver::x)?.prop` and `receiver::(x?.prop)`.
 (And both of these possibilities would be useless anyway:\
 A bind-this expression will **never** evaluate to `null` or `undefined`,\
 so `(receiver::x)?.prop` is not useful.\
-And `receiver::(null)` and `receiver::(undefined)` will always throw TypeErrors,\
+And `receiver::(null)` and `receiver::(undefined)` will always
+throw TypeErrors,\
 so `receiver::(x?.prop)` is also not useful.)
 
 ## Why a bind-this operator
@@ -156,10 +150,10 @@ In short:
 [call]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
 
 ### `.bind` and `.call` are very common
-The dynamic `this` binding is a fundamental part of JavaScript design and practice today.
-Because of this, developers frequently need to change the `this` binding.
-`.bind` and `.call` are arguably three of the most commonly used functions
-in all JavaScript.
+The dynamic `this` binding is a fundamental part of JavaScript design and
+practice today. Because of this, developers frequently need to change the `this`
+binding. `.bind` and `.call` are arguably three of the most commonly used
+functions in all JavaScript.
 
 We can estimate `.bind` and `.call`’s prevalences using [Node Gzemnid][].
 Although [Gzemnid can be deceptive][], we are only seeking rough estimations.
@@ -167,8 +161,8 @@ Although [Gzemnid can be deceptive][], we are only seeking rough estimations.
 [Node Gzemnid]: https://github.com/nodejs/Gzemnid
 [Gzemnid can be deceptive]: https://github.com/nodejs/Gzemnid/blob/main/README.md#deception
 
-The following results are from the checked-in-Git source code
-of the top-1000 downloaded NPM packages.
+The following results are from the checked-in-Git source code of the top-1000
+downloaded NPM packages.
 
 | Occurrences | Method      |
 | ----------: | ----------- |
@@ -180,20 +174,19 @@ of the top-1000 downloaded NPM packages.
 | 168,872     |`.set`       |
 | 70,116      |`.push`      |
 
-These results suggest that usage of `.bind` and `.call`
-are comparable to usage of other frequently used standard functions.
-In this dataset, their combined usage even exceeds that of `console.log`.
+These results suggest that usage of `.bind` and `.call` are comparable to usage
+of other frequently used standard functions. In this dataset, their combined
+usage even exceeds that of `console.log`.
 
-Obviously, [this methodology has many pitfalls][Gzemnid can be deceptive],
-but we are only looking for roughly estimated orders of magnitude
-relative to other baseline functions.
-Gzemnid counts each library’s codebase only once; it does not double-count dependencies.
+Obviously, [this methodology has many pitfalls][Gzemnid can be deceptive], but
+we are only looking for roughly estimated orders of magnitude relative to other
+baseline functions. Gzemnid counts each library’s codebase only once; it does
+not double-count dependencies.
 
-In fact, this method definitely underestimates the prevalences
-of `.bind` and `.call`
-by excluding the large JavaScript codebases of Node and Deno.
-Node and Deno [copiously use bound functions for security][security-use-case]
-hundreds or thousands of times.
+In fact, this method definitely underestimates the prevalences of `.bind` and
+`.call` by excluding the large JavaScript codebases of Node and Deno. Node and
+Deno [copiously use bound functions for security][security-use-case] hundreds or
+thousands of times.
 
 [security-use-case]: https://github.com/js-choi/proposal-bind-this/blob/main/security-use-case.md
 
@@ -203,12 +196,11 @@ hundreds or thousands of times.
 
 ***
 
-First, we download the 2019-06-04 [pre-built Gzemnid dataset][]
-for the top-1000 downloaded NPM packages.
-We also need Gzemnid’s `search.topcode.sh` script in the same active directory,
-which in turn requires the lz4 command suite.
-`search.topcode.sh` will output lines of code from the top-1000 packages
-that match the given regular expression.
+First, we download the 2019-06-04 [pre-built Gzemnid dataset][] for the top-1000
+downloaded NPM packages. We also need Gzemnid’s `search.topcode.sh` script in
+the same active directory, which in turn requires the lz4 command suite.
+`search.topcode.sh` will output lines of code from the top-1000 packages that
+match the given regular expression.
 
 [pre-built Gzemnid dataset]: https://gzemnid.nodejs.org/datasets/
 
@@ -226,9 +218,8 @@ grep -aE  "\.call\b"
 139612972	readable-stream@3.4.0/lib/_stream_readable.js:786:  var res = Stream.prototype.on.call(this, ev, fn);
 ```
 
-We use `awk` to count those matching lines of code
-and compare their numbers for `bind`, `call`,
-and several other frequently used functions.
+We use `awk` to count those matching lines of code and compare their numbers for
+`bind`, `call`, and several other frequently used functions.
 
 ```bash
 > ls
@@ -250,10 +241,9 @@ slim.topcode.1000.txt.lz4
 70116
 ```
 
-Note that, for `.call`, we use `grep` to exclude
-several irrelevant occurrences of `.call`
-either within comments or from transpiled code.
-We err on the side of false exclusions.
+Note that, for `.call`, we use `grep` to exclude several irrelevant occurrences
+of `.call` either within comments or from transpiled code. We err on the side of
+false exclusions.
 
 | Excluded pattern                             | Reason                                           |
 | -------------------------------------------- | ------------------------------------------------ |
@@ -269,42 +259,39 @@ We err on the side of false exclusions.
 | `WEBPACK VAR INJECTION`                      | Webpack artifact.                                |
 | `\.hasOwnProperty\.call`                     | Obsoleted by `Object.has`.                       |
 
-These excluded patterns were determined
-by an independent investigator ([Scott Jamison][]),
-after [manually reviewing the first 10,000 occurrences of `.call` in the dataset][review]
-for why each occurrence occurred.
+These excluded patterns were determined by an independent investigator ([Scott
+Jamison][]), after [manually reviewing the first 10,000 occurrences of `.call`
+in the dataset][review] for why each occurrence occurred.
 
 [review]: https://github.com/js-choi/proposal-bind-this/issues/12
 
-The excluded `[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this`
-pattern deserves a special note.
-This pattern matches any capitalized identifier followed by `.call(this`.
-We exclude any such occurrences because any capitalized identifier
-likely refers to a constructor,
-and using `.call` on a constructor is a pattern
-that has largely been obviated by `class` and `super` syntax.
-It is likely that this pattern erroneously excludes many legitimate uses
-of `.call` from our count, but this bias against `.call` is acceptable
-for the purposes of rough comparison.
+The excluded `[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this` pattern deserves a
+special note. This pattern matches any capitalized identifier followed by
+`.call(this`. We exclude any such occurrences because any capitalized identifier
+likely refers to a constructor, and using `.call` on a constructor is a pattern
+that has largely been obviated by `class` and `super` syntax. It is likely that
+this pattern erroneously excludes many legitimate uses of `.call` from our
+count, but this bias against `.call` is acceptable for the purposes of rough
+comparison.
 
 [Scott Jamison]: https://github.com/theScottyJam
 
 </details>
 
 ### `.bind` and `.call` are clunky
-JavaScript developers are used to using methods in a [noun–verb–noun word order][]
-that resembles English and other [SVO human languages][]: `receiver.method(arg)`.
+JavaScript developers are used to using methods in a [noun–verb–noun word
+order][] that resembles English and other [SVO human languages][]:
+`receiver.method(arg)`.
 
 [SVO human languages]: https://en.wikipedia.org/wiki/Category:Subject–verb–object_languages
 
-However, `.bind` and `.call` flip this “natural” word order,
-They flip the first noun and the verb,
-and they interpose the verb’s `Function.prototype` method between them:
-`method.call(receiver, arg)`.
+However, `.bind` and `.call` flip this “natural” word order, They flip the first
+noun and the verb, and they interpose the verb’s `Function.prototype` method
+between them: `method.call(receiver, arg)`.
 
-Consider the following real-life code using `.bind` or `.call`,
-and compare them to versions that use the bind-this operator.
-The difference is especially evident when you read them aloud.
+Consider the following real-life code using `.bind` or `.call`, and compare them
+to versions that use the bind-this operator. The difference is especially
+evident when you read them aloud.
 
 ```js
 // kind-of@6.0.2/index.js
@@ -365,42 +352,36 @@ return obj?.::fn;
 [noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
 
 ## Non-goals
-A goal of this proposal is **simplicity**.
-Therefore, this proposal purposefully
+A goal of this proposal is **simplicity**. Therefore, this proposal purposefully
 does *not* address the following use cases.
 
-**Method extraction with implicit binding**
-is not a goal of this proposal.
-When extracting a method from an object
-and then calling it on the **same** object
+**Method extraction with implicit binding** is not a goal of this proposal. When
+extracting a method from an object and then calling it on the **same** object
 requires that that object be **repeated**.
 ```js
 const { fn } = receiver;
 receiver::fn(...args);
 ```
-This is **not** a big problem.
-In general, methods are extracted from **prototype** objects
-and then called on **instance** objects,
-so the extraction’s source object and the call’s receiver object
-are usually different anyway.
+This is **not** a big problem. In general, methods are extracted from
+**prototype** objects and then called on **instance** objects, so the
+extraction’s source object and the call’s receiver object are usually
+different anyway.
+```js
 const { slice } = Array.prototype;
 arr::slice(...args);
+```
 
-We are deferring any special syntax
-for method extraction with implicit binding
+We are deferring any special syntax for method extraction with implicit binding
 to a future proposal.
 
-**Extracting property accessors** (i.e., getters and setters)
-is not a goal of this proposal.
-Get/set accessors are **not like** methods.
-Methods are **properties** (which happen to be functions).
-Accessors themselves are **not** properties;
-they are functions that activate when getting or setting properties.
+**Extracting property accessors** (i.e., getters and setters) is not a goal of
+this proposal. Get/set accessors are **not like** methods. Methods are
+**properties** (which happen to be functions). Accessors themselves are **not**
+properties; they are functions that activate when getting or setting properties.
 Getters/setters have to be extracted using `Object.getOwnPropertyDescriptor`;
-they are not handled in a special way.
-This verbosity may be considered to be desirable [syntactic salt][]:
-it makes the developer’s intention (to extract getters/setters – and not methods)
-more explicit.
+they are not handled in a special way. This verbosity may be considered to be
+desirable [syntactic salt][]: it makes the developer’s intention (to extract
+getters/setters – and not methods) more explicit.
 
 ```js
 const { get: $getSize } =
@@ -416,11 +397,9 @@ new Set([0, 1, 2])::$getSize();
 
 [syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
 
-**Function/expression application**,
-in which deeply nested function calls and other expressions
-are untangled into linear pipelines,
-is important but not addressed by this proposal.
-Instead, it is addressed by the [pipe operator][],
+**Function/expression application**, in which deeply nested function calls and
+other expressions are untangled into linear pipelines, is important but not
+addressed by this proposal. Instead, it is addressed by the [pipe operator][],
 with which this proposal’s syntax works well.
 
 [pipe operator]: #pipe-operator
@@ -428,24 +407,22 @@ with which this proposal’s syntax works well.
 ## Related proposals
 
 ### Old bind operator
-This proposal is a **resurrection**
-of the old [Stage-0 bind-operator proposal][old bind].
-(A champion of the old proposal has [recommended restarting with a new proposal][fresh]
-instead of using the old proposal.)
+This proposal is a **resurrection** of the old [Stage-0 bind-operator
+proposal][old bind]. (A champion of the old proposal has [recommended restarting
+with a new proposal][fresh] instead of using the old proposal.)
 
 [fresh]: https://github.com/tc39/proposal-bind-operator/issues/56#issuecomment-698444297
 
-The new proposal is basically the same as the old proposal.
-The only big difference is that there is no unary form
-for implicit binding of the receiver during method extraction.
-(See also [non-goals](#non-goals).)
+The new proposal is basically the same as the old proposal. The only big
+difference is that there is no unary form for implicit binding of the receiver
+during method extraction. (See also [non-goals](#non-goals).)
 
 ### Extensions
-The extensions system is an alternative, **competing** proposal
-to the [Stage-1 extensions proposal][extensions].
+The extensions system is an alternative, **competing** proposal to the [Stage-1
+extensions proposal][extensions].
 
-An [in-depth comparison is also available][extensions compare].
-The concrete differences briefly are:
+An [in-depth comparison is also available][extensions compare]. The concrete
+differences briefly are:
 
 1. Bind-this has no special variable namespace.
 2. Bind-this has no implicit syntactic handling of property accessors.
@@ -456,22 +433,22 @@ The concrete differences briefly are:
 [extensions compare]: https://github.com/js-choi/proposal-bind-this/blob/main/extensions-comparison.md
 
 ### Pipe operator
-The [pipe operator][pipe repo] is a **complementary** proposal
-that can be used to linearize deeply nested expressions
-like `f(0, g([h()], 1), 2)` into `h() |> g(^, 1) |> f(0, ^, 2)`.
+The [pipe operator][pipe repo] is a **complementary** proposal that can be used
+to linearize deeply nested expressions like `f(0, g([h()], 1), 2)` into
+`h() |> g(^, 1) |> f(0, ^, 2)`.
 
-This is fundamentally different than the bind-this operator’s purpose,
-which would be much closer to property access `.`.
+This is fundamentally different than the bind-this operator’s purpose, which
+would be much closer to property access `.`.
 
-It is true that property access `.`, bind-this, and the pipe operator
-all may be used to linearize code.
-But this is a mere happy side effect for the first two operators:
+It is true that property access `.`, bind-this, and the pipe operator all may be
+used to linearize code. But this is a mere happy side effect for the first two
+operators:
 
 * Property access is tightly coupled to object membership.
 * Bind-this is simply changes the `this` binding of a function.
 
-In contrast, the pipe operator is designed to generally
-linearize all other kinds of expressions.
+In contrast, the pipe operator is designed to generally linearize all other
+kinds of expressions.
 
 Just like how the pipe operator coexists with property access:
 ```js
@@ -495,18 +472,17 @@ return this._styles
 [pipe repo]: https://github.com/tc39/proposal-pipeline-operator
 
 ### PFA syntax
-[PFA (partial function application) syntax][PFA] `~()`
-would tersely create partially applied functions.
+[PFA (partial function application) syntax][PFA] `~()` would tersely create
+partially applied functions.
 
-PFA syntax `~()` and bind-this `::` are also complementary
-and handle different use cases.
+PFA syntax `~()` and bind-this `::` are also complementary and handle different
+use cases.
 
-For example, `obj.method~()` would handle method extraction
-with implicit binding, which bind-this does not address.
-In other words, when the receiver object itself
-contains the function to which we wish to bind,
-then we need to repeat the receiver once, with bind-this.
-PFA syntax would allow us to avoid repeating the receiver.
+For example, `obj.method~()` would handle method extraction with implicit
+binding, which bind-this does not address. In other words, when the receiver
+object itself contains the function to which we wish to bind, then we need to
+repeat the receiver once, with bind-this. PFA syntax would allow us to avoid
+repeating the receiver.
 
 ```js
 n.on("click", v.reset.bind(v))
@@ -514,9 +490,9 @@ n.on("click", v::v.reset)
 n.on("click", v.reset~())
 ```
 
-In contrast, bind-this changes the receiver of an unbound function: receiver::fn().
-(This unbound function might have already been extracted from another object.)
-PFA syntax does not address this use case.
+In contrast, bind-this changes the receiver of an unbound function:
+`receiver::fn()`. (This unbound function might have already been extracted from
+another object.) PFA syntax does not address this use case.
 
 ```js
 // bluebird@3.5.5/js/release/synchronous_inspection.js
@@ -524,7 +500,8 @@ isPending.call(this._target())
 this._target()::isPending()
 ```
 
-PFA syntax and bind-this can also work together, when creating bound functions with multiple partially applied arguments.
+PFA syntax and bind-this can also work together, when creating bound functions
+with multiple partially applied arguments.
 
 ```js
 // svgo@1.2.2/plugins/convertTransform.js
