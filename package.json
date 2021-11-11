@@ -6,10 +6,9 @@
   "license": "MIT",
   "repository": "github:js-choi/proposal-bind-operator",
   "scripts": {
-    "prespec": "mkdir -p out/",
-    "spec": "ecmarkup spec.html out/index.html --assets inline",
-    "prewatch": "npm run prespec",
-    "watch": "npm run spec -- --watch"
+    "prebuild": "mkdir -p dist",
+    "build": "ecmarkup --verbose spec.html dist/index.html --css dist/ecmarkup.css --js dist/ecmarkup.js",
+    "watch": "npm run build -- --watch"
   },
   "devDependencies": {
     "ecmarkup": "^9.4.1"
