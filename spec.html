@@ -42,6 +42,7 @@ contributors: J. S. Choi
         SimpleMemberExpression :
           IdentifierReference
           SimpleMemberExpression `.` IdentifierName
+          SimpleMemberExpression `.` PrivateIdentifier
         </ins>
 
         LeftHandSideExpression :
@@ -69,6 +70,7 @@ contributors: J. S. Choi
         SimpleMemberExpression :
           IdentifierReference
           SimpleMemberExpression `.` IdentifierName
+          SimpleMemberExpression `.` PrivateIdentifier
           `(` Expression `)`
 
         BindThisExpression :
@@ -107,6 +109,7 @@ contributors: J. S. Choi
       <emu-grammar>
       SimpleMemberExpression :
         SimpleMemberExpression `.` IdentifierName
+        SimpleMemberExpression `.` PrivateIdentifier
       </emu-grammar>
       <emu-alg>
         1. If |MemberExpression| Contains _symbol_ is *true*, return *true*.
@@ -218,6 +221,7 @@ contributors: J. S. Choi
       SimpleMemberExpression[Yield, Await] :
         IdentifierReference[?Yield, ?Await]
         SimpleMemberExpression[?Yield, ?Await] `.` IdentifierName
+        SimpleMemberExpression[?Yield, ?Await] `.` PrivateIdentifier
         `(` Expression[+In, ?Yield, ?Await] `)`
       </ins>
 
