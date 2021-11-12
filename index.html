@@ -37,7 +37,7 @@
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
-    <emu-rhs a="cou_6mao">
+    <emu-rhs a="cou_6mao" id="prod-segQRZqZ">
         <emu-nt id="_ref_76"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt>PrivateIdentifier</emu-nt>
@@ -67,6 +67,11 @@
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
+    <emu-rhs a="cou_6mao" id="prod-kibbKWvu">
+        <emu-nt id="_ref_81"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt>PrivateIdentifier</emu-nt>
+    </emu-rhs>
     <emu-rhs a="s6bvnd5v" id="prod-F4opMQyF">
         <emu-t>(</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
@@ -75,14 +80,14 @@
 </emu-production>
 <emu-production name="BindThisExpression">
     <emu-nt><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="lbadidz6" id="prod-HNWAzyVY">
-        <emu-nt id="_ref_81"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt id="_ref_82"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_82"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_83"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="bhnsn__g" id="prod-XRFsQeSU">
-        <emu-nt id="_ref_83"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_84"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_84"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_85"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production></ins>
 </emu-grammar>
@@ -111,13 +116,18 @@
 
       <emu-grammar><emu-production name="SimpleMemberExpression">
     <emu-nt><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="hl4fjs_p">
-        <emu-nt id="_ref_85"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_86"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
+    <emu-rhs a="cou_6mao">
+        <emu-nt id="_ref_87"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt>PrivateIdentifier</emu-nt>
+    </emu-rhs>
 </emu-production>
 </emu-grammar>
-      <emu-alg><ol><li>If <emu-nt id="_ref_86"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> <emu-xref aoid="Contains" id="_ref_5"><a href="#sec-static-semantics-contains">Contains</a></emu-xref> <var>symbol</var> is <emu-val>true</emu-val>, return <emu-val>true</emu-val>.</li><li>Return <emu-val>false</emu-val>.</li></ol></emu-alg>
+      <emu-alg><ol><li>If <emu-nt id="_ref_88"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> <emu-xref aoid="Contains" id="_ref_5"><a href="#sec-static-semantics-contains">Contains</a></emu-xref> <var>symbol</var> is <emu-val>true</emu-val>, return <emu-val>true</emu-val>.</li><li>Return <emu-val>false</emu-val>.</li></ol></emu-alg>
       </ins>
     </emu-clause>
   </emu-clause>
@@ -135,22 +145,22 @@
 
       <emu-grammar><ins class="block"><emu-production name="BindThisExpression">
     <emu-nt><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="lbadidz6" id="prod-0ZxsEGzR">
-        <emu-nt id="_ref_87"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt id="_ref_89"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_88"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_90"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="028izhlp" id="prod-Z1jC8vqz">
-        <emu-nt id="_ref_89"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt id="_ref_91"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="bhnsn__g" id="prod-Rar5I-18">
-        <emu-nt id="_ref_90"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_92"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_91"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_93"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="tokhqks7" id="prod-QcrpCWv7">
-        <emu-nt id="_ref_92"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_94"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
@@ -158,37 +168,37 @@
 <emu-production name="CallExpression">
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="7jj-96li" id="prod-zWRPaVzO"><emu-nt><a href="https://tc39.es/ecma262/#prod-CoverCallExpressionAndAsyncArrowHead">CoverCallExpressionAndAsyncArrowHead</a></emu-nt></emu-rhs>
     <ins><emu-rhs a="yrga5qqi" id="prod-vLZLZLv2">
-        <emu-nt id="_ref_93"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
-        <emu-nt id="_ref_94"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_95"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_96"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs></ins>
-    <emu-rhs a="ljkqw-iw" id="prod-g9CfMMnI"><emu-nt id="_ref_95"><a href="#prod-SuperCall">SuperCall</a></emu-nt></emu-rhs>
-    <emu-rhs a="kyx2iyhy" id="prod-lJ9wuQsk"><emu-nt id="_ref_96"><a href="#prod-ImportCall">ImportCall</a></emu-nt></emu-rhs>
+    <emu-rhs a="ljkqw-iw" id="prod-g9CfMMnI"><emu-nt id="_ref_97"><a href="#prod-SuperCall">SuperCall</a></emu-nt></emu-rhs>
+    <emu-rhs a="kyx2iyhy" id="prod-lJ9wuQsk"><emu-nt id="_ref_98"><a href="#prod-ImportCall">ImportCall</a></emu-nt></emu-rhs>
     <emu-rhs a="qugahahu" id="prod-fZIg56D8">
-        <emu-nt id="_ref_97"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
-        <emu-nt id="_ref_98"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_99"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_100"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="2u2urbmg" id="prod-G2CxyRR8">
-        <emu-nt id="_ref_99"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_101"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-t>[</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
         <emu-t>]</emu-t>
     </emu-rhs>
     <emu-rhs a="u6lsbvgu" id="prod-H084cqoS">
-        <emu-nt id="_ref_100"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_102"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
     <ins><emu-rhs a="g_nunv5x" id="prod-CeJLa9Fd">
-        <emu-nt id="_ref_101"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_103"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_102"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_104"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs></ins>
     <emu-rhs a="rc744wey" id="prod-AgSQnEAG">
-        <emu-nt id="_ref_103"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_105"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="cysjk9wh" id="prod-hU5p3vdM">
-        <emu-nt id="_ref_104"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_106"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
@@ -232,29 +242,29 @@
     <emu-grammar type="definition"><emu-production name="MemberExpression" params="Yield, Await" id="prod-MemberExpression">
     <emu-nt params="Yield, Await"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="zp2ej-dr"><emu-nt params="?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-PrimaryExpression">PrimaryExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
     <emu-rhs a="rnalvwun">
-        <emu-nt params="?Yield, ?Await" id="_ref_105"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_107"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>[</emu-t>
         <emu-nt params="+In, ?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a><emu-mods><emu-params>[+In, ?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>]</emu-t>
     </emu-rhs>
     <emu-rhs a="_qdjqibg">
-        <emu-nt params="?Yield, ?Await" id="_ref_106"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_108"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="46cuzeza">
-        <emu-nt params="?Yield, ?Await" id="_ref_107"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_109"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-nt params="?Yield, ?Await, +Tagged"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await, +Tagged]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="g9rhupwf"><emu-nt params="?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-SuperProperty">SuperProperty</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
     <emu-rhs a="yb7id2be"><emu-nt><a href="https://tc39.es/ecma262/#prod-MetaProperty">MetaProperty</a></emu-nt></emu-rhs>
     <emu-rhs a="ufvcifdc">
         <emu-t>new</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_108"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_109"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_110"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_111"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="4cnbmhao">
-        <emu-nt params="?Yield, ?Await" id="_ref_110"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_112"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
@@ -262,9 +272,14 @@
 <ins class="block"><emu-production name="SimpleMemberExpression" params="Yield, Await" id="prod-SimpleMemberExpression">
     <emu-nt params="Yield, Await"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="dlsgch-w" id="prod-sEYMrIsh"><emu-nt params="?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-IdentifierReference">IdentifierReference</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
     <emu-rhs a="alifel4y" id="prod-4c2A7Lpb">
-        <emu-nt params="?Yield, ?Await" id="_ref_111"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_113"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
+    </emu-rhs>
+    <emu-rhs a="yu-bxxjm" id="prod-mY_rQRpf">
+        <emu-nt params="?Yield, ?Await" id="_ref_114"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-t>.</emu-t>
+        <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
     <emu-rhs a="ed6ncho6" id="prod-ZuQxGit_">
         <emu-t>(</emu-t>
@@ -273,30 +288,30 @@
     </emu-rhs>
 </emu-production></ins>
 <emu-production name="NewExpression" params="Yield, Await" id="prod-NewExpression">
-    <emu-nt params="Yield, Await"><a href="#prod-NewExpression">NewExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="vbcu9jjv"><emu-nt params="?Yield, ?Await" id="_ref_112"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-nt params="Yield, Await"><a href="#prod-NewExpression">NewExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="vbcu9jjv"><emu-nt params="?Yield, ?Await" id="_ref_115"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
     <emu-rhs a="iyf_se48">
         <emu-t>new</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_113"><a href="#prod-NewExpression">NewExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_116"><a href="#prod-NewExpression">NewExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
 </emu-production>
 <ins class="block"><emu-production name="BindThisExpression" params="Yield, Await" id="prod-BindThisExpression">
     <emu-nt params="Yield, Await"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="vwzcgrr7" id="prod-HNZT6bA9">
-        <emu-nt params="?Yield, ?Await" id="_ref_114"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_117"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_115"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_118"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="duv3s71p" id="prod-lmPWh9uM">
-        <emu-nt params="?Yield, ?Await" id="_ref_116"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_119"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt params="?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="p5pukwcs" id="prod-_eviamN2">
-        <emu-nt params="?Yield, ?Await" id="_ref_117"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_120"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_118"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_121"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="mk1t0d3r" id="prod-NA9ZFYQ4">
-        <emu-nt params="?Yield, ?Await" id="_ref_119"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_122"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt params="?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
@@ -304,42 +319,42 @@
 <emu-production name="CallExpression" params="Yield, Await" id="prod-CallExpression">
     <emu-nt params="Yield, Await"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="callcover" id="prod-58WiwMc8"><emu-nt params="?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-CoverCallExpressionAndAsyncArrowHead">CoverCallExpressionAndAsyncArrowHead</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
     <ins><emu-rhs a="rgp4krxo" id="prod-Hg0iLNOs">
-        <emu-nt params="?Yield, ?Await" id="_ref_120"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_121"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_123"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_124"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs></ins>
-    <emu-rhs a="5cynbd7h" id="prod-Cmo-Ch0M"><emu-nt params="?Yield, ?Await" id="_ref_122"><a href="#prod-SuperCall">SuperCall</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
-    <emu-rhs a="12avhmhv" id="prod-XZ1IV5BV"><emu-nt params="?Yield, ?Await" id="_ref_123"><a href="#prod-ImportCall">ImportCall</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-rhs a="5cynbd7h" id="prod-Cmo-Ch0M"><emu-nt params="?Yield, ?Await" id="_ref_125"><a href="#prod-SuperCall">SuperCall</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-rhs a="12avhmhv" id="prod-XZ1IV5BV"><emu-nt params="?Yield, ?Await" id="_ref_126"><a href="#prod-ImportCall">ImportCall</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
     <emu-rhs a="zq2ahe82" id="prod-kYvem_87">
-        <emu-nt params="?Yield, ?Await" id="_ref_124"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_125"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_127"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_128"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="jan4qzpu" id="prod-Shb6Dgff">
-        <emu-nt params="?Yield, ?Await" id="_ref_126"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_129"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>[</emu-t>
         <emu-nt params="+In, ?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a><emu-mods><emu-params>[+In, ?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>]</emu-t>
     </emu-rhs>
     <emu-rhs a="8fzekpe0" id="prod-EOA2Fe3-">
-        <emu-nt params="?Yield, ?Await" id="_ref_127"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_130"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
     <ins class="block"><emu-rhs a="rqnpsbew" id="prod-LtiyCcKo">
-        <emu-nt params="?Yield, ?Await" id="_ref_128"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_131"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_129"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_132"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="k5h3pxhi">
-        <emu-nt params="?Yield, ?Await" id="_ref_130"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_133"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt params="?Yield, ?Await, +Tagged"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await, +Tagged]</emu-params></emu-mods></emu-nt>
     </emu-rhs></ins>
     <emu-rhs a="xe3ycfgs" id="prod-WPBp76A-">
-        <emu-nt params="?Yield, ?Await" id="_ref_131"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_134"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-nt params="?Yield, ?Await, +Tagged"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await, +Tagged]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="62npgx0j" id="prod-FwaLgcLH">
-        <emu-nt params="?Yield, ?Await" id="_ref_132"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_135"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
@@ -347,7 +362,7 @@
 <emu-production name="SuperCall" params="Yield, Await" id="prod-SuperCall">
     <emu-nt params="Yield, Await"><a href="#prod-SuperCall">SuperCall</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="a1uz3ssm">
         <emu-t>super</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_133"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_136"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
 </emu-production>
 <emu-production name="ImportCall" params="Yield, Await" id="prod-ImportCall">
@@ -365,12 +380,12 @@
     </emu-rhs>
     <emu-rhs a="zoyucce7">
         <emu-t>(</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_134"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_137"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>)</emu-t>
     </emu-rhs>
     <emu-rhs a="xsawavht">
         <emu-t>(</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_135"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_138"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>,</emu-t>
         <emu-t>)</emu-t>
     </emu-rhs>
@@ -382,12 +397,12 @@
         <emu-nt params="+In, ?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a><emu-mods><emu-params>[+In, ?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="krcqss7_">
-        <emu-nt params="?Yield, ?Await" id="_ref_136"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_139"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>,</emu-t>
         <emu-nt params="+In, ?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a><emu-mods><emu-params>[+In, ?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="1ve8zfk_">
-        <emu-nt params="?Yield, ?Await" id="_ref_137"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_140"><a href="#prod-ArgumentList">ArgumentList</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>,</emu-t>
         <emu-t>...</emu-t>
         <emu-nt params="+In, ?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-AssignmentExpression">AssignmentExpression</a><emu-mods><emu-params>[+In, ?Yield, ?Await]</emu-params></emu-mods></emu-nt>
@@ -395,26 +410,26 @@
 </emu-production>
 <emu-production name="OptionalExpression" params="Yield, Await" id="prod-OptionalExpression">
     <emu-nt params="Yield, Await"><a href="#prod-OptionalExpression">OptionalExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="ecu35e6c">
-        <emu-nt params="?Yield, ?Await" id="_ref_138"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_139"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_141"><a href="#prod-MemberExpression">MemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_142"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <ins><emu-rhs a="i6oqcwom">
-        <emu-nt params="?Yield, ?Await" id="_ref_140"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_141"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_143"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_144"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs></ins>
     <emu-rhs a="zdg__vw8">
-        <emu-nt params="?Yield, ?Await" id="_ref_142"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_143"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_145"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_146"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="w8fdvlpp">
-        <emu-nt params="?Yield, ?Await" id="_ref_144"><a href="#prod-OptionalExpression">OptionalExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_145"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_147"><a href="#prod-OptionalExpression">OptionalExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_148"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
 </emu-production>
 <emu-production name="OptionalChain" params="Yield, Await" id="prod-OptionalChain">
     <emu-nt params="Yield, Await"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="8htvkqhl" id="prod-J4fvvwWl">
         <emu-t>?.</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_146"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_149"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="dfjbcotw" id="prod-a5k1i_eU">
         <emu-t>?.</emu-t>
@@ -429,7 +444,7 @@
     <ins><emu-rhs a="djgpq87p">
         <emu-t>?.</emu-t>
         <emu-t>::</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_147"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_150"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs></ins>
     <emu-rhs a="gddsvrzp">
         <emu-t>?.</emu-t>
@@ -440,45 +455,45 @@
         <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
     <emu-rhs a="mf2i0e3e" id="prod-zMZUOMrf">
-        <emu-nt params="?Yield, ?Await" id="_ref_148"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
-        <emu-nt params="?Yield, ?Await" id="_ref_149"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_151"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_152"><a href="#prod-Arguments">Arguments</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="tyrnajyn" id="prod-4aVR1jLh">
-        <emu-nt params="?Yield, ?Await" id="_ref_150"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_153"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>[</emu-t>
         <emu-nt params="+In, ?Yield, ?Await"><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a><emu-mods><emu-params>[+In, ?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>]</emu-t>
     </emu-rhs>
     <emu-rhs a="nm82pnnk" id="prod-25V7_u74">
-        <emu-nt params="?Yield, ?Await" id="_ref_151"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_154"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
     <ins class="block"><emu-rhs a="7jr8wzw3">
-        <emu-nt params="?Yield, ?Await" id="_ref_152"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_155"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt params="?Yield, ?Await" id="_ref_153"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_156"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="aqu3unaj">
-        <emu-nt params="?Yield, ?Await" id="_ref_154"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_157"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt params="?Yield, ?Await, +Tagged"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await, +Tagged]</emu-params></emu-mods></emu-nt>
     </emu-rhs></ins>
     <emu-rhs a="i6asyits">
-        <emu-nt params="?Yield, ?Await" id="_ref_155"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_158"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-nt params="?Yield, ?Await, +Tagged"><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a><emu-mods><emu-params>[?Yield, ?Await, +Tagged]</emu-params></emu-mods></emu-nt>
     </emu-rhs>
     <emu-rhs a="tglbsgos" id="prod-MW9Cgivd">
-        <emu-nt params="?Yield, ?Await" id="_ref_156"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
+        <emu-nt params="?Yield, ?Await" id="_ref_159"><a href="#prod-OptionalChain">OptionalChain</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
 </emu-production>
 <emu-production name="LeftHandSideExpression" params="Yield, Await" id="prod-LeftHandSideExpression">
-    <emu-nt params="Yield, Await"><a href="#prod-LeftHandSideExpression">LeftHandSideExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="qjnhzlak"><emu-nt params="?Yield, ?Await" id="_ref_157"><a href="#prod-NewExpression">NewExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
-    <ins><emu-rhs a="kj-2qek6" id="prod-CQEMD25C"><emu-nt params="?Yield, ?Await" id="_ref_158"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs></ins>
-    <emu-rhs a="hpn2js4d" id="prod-RmIHX089"><emu-nt params="?Yield, ?Await" id="_ref_159"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
-    <emu-rhs a="hwcrnmoq" id="prod-hKgp5YBB"><emu-nt params="?Yield, ?Await" id="_ref_160"><a href="#prod-OptionalExpression">OptionalExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-nt params="Yield, Await"><a href="#prod-LeftHandSideExpression">LeftHandSideExpression</a><emu-mods><emu-params>[Yield, Await]</emu-params></emu-mods></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="qjnhzlak"><emu-nt params="?Yield, ?Await" id="_ref_160"><a href="#prod-NewExpression">NewExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <ins><emu-rhs a="kj-2qek6" id="prod-CQEMD25C"><emu-nt params="?Yield, ?Await" id="_ref_161"><a href="#prod-BindThisExpression">BindThisExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs></ins>
+    <emu-rhs a="hpn2js4d" id="prod-RmIHX089"><emu-nt params="?Yield, ?Await" id="_ref_162"><a href="#prod-CallExpression">CallExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
+    <emu-rhs a="hwcrnmoq" id="prod-hKgp5YBB"><emu-nt params="?Yield, ?Await" id="_ref_163"><a href="#prod-OptionalExpression">OptionalExpression</a><emu-mods><emu-params>[?Yield, ?Await]</emu-params></emu-mods></emu-nt></emu-rhs>
 </emu-production>
 </emu-grammar>
 
@@ -496,12 +511,12 @@
         <ins class="block">
         <emu-grammar><emu-production name="BindThisExpression">
     <emu-nt><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="028izhlp">
-        <emu-nt id="_ref_161"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt id="_ref_164"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
     <emu-rhs a="tokhqks7">
-        <emu-nt id="_ref_162"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_165"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
@@ -524,7 +539,7 @@
 
         <emu-grammar><emu-production name="CallExpression">
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="pdtc6eca">
-        <emu-nt id="_ref_163"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_166"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
@@ -547,7 +562,7 @@
 
         <emu-grammar><emu-production name="OptionalChain">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="jga6znck">
-        <emu-nt id="_ref_164"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_167"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>::</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-TemplateLiteral">TemplateLiteral</a></emu-nt>
     </emu-rhs>
@@ -584,30 +599,30 @@
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="7jj-96li"><emu-nt><a href="https://tc39.es/ecma262/#prod-CoverCallExpressionAndAsyncArrowHead">CoverCallExpressionAndAsyncArrowHead</a></emu-nt></emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>expr</var> be the <emu-nt><a href="https://tc39.es/ecma262/#prod-CallMemberExpression">CallMemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt><a href="https://tc39.es/ecma262/#prod-CoverCallExpressionAndAsyncArrowHead">CoverCallExpressionAndAsyncArrowHead</a></emu-nt>.</li><li>Let <var>memberExpr</var> be the <emu-nt id="_ref_165"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> of <var>expr</var>.</li><li>Let <var>arguments</var> be the <emu-nt id="_ref_166"><a href="#prod-Arguments">Arguments</a></emu-nt> of <var>expr</var>.</li><li>Let <var>ref</var> be the result of evaluating <var>memberExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_6"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>ref</var>).</li><li>If <var>ref</var> is a <emu-xref href="#sec-reference-specification-type"><a href="https://tc39.es/ecma262/#sec-reference-specification-type">Reference</a></emu-xref> <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>, <emu-xref aoid="IsPropertyReference" id="_ref_7"><a href="https://tc39.es/ecma262/#sec-ispropertyreference">IsPropertyReference</a></emu-xref>(<var>ref</var>) is <emu-val>false</emu-val>, and <var>ref</var>.[[ReferencedName]] is <emu-val>"eval"</emu-val>, then<ol><li>If <emu-xref aoid="SameValue" id="_ref_8"><a href="https://tc39.es/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>func</var>, <emu-xref href="#sec-eval-x"><a href="https://tc39.es/ecma262/#sec-eval-x">%eval%</a></emu-xref>) is <emu-val>true</emu-val>, then<ol><li>Let <var>argList</var> be ? ArgumentListEvaluation of <var>arguments</var>.</li><li>If <var>argList</var> has no elements, return <emu-val>undefined</emu-val>.</li><li>Let <var>evalArg</var> be the first element of <var>argList</var>.</li><li>If the source code matching this <emu-nt id="_ref_167"><a href="#prod-CallExpression">CallExpression</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strictCaller</var> be <emu-val>true</emu-val>. Otherwise let <var>strictCaller</var> be <emu-val>false</emu-val>.</li><li>Let <var>evalRealm</var> be <emu-xref href="#current-realm"><a href="https://tc39.es/ecma262/#current-realm">the current Realm Record</a></emu-xref>.</li><li id="step-callexpression-evaluation-direct-eval">Return ?&nbsp;<emu-xref aoid="PerformEval" id="_ref_9"><a href="https://tc39.es/ecma262/#sec-performeval">PerformEval</a></emu-xref>(<var>evalArg</var>, <var>evalRealm</var>, <var>strictCaller</var>, <emu-val>true</emu-val>).</li></ol></li></ol></li><li>Let <var>thisCall</var> be this <emu-nt id="_ref_168"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_10"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisCall</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_11"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>ref</var>, <var>arguments</var>, <var>tailCall</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>expr</var> be the <emu-nt><a href="https://tc39.es/ecma262/#prod-CallMemberExpression">CallMemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt><a href="https://tc39.es/ecma262/#prod-CoverCallExpressionAndAsyncArrowHead">CoverCallExpressionAndAsyncArrowHead</a></emu-nt>.</li><li>Let <var>memberExpr</var> be the <emu-nt id="_ref_168"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> of <var>expr</var>.</li><li>Let <var>arguments</var> be the <emu-nt id="_ref_169"><a href="#prod-Arguments">Arguments</a></emu-nt> of <var>expr</var>.</li><li>Let <var>ref</var> be the result of evaluating <var>memberExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_6"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>ref</var>).</li><li>If <var>ref</var> is a <emu-xref href="#sec-reference-specification-type"><a href="https://tc39.es/ecma262/#sec-reference-specification-type">Reference</a></emu-xref> <emu-xref href="#sec-list-and-record-specification-type"><a href="https://tc39.es/ecma262/#sec-list-and-record-specification-type">Record</a></emu-xref>, <emu-xref aoid="IsPropertyReference" id="_ref_7"><a href="https://tc39.es/ecma262/#sec-ispropertyreference">IsPropertyReference</a></emu-xref>(<var>ref</var>) is <emu-val>false</emu-val>, and <var>ref</var>.[[ReferencedName]] is <emu-val>"eval"</emu-val>, then<ol><li>If <emu-xref aoid="SameValue" id="_ref_8"><a href="https://tc39.es/ecma262/#sec-samevalue">SameValue</a></emu-xref>(<var>func</var>, <emu-xref href="#sec-eval-x"><a href="https://tc39.es/ecma262/#sec-eval-x">%eval%</a></emu-xref>) is <emu-val>true</emu-val>, then<ol><li>Let <var>argList</var> be ? ArgumentListEvaluation of <var>arguments</var>.</li><li>If <var>argList</var> has no elements, return <emu-val>undefined</emu-val>.</li><li>Let <var>evalArg</var> be the first element of <var>argList</var>.</li><li>If the source code matching this <emu-nt id="_ref_170"><a href="#prod-CallExpression">CallExpression</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strictCaller</var> be <emu-val>true</emu-val>. Otherwise let <var>strictCaller</var> be <emu-val>false</emu-val>.</li><li>Let <var>evalRealm</var> be <emu-xref href="#current-realm"><a href="https://tc39.es/ecma262/#current-realm">the current Realm Record</a></emu-xref>.</li><li id="step-callexpression-evaluation-direct-eval">Return ?&nbsp;<emu-xref aoid="PerformEval" id="_ref_9"><a href="https://tc39.es/ecma262/#sec-performeval">PerformEval</a></emu-xref>(<var>evalArg</var>, <var>evalRealm</var>, <var>strictCaller</var>, <emu-val>true</emu-val>).</li></ol></li></ol></li><li>Let <var>thisCall</var> be this <emu-nt id="_ref_171"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_10"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisCall</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_11"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>ref</var>, <var>arguments</var>, <var>tailCall</var>).</li></ol></emu-alg>
 
         <ins class="block">
         <emu-grammar><emu-production name="CallExpression" collapsed="">
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="yrga5qqi">
-        <emu-nt id="_ref_169"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
-        <emu-nt id="_ref_170"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_172"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_173"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
         <emu-note><span class="note">Note</span><div class="note-contents">
           <p>See also the <emu-xref href="#sec-bind-this-operator" id="_ref_0"><a href="#sec-bind-this-operator">bind-this operator</a></emu-xref>.</p>
         </div></emu-note>
-        <emu-alg><ol><li>Let <var>thisExpr</var> be the <emu-nt id="_ref_171"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> of <emu-nt id="_ref_172"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>.</li><li>Let <var>bindThisRHS</var> be the <emu-nt id="_ref_173"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> of <var>memberExpr</var>.</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_174"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <var>bindThisRHS</var>.</li><li>Let <var>thisRef</var> be the result of evaluating <var>thisExpr</var>.</li><li>Let <var>thisValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_12"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>thisRef</var>).</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_13"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Let <var>thisCall</var> be this <emu-nt id="_ref_175"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_14"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisCall</var>).</li><li>Return <emu-xref aoid="EvaluateCall" id="_ref_15"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>thisValue</var>, <emu-nt id="_ref_176"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>thisExpr</var> be the <emu-nt id="_ref_174"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> of <emu-nt id="_ref_175"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>.</li><li>Let <var>bindThisRHS</var> be the <emu-nt id="_ref_176"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> of <var>memberExpr</var>.</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_177"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <var>bindThisRHS</var>.</li><li>Let <var>thisRef</var> be the result of evaluating <var>thisExpr</var>.</li><li>Let <var>thisValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_12"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>thisRef</var>).</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_13"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Let <var>thisCall</var> be this <emu-nt id="_ref_178"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_14"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisCall</var>).</li><li>Return <emu-xref aoid="EvaluateCall" id="_ref_15"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>thisValue</var>, <emu-nt id="_ref_179"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
         </ins>
 
         <emu-grammar><emu-production name="CallExpression" collapsed="">
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="qugahahu">
-        <emu-nt id="_ref_177"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
-        <emu-nt id="_ref_178"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_180"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_181"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>ref</var> be the result of evaluating <emu-nt id="_ref_179"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_16"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>ref</var>).</li><li>Let <var>thisCall</var> be this <emu-nt id="_ref_180"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_17"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisCall</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_18"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>ref</var>, <emu-nt id="_ref_181"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>ref</var> be the result of evaluating <emu-nt id="_ref_182"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_16"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>ref</var>).</li><li>Let <var>thisCall</var> be this <emu-nt id="_ref_183"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_17"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisCall</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_18"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>ref</var>, <emu-nt id="_ref_184"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
       </emu-clause>
     </emu-clause>
 
@@ -627,8 +642,8 @@
           <emu-note><span class="note">Note</span><div class="note-contents">
             <p>For evaluation of the production <emu-grammar><emu-production name="CallExpression" collapsed="" class=" inline">
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="yrga5qqi">
-        <emu-nt id="_ref_182"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
-        <emu-nt id="_ref_183"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_185"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_186"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>, see clause&nbsp;<emu-xref href="#sec-function-calls-runtime-semantics-evaluation" id="_ref_1"><a href="#sec-function-calls-runtime-semantics-evaluation">3.1.2.1</a></emu-xref>.</p>
@@ -636,14 +651,14 @@
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="bssu4ghb">
         <emu-t>?.</emu-t>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_184"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_187"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar> and <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="zrkd-xlz">
-        <emu-nt id="_ref_185"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_188"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_186"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_189"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>, see clause&nbsp;<emu-xref href="#sec-function-calls-runtime-semantics-evaluation" id="_ref_2"><a href="#sec-function-calls-runtime-semantics-evaluation">3.1.2.1</a></emu-xref>.</p>
@@ -651,33 +666,33 @@
 
           <emu-grammar><emu-production name="BindThisExpression" collapsed="">
     <emu-nt><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="lbadidz6">
-        <emu-nt id="_ref_187"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt id="_ref_190"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_188"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_191"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-          <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_189"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_19"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_190"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_191"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_20"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_21"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
+          <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_192"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_19"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_193"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_194"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_20"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_21"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
 
           <emu-grammar><emu-production name="BindThisExpression" collapsed="">
     <emu-nt><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="bhnsn__g">
-        <emu-nt id="_ref_192"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_195"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_193"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_196"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-          <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_194"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_22"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_195"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_196"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_23"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_24"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
+          <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_197"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_22"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_198"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_199"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_23"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_24"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
 
           <emu-grammar><emu-production name="CallExpression" collapsed="">
     <emu-nt><a href="#prod-CallExpression">CallExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="g_nunv5x">
-        <emu-nt id="_ref_197"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_200"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_198"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_201"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-          <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_199"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_25"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_200"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_201"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_26"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_27"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
+          <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_202"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_25"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_203"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_204"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_26"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_27"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
         </emu-clause>
 
         <emu-clause id="sec-extract-method" type="abstract operation" aoid="BindThis">
@@ -703,38 +718,38 @@
         <h1><span class="secnum">3.1.4.1</span> Runtime Semantics: Evaluation</h1>
         <emu-grammar><emu-production name="OptionalExpression">
     <emu-nt><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="tne-ixmh">
-        <emu-nt id="_ref_202"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
-        <emu-nt id="_ref_203"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_205"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>
+        <emu-nt id="_ref_206"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_204"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_37"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_38"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_205"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_207"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_37"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_38"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_208"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
         <ins class="block">
         <emu-grammar><emu-production name="OptionalExpression">
     <emu-nt><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="4wwnauia">
-        <emu-nt id="_ref_206"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
-        <emu-nt id="_ref_207"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_209"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>
+        <emu-nt id="_ref_210"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_208"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_39"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_40"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_209"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_211"><a href="#prod-BindThisExpression">BindThisExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_39"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_40"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_212"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
         </ins>
         <emu-grammar><emu-production name="OptionalExpression">
     <emu-nt><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="vah6zjkb">
-        <emu-nt id="_ref_210"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
-        <emu-nt id="_ref_211"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_213"><a href="#prod-CallExpression">CallExpression</a></emu-nt>
+        <emu-nt id="_ref_214"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_212"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_41"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_42"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_213"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_215"><a href="#prod-CallExpression">CallExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_41"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_42"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_216"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
         <emu-grammar><emu-production name="OptionalExpression">
     <emu-nt><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="m-2pf2bd">
-        <emu-nt id="_ref_214"><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt>
-        <emu-nt id="_ref_215"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_217"><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt>
+        <emu-nt id="_ref_218"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_216"><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_43"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_44"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_217"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>baseReference</var> be the result of evaluating <emu-nt id="_ref_219"><a href="#prod-OptionalExpression">OptionalExpression</a></emu-nt>.</li><li>Let <var>baseValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_43"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>baseReference</var>).</li><li>If <var>baseValue</var> is <emu-val>undefined</emu-val> or <emu-val>null</emu-val>, then<ol><li>Return <emu-val>undefined</emu-val>.</li></ol></li><li>Return the result of performing <emu-xref aoid="ChainEvaluation" id="_ref_44"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <emu-nt id="_ref_220"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> with arguments <var>baseValue</var> and <var>baseReference</var>.</li></ol></emu-alg>
       </emu-clause>
 
       <emu-clause id="sec-optional-chaining-chain-evaluation" type="sdo" aoid="ChainEvaluation">
@@ -743,11 +758,11 @@
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="ynxeowdb" id="prod-1C3YSxR_">
         <emu-t>?.</emu-t>
-        <emu-nt id="_ref_218"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_221"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>thisChain</var> be this <emu-nt id="_ref_219"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_45"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_46"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>baseValue</var>, <var>baseReference</var>, <emu-nt id="_ref_220"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>thisChain</var> be this <emu-nt id="_ref_222"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_45"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_46"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>baseValue</var>, <var>baseReference</var>, <emu-nt id="_ref_223"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="kktyttw7" id="prod-w5u7jzLu">
         <emu-t>?.</emu-t>
@@ -757,7 +772,7 @@
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>If the code matched by this <emu-nt id="_ref_221"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return ?&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithExpressionKey" id="_ref_47"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-expression-key">EvaluatePropertyAccessWithExpressionKey</a></emu-xref>(<var>baseValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>If the code matched by this <emu-nt id="_ref_224"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return ?&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithExpressionKey" id="_ref_47"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-expression-key">EvaluatePropertyAccessWithExpressionKey</a></emu-xref>(<var>baseValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="w-4ch2am" id="prod-9T4kB2jq">
         <emu-t>?.</emu-t>
@@ -765,20 +780,20 @@
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>If the code matched by this <emu-nt id="_ref_222"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return !&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithIdentifierKey" id="_ref_48"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-identifier-key">EvaluatePropertyAccessWithIdentifierKey</a></emu-xref>(<var>baseValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>If the code matched by this <emu-nt id="_ref_225"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return !&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithIdentifierKey" id="_ref_48"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-identifier-key">EvaluatePropertyAccessWithIdentifierKey</a></emu-xref>(<var>baseValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
         <ins class="block">
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="bssu4ghb">
         <emu-t>?.</emu-t>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_223"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_226"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
         <emu-note><span class="note">Note 1</span><div class="note-contents">
           <p>See also the <emu-xref href="#sec-bind-this-operator" id="_ref_3"><a href="#sec-bind-this-operator">bind-this operator</a></emu-xref>.</p>
         </div></emu-note>
-        <emu-alg><ol><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_224"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_225"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_49"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_50"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_227"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_228"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_49"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_50"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>baseValue</var>, <var>func</var>).</li></ol></emu-alg>
         </ins>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="0xlnjlpz" id="prod-JeRaAt5H">
@@ -790,24 +805,24 @@
         <emu-alg><ol><li>Let <var>fieldNameString</var> be the StringValue of <emu-nt>PrivateIdentifier</emu-nt>.</li><li>Return !&nbsp;MakePrivateReference(<var>baseValue</var>, <var>fieldNameString</var>).</li></ol></emu-alg>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="eogoekck" id="prod-kAXkNcIE">
-        <emu-nt id="_ref_226"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
-        <emu-nt id="_ref_227"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_229"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_230"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_228"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_51"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_52"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>Let <var>thisChain</var> be this <emu-nt id="_ref_229"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_53"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_54"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>newValue</var>, <var>newReference</var>, <emu-nt id="_ref_230"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_231"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_51"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_52"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>Let <var>thisChain</var> be this <emu-nt id="_ref_232"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_53"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return ?&nbsp;<emu-xref aoid="EvaluateCall" id="_ref_54"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>newValue</var>, <var>newReference</var>, <emu-nt id="_ref_233"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
         <emu-note><span class="note">Note 2</span><div class="note-contents">
-          <p>If <emu-nt id="_ref_231"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> (in <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
+          <p>If <emu-nt id="_ref_234"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> (in <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="eogoekck">
-        <emu-nt id="_ref_232"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
-        <emu-nt id="_ref_233"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_235"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_236"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>) is, in turn, <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covering</a></emu-xref> the production <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="bssu4ghb">
         <emu-t>?.</emu-t>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_234"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_237"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
@@ -815,76 +830,76 @@
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="bssu4ghb">
         <emu-t>?.</emu-t>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_235"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_238"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
-</emu-grammar> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_236"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>bindThisRHS</var> be the <emu-nt id="_ref_237"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> of <var>optionalBindThisChain</var>.</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_238"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <var>bindThisRHS</var>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_55"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Let <var>thisChain</var> be this <emu-nt id="_ref_239"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_56"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return <emu-xref aoid="EvaluateCall" id="_ref_57"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>baseValue</var>, <emu-nt id="_ref_240"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
+</emu-grammar> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_239"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>bindThisRHS</var> be the <emu-nt id="_ref_240"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> of <var>optionalBindThisChain</var>.</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_241"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <var>bindThisRHS</var>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_55"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Let <var>thisChain</var> be this <emu-nt id="_ref_242"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_56"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return <emu-xref aoid="EvaluateCall" id="_ref_57"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>baseValue</var>, <emu-nt id="_ref_243"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
 
-          <p>If <emu-nt id="_ref_241"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> (in <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
+          <p>If <emu-nt id="_ref_244"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> (in <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="eogoekck">
-        <emu-nt id="_ref_242"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
-        <emu-nt id="_ref_243"><a href="#prod-Arguments">Arguments</a></emu-nt>
+        <emu-nt id="_ref_245"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_246"><a href="#prod-Arguments">Arguments</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>) is, in turn, <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covering</a></emu-xref> the production <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="zrkd-xlz">
-        <emu-nt id="_ref_244"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_247"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_245"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_248"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
           <emu-alg><ol><li>Let <var>bindThisOptionalChain</var> be the <emu-grammar><emu-production name="OptionalChain" collapsed="" class=" inline">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="zrkd-xlz">
-        <emu-nt id="_ref_246"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_249"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_247"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_250"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
-</emu-grammar> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_248"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>bindThisRHS</var> be the <emu-nt id="_ref_249"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> of <var>bindThisOptionalChain</var>.</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_250"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <var>bindThisRHS</var>.</li><li>Let <var>thisRef</var> be the result of evaluating ? <emu-xref aoid="ChainEvaluation" id="_ref_58"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>thisOptionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>thisValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_59"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>thisRef</var>).</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_60"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Let <var>thisChain</var> be this <emu-nt id="_ref_251"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_61"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return <emu-xref aoid="EvaluateCall" id="_ref_62"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>thisValue</var>, <emu-nt id="_ref_252"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
+</emu-grammar> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_251"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>bindThisRHS</var> be the <emu-nt id="_ref_252"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt> of <var>bindThisOptionalChain</var>.</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_253"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <var>bindThisRHS</var>.</li><li>Let <var>thisRef</var> be the result of evaluating ? <emu-xref aoid="ChainEvaluation" id="_ref_58"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>thisOptionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>thisValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_59"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>thisRef</var>).</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_60"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Let <var>thisChain</var> be this <emu-nt id="_ref_254"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>tailCall</var> be <emu-xref aoid="IsInTailPosition" id="_ref_61"><a href="https://tc39.es/ecma262/#sec-isintailposition">IsInTailPosition</a></emu-xref>(<var>thisChain</var>).</li><li>Return <emu-xref aoid="EvaluateCall" id="_ref_62"><a href="https://tc39.es/ecma262/#sec-evaluatecall">EvaluateCall</a></emu-xref>(<var>func</var>, <var>thisValue</var>, <emu-nt id="_ref_255"><a href="#prod-Arguments">Arguments</a></emu-nt>, <var>tailCall</var>).</li></ol></emu-alg>
         </div></emu-note>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="jgl-kve-" id="prod-PNgnxyKa">
-        <emu-nt id="_ref_253"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_256"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>[</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>
         <emu-t>]</emu-t>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_254"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_63"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_64"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>If the code matched by this <emu-nt id="_ref_255"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return ?&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithExpressionKey" id="_ref_65"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-expression-key">EvaluatePropertyAccessWithExpressionKey</a></emu-xref>(<var>newValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_257"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_63"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_64"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>If the code matched by this <emu-nt id="_ref_258"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return ?&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithExpressionKey" id="_ref_65"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-expression-key">EvaluatePropertyAccessWithExpressionKey</a></emu-xref>(<var>newValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-Expression">Expression</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="lf2imwfr" id="prod-Il7WrbnC">
-        <emu-nt id="_ref_256"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_259"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_257"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_66"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_67"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>If the code matched by this <emu-nt id="_ref_258"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return !&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithIdentifierKey" id="_ref_68"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-identifier-key">EvaluatePropertyAccessWithIdentifierKey</a></emu-xref>(<var>newValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_260"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_66"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_67"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>If the code matched by this <emu-nt id="_ref_261"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> is <emu-xref href="#sec-strict-mode-code"><a href="https://tc39.es/ecma262/#sec-strict-mode-code">strict mode code</a></emu-xref>, let <var>strict</var> be <emu-val>true</emu-val>; else let <var>strict</var> be <emu-val>false</emu-val>.</li><li>Return !&nbsp;<emu-xref aoid="EvaluatePropertyAccessWithIdentifierKey" id="_ref_68"><a href="https://tc39.es/ecma262/#sec-evaluate-property-access-with-identifier-key">EvaluatePropertyAccessWithIdentifierKey</a></emu-xref>(<var>newValue</var>, <emu-nt><a href="https://tc39.es/ecma262/#prod-IdentifierName">IdentifierName</a></emu-nt>, <var>strict</var>).</li></ol></emu-alg>
         <ins class="block">
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="zrkd-xlz">
-        <emu-nt id="_ref_259"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_262"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>::</emu-t>
-        <emu-nt id="_ref_260"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
+        <emu-nt id="_ref_263"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
         <emu-note><span class="note">Note 3</span><div class="note-contents">
           <p>See also the <emu-xref href="#sec-bind-this-operator" id="_ref_4"><a href="#sec-bind-this-operator">bind-this operator</a></emu-xref>.</p>
         </div></emu-note>
-        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_261"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_69"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_70"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_262"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_263"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_71"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_72"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>newValue</var>, <var>func</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_264"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_69"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_70"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>Let <var>funcExpr</var> be the <emu-nt id="_ref_265"><a href="#prod-MemberExpression">MemberExpression</a></emu-nt> that is <emu-xref href="#sec-syntactic-grammar"><a href="https://tc39.es/ecma262/#sec-syntactic-grammar">covered</a></emu-xref> by <emu-nt id="_ref_266"><a href="#prod-SimpleMemberExpression">SimpleMemberExpression</a></emu-nt>.</li><li>Let <var>funcRef</var> be the result of evaluating <var>funcExpr</var>.</li><li>Let <var>func</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_71"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>funcRef</var>).</li><li>Return <emu-xref aoid="BindThis" id="_ref_72"><a href="#sec-extract-method">BindThis</a></emu-xref>(<var>newValue</var>, <var>func</var>).</li></ol></emu-alg>
         </ins>
         <emu-grammar><emu-production name="OptionalChain" collapsed="">
     <emu-nt><a href="#prod-OptionalChain">OptionalChain</a></emu-nt> <emu-geq>:</emu-geq> <emu-rhs a="dnp-fbqk" id="prod-5tv-oPv9">
-        <emu-nt id="_ref_264"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
+        <emu-nt id="_ref_267"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>
         <emu-t>.</emu-t>
         <emu-nt>PrivateIdentifier</emu-nt>
     </emu-rhs>
 </emu-production>
 </emu-grammar>
-        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_265"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_73"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_74"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>Let <var>fieldNameString</var> be the StringValue of <emu-nt>PrivateIdentifier</emu-nt>.</li><li>Return !&nbsp;MakePrivateReference(<var>newValue</var>, <var>fieldNameString</var>).</li></ol></emu-alg>
+        <emu-alg><ol><li>Let <var>optionalChain</var> be <emu-nt id="_ref_268"><a href="#prod-OptionalChain">OptionalChain</a></emu-nt>.</li><li>Let <var>newReference</var> be ? <emu-xref aoid="ChainEvaluation" id="_ref_73"><a href="#sec-optional-chaining-chain-evaluation">ChainEvaluation</a></emu-xref> of <var>optionalChain</var> with arguments <var>baseValue</var> and <var>baseReference</var>.</li><li>Let <var>newValue</var> be ?&nbsp;<emu-xref aoid="GetValue" id="_ref_74"><a href="https://tc39.es/ecma262/#sec-getvalue">GetValue</a></emu-xref>(<var>newReference</var>).</li><li>Let <var>fieldNameString</var> be the StringValue of <emu-nt>PrivateIdentifier</emu-nt>.</li><li>Return !&nbsp;MakePrivateReference(<var>newValue</var>, <var>fieldNameString</var>).</li></ol></emu-alg>
       </emu-clause>
     </emu-clause>
   </emu-clause>
