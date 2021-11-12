@@ -286,7 +286,7 @@ contributors: J. S. Choi
         OptionalChain[?Yield, ?Await] `[` Expression[+In, ?Yield, ?Await] `]`
         OptionalChain[?Yield, ?Await] `.` IdentifierName
         <ins class="block">
-        OptionalChain[?Yield, ?Await] `::` SimpleMemberExpression[?Yield, ?Await]
+        OptionalChain[?Yield, ?Await] `::` SimpleMemberExpression[?Yield, ?Await] [lookahead != `.`]
         OptionalChain[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
         OptionalChain[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
