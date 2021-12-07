@@ -152,8 +152,8 @@ In short:
 ### `.bind` and `.call` are very common
 The dynamic `this` binding is a fundamental part of JavaScript design and
 practice today. Because of this, developers frequently need to change the `this`
-binding. `.bind` and `.call` are arguably three of the most commonly used
-functions in all JavaScript.
+binding. `.bind` and `.call` are arguably two of the most commonly used
+functions in all of JavaScript.
 
 We can estimate `.bind` and `.call`’s prevalences using [Node Gzemnid][].
 Although [Gzemnid can be deceptive][], we are only seeking rough estimations.
