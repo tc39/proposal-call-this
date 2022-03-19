@@ -1,10 +1,10 @@
 {
   "private": true,
-  "name": "proposal-bind-this",
-  "description": "Draft specification for a bind-this operator in JavaScript.",
+  "name": "proposal-call-this",
+  "description": "Draft specification for a call-this operator in JavaScript.",
   "author": "J. S. Choi <jschoi@jschoi.org> (https://jschoi.org/)",
   "license": "MIT",
-  "repository": "github:js-choi/proposal-bind-operator",
+  "repository": "github:tc39/proposal-call-operator",
   "scripts": {
     "prebuild": "mkdir -p dist",
     "build": "ecmarkup --verbose spec.html dist/index.html --css dist/ecmarkup.css --js dist/ecmarkup.js",

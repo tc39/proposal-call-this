@@ -1,4 +1,7 @@
 # The extensions system and the bind-`this` operator
+
+**This document is out of date!**
+
 There are two proposals that do similar things.
 
 * A [proposal for an extensions system][extensions system]:
@@ -17,7 +20,7 @@ In brief, the concrete differences are:
 
 <thead>
 
-<th>extensions system
+<th>Extensions system
 <th>Bind-<code>this</code> operator
 
 </thead>
