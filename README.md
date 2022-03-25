@@ -15,6 +15,14 @@ proposals](#related-proposals).
 [extensions]: https://github.com/tc39/proposal-extensions
 
 ## Syntax
+
+The syntax is being bikeshedded in [issue #10][].
+
+[issue #10]: https://github.com/tc39/proposal-call-this/issues/10
+
+<details>
+<summary>Tentative syntax</summary>
+
 ```js
 receiver :> fn(arg0, arg1)
 receiver :> ns.fn(arg0, arg1)
@@ -66,7 +74,17 @@ A series of argument expressions, which may include spread `...` syntax.
 
 </dl>
 
+</details>
+
 ## Description
+
+The syntax is being bikeshedded in [issue #10][].
+
+[issue #10]: https://github.com/tc39/proposal-call-this/issues/10
+
+<details>
+<summary>Tentative description</summary>
+
 (A [formal specification][] is available.)
 
 The call-this operator `:>` is a **left-associative** binary operator. It calls
@@ -125,6 +143,8 @@ A `new` expression may **not** contain a call-this expression without
 parentheses. `new x :> fn()` is a SyntaxError.
 Otherwise, `new x :> fn()` would be visually ambiguous between\
 `(new x) :> fn()` and `new (x :> fn())`.
+
+</details>
 
 ## Why a call-this operator
 In short:
