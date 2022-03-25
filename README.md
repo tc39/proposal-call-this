@@ -242,7 +242,7 @@ These excluded patterns were determined by an independent investigator ([Scott
 Jamison][]), after [manually reviewing the first 10,000 occurrences of `.call`
 in the dataset][review] for why each occurrence occurred.
 
-[review]: https://github.com/js-choi/proposal-call-this/issues/12
+[review]: https://github.com/tc39/proposal-call-this/issues/12
 
 The excluded `[^a-zA-Z][A-Z][a-zA-Z0-9_$]*\.call\( *this` pattern deserves a
 special note. This pattern matches any capitalized identifier followed by
