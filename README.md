@@ -155,7 +155,7 @@ In short:
 [bind]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 [call]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call
 
-### `.call` are very common
+### `.call` is very common
 The dynamic `this` binding is a fundamental part of JavaScript design and
 practice today. Because of this, developers frequently need to change the
 `this` binding. `.call` is arguably one of the most commonly used functions in
