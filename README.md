@@ -277,16 +277,66 @@ comparison.
 
 </details>
 
+***
+
+There are a variety of reasons why developers use `.call`. These include:
+
+**Wrapping** a receiver’s method before calling it:
+
+```js
+// Wrapping a receiver’s method before calling it:
+assertFunction(obj.f).call(obj, f);
+
+// From bluebird@3.5.5.
+tryCatch(item).call(boundTo, e);
+```
+
+**Conditionally switching** a call between two methods:
+
+```js
+const method = obj.f ?? obj.g;
+method.call(obj, arg0, arg1);
+
+// From debug@4.1.1.
+// createDebug is an object either for Node or for web browsers.
+createDebug.formatArgs.call(self, args);
+```
+
+**Reusing** an **original** method on a **monkey-patched** object:
+
+```js
+// From graceful-fs@4.1.15.
+return fs$read.call(fs, fd, /*…*/)
+```
+
+**Protecting** a method call from **prototype pollution**:
+```js
+// From lodash@4.17.11.
+// Object.prototype.toString was cached as nativeObjectToString.
+nativeObjectToString.call(value);
+```
+
+…and other reasons. Developers do all of this using `.call`, and the sum of
+these uses propels `.call` to being one of the most used operations in the
+entire language.
+
 ### `.call` is clunky
-JavaScript developers are used to using methods in a [noun–verb–noun word
+In spite of its frequency, .call is clunky and poorly readable. It separates the function from its receiver and arguments with boilerplate, and it flips the “natural” word order, resulting in a verb`.call`–subject–object word order:
+
+```js
+fn.call(rec, arg0).
+```
+
+JavaScript developers are used to using methods in a [subject–verb–object word
 order][] that resembles English and other [SVO human languages][]. This pattern
-is ubiquitous in JavaScript as dot method calls: `receiver.method(arg)`.
+is ubiquitous in JavaScript as dot method calls:
 
+```js
+rec.method(arg0).
+```
+
+[subject–verb–object word order]: https://en.wikipedia.org/wiki/Subject–verb–object
 [SVO human languages]: https://en.wikipedia.org/wiki/Category:Subject–verb–object_languages
-
-However, `.call` flips this “natural” word order, They flip the first
-noun and the verb, and they interpose the verb’s `Function.prototype` method
-between them: `method.call(receiver, arg)`.
 
 Consider the following real-life code using `.call`, and compare them
 to versions that use the call-this operator. The difference is especially
@@ -327,8 +377,6 @@ validate = self~>macro(schema, parentSchema, it);
 return fs$read.call(fs, fd, buffer, offset, length, position, callback)
 return fs~>fs$read(fd, buffer, offset, length, position, callback)
 ```
-
-[noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
 
 ## Non-goals
 A goal of this proposal is **simplicity**. Therefore, this proposal
