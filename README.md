@@ -97,7 +97,7 @@ For example, `receiver~>fn(arg0, arg1)` would be equivalent to
 code elsewhere reassigns the global method `Function.prototype.call`).
 
 Likewise, `receiver~>(createFn())(arg0, arg1)` would be roughly equivalent to
-`createFn().call(receiver)`.
+`createFn().call(receiver, arg0, arg1)`.
 
 If the operator’s right-hand side does not evaluate to a function during
 runtime, then the program throws a TypeError.
