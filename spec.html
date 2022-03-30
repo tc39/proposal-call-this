@@ -15,7 +15,7 @@ contributors: J. S. Choi
   <p><strong>Warning! This spec is out of date!</strong></p>
 
   <p>This is the formal specification
-  for a proposed bind-this operator `::` in JavaScript.
+  for a proposed bind-this operator `~>` in JavaScript.
   It modifies the original <a
   href=https://tc39.github.io/ecma262/>ECMAScript specification</a> with
   several new or revised clauses. See <a
@@ -77,8 +77,8 @@ contributors: J. S. Choi
           `(` Expression `)`
 
         BindThisExpression :
-          MemberExpression `::` SimpleMemberExpression
-          BindThisExpression `::` SimpleMemberExpression
+          MemberExpression `~>` SimpleMemberExpression
+          BindThisExpression `~>` SimpleMemberExpression
         </ins>
       </emu-grammar>
       <emu-alg>
@@ -138,10 +138,10 @@ contributors: J. S. Choi
       <emu-grammar>
         <ins class="block">
         BindThisExpression :
-          MemberExpression `::` SimpleMemberExpression
-          MemberExpression `::` TemplateLiteral
-          BindThisExpression `::` SimpleMemberExpression
-          BindThisExpression `::` TemplateLiteral
+          MemberExpression `~>` SimpleMemberExpression
+          MemberExpression `~>` TemplateLiteral
+          BindThisExpression `~>` SimpleMemberExpression
+          BindThisExpression `~>` TemplateLiteral
         </ins>
 
         CallExpression :
@@ -152,7 +152,7 @@ contributors: J. S. Choi
           CallExpression Arguments
           CallExpression `[` Expression `]`
           CallExpression `.` IdentifierName
-          <ins>CallExpression `::` SimpleMemberExpression</ins>
+          <ins>CallExpression `~>` SimpleMemberExpression</ins>
           CallExpression TemplateLiteral
           CallExpression `.` PrivateIdentifier
       </emu-grammar>
@@ -176,9 +176,9 @@ contributors: J. S. Choi
     </emu-note>
 
     <emu-grammar>
-      OtherPunctuator :: one of
+      OtherPunctuator ~> one of
         `{` `(` `)` `[` `]`
-        `.` <ins>`::`</ins> `...` `;` `,`
+        `.` <ins>`~>`</ins> `...` `;` `,`
         `&lt;` `&gt;` `&lt;=` `&gt;=`
         `==` `!=` `===` `!==`
         `+` `-` `*` `%` `**`
@@ -234,10 +234,10 @@ contributors: J. S. Choi
 
       <ins class="block">
       BindThisExpression[Yield, Await] :
-        MemberExpression[?Yield, ?Await] `::` SimpleMemberExpression[?Yield, ?Await]
-        MemberExpression[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await]
-        BindThisExpression[?Yield, ?Await] `::` SimpleMemberExpression[?Yield, ?Await]
-        BindThisExpression[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await]
+        MemberExpression[?Yield, ?Await] `~>` SimpleMemberExpression[?Yield, ?Await]
+        MemberExpression[?Yield, ?Await] `~>` TemplateLiteral[?Yield, ?Await]
+        BindThisExpression[?Yield, ?Await] `~>` SimpleMemberExpression[?Yield, ?Await]
+        BindThisExpression[?Yield, ?Await] `~>` TemplateLiteral[?Yield, ?Await]
       </ins>
 
       CallExpression[Yield, Await] :
@@ -249,8 +249,8 @@ contributors: J. S. Choi
         CallExpression[?Yield, ?Await] `[` Expression[+In, ?Yield, ?Await] `]`
         CallExpression[?Yield, ?Await] `.` IdentifierName
         <ins class="block">
-        CallExpression[?Yield, ?Await] `::` SimpleMemberExpression[?Yield, ?Await]
-        CallExpression[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await, +Tagged]
+        CallExpression[?Yield, ?Await] `~>` SimpleMemberExpression[?Yield, ?Await]
+        CallExpression[?Yield, ?Await] `~>` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
         CallExpression[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
         CallExpression[?Yield, ?Await] `.` PrivateIdentifier
@@ -282,15 +282,15 @@ contributors: J. S. Choi
         `?.` Arguments[?Yield, ?Await]
         `?.` `[` Expression[+In, ?Yield, ?Await] `]`
         `?.` IdentifierName
-        <ins>`?.` `::` SimpleMemberExpression[?Yield, ?Await]</ins>
+        <ins>`?.` `~>` SimpleMemberExpression[?Yield, ?Await]</ins>
         `?.` TemplateLiteral[?Yield, ?Await, +Tagged]
         `?.` PrivateIdentifier
         OptionalChain[?Yield, ?Await] Arguments[?Yield, ?Await]
         OptionalChain[?Yield, ?Await] `[` Expression[+In, ?Yield, ?Await] `]`
         OptionalChain[?Yield, ?Await] `.` IdentifierName
         <ins class="block">
-        OptionalChain[?Yield, ?Await] `::` SimpleMemberExpression[?Yield, ?Await] [lookahead != `.`]
-        OptionalChain[?Yield, ?Await] `::` TemplateLiteral[?Yield, ?Await, +Tagged]
+        OptionalChain[?Yield, ?Await] `~>` SimpleMemberExpression[?Yield, ?Await] [lookahead != `.`]
+        OptionalChain[?Yield, ?Await] `~>` TemplateLiteral[?Yield, ?Await, +Tagged]
         </ins>
         OptionalChain[?Yield, ?Await] TemplateLiteral[?Yield, ?Await, +Tagged]
         OptionalChain[?Yield, ?Await] `.` PrivateIdentifier
@@ -318,8 +318,8 @@ contributors: J. S. Choi
         <ins class="block">
         <emu-grammar>
           BindThisExpression :
-            MemberExpression `::` TemplateLiteral
-            BindThisExpression `::` TemplateLiteral
+            MemberExpression `~>` TemplateLiteral
+            BindThisExpression `~>` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -329,7 +329,7 @@ contributors: J. S. Choi
         <emu-note>
           <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-this operator:</p>
           <pre><code class="javascript">
-            a::b
+            a~>b
             `c`
           </code></pre>
           <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-this operator:</p>
@@ -342,7 +342,7 @@ contributors: J. S. Choi
 
         <emu-grammar>
           CallExpression :
-            CallExpression `::` TemplateLiteral
+            CallExpression `~>` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -352,7 +352,7 @@ contributors: J. S. Choi
         <emu-note>
           <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-this operator:</p>
           <pre><code class="javascript">
-            a()::b
+            a()~>b
             `c`
           </code></pre>
           <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-this operator:</p>
@@ -365,7 +365,7 @@ contributors: J. S. Choi
 
         <emu-grammar>
           OptionalChain :
-            OptionalChain `::` TemplateLiteral
+            OptionalChain `~>` TemplateLiteral
         </emu-grammar>
         <ul>
           <li>
@@ -375,7 +375,7 @@ contributors: J. S. Choi
         <emu-note>
           <p>This production exists in order to prevent automatic semicolon insertion rules (<emu-xref href="#sec-automatic-semicolon-insertion"></emu-xref>) from being applied to the following code with the bind-this operator:</p>
           <pre><code class="javascript">
-            a?.()::b
+            a?.()~>b
             `c`
           </code></pre>
           <p>so that it would be interpreted as two valid statements. The purpose is to maintain consistency with similar code without the bind-this operator:</p>
@@ -465,10 +465,10 @@ contributors: J. S. Choi
 
           <emu-note>
             <p>For evaluation of the production <emu-grammar>CallExpression : BindThisExpression Arguments</emu-grammar>, see clause <emu-xref href=#sec-function-calls-runtime-semantics-evaluation></emu-xref>.</p>
-            <p>For evaluation of the productions <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar> and <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar>, see clause <emu-xref href=#sec-function-calls-runtime-semantics-evaluation></emu-xref>.</p>
+            <p>For evaluation of the productions <emu-grammar>OptionalChain : `?.` `~>` SimpleMemberExpression</emu-grammar> and <emu-grammar>OptionalChain : OptionalChain `~>` SimpleMemberExpression</emu-grammar>, see clause <emu-xref href=#sec-function-calls-runtime-semantics-evaluation></emu-xref>.</p>
           </emu-note>
 
-          <emu-grammar>BindThisExpression : MemberExpression `::` SimpleMemberExpression</emu-grammar>
+          <emu-grammar>BindThisExpression : MemberExpression `~>` SimpleMemberExpression</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |MemberExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -478,7 +478,7 @@ contributors: J. S. Choi
             1. Return BindThis(_baseValue_, _func_).
           </emu-alg>
 
-          <emu-grammar>BindThisExpression : BindThisExpression `::` SimpleMemberExpression</emu-grammar>
+          <emu-grammar>BindThisExpression : BindThisExpression `~>` SimpleMemberExpression</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |BindThisExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -488,7 +488,7 @@ contributors: J. S. Choi
             1. Return BindThis(_baseValue_, _func_).
           </emu-alg>
 
-          <emu-grammar>CallExpression : CallExpression `::` SimpleMemberExpression</emu-grammar>
+          <emu-grammar>CallExpression : CallExpression `~>` SimpleMemberExpression</emu-grammar>
           <emu-alg>
             1. Let _baseReference_ be the result of evaluating |CallExpression|.
             1. Let _baseValue_ be ? GetValue(_baseReference_).
@@ -620,7 +620,7 @@ contributors: J. S. Choi
           1. Return ! EvaluatePropertyAccessWithIdentifierKey(_baseValue_, |IdentifierName|, _strict_).
         </emu-alg>
         <ins class="block">
-        <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar>
+        <emu-grammar>OptionalChain : `?.` `~>` SimpleMemberExpression</emu-grammar>
         <emu-note>
           <p>See also the <emu-xref href=#sec-bind-this-operator>bind-this operator</emu-xref>.</p>
         </emu-note>
@@ -646,9 +646,9 @@ contributors: J. S. Choi
           1. Return ? EvaluateCall(_newValue_, _newReference_, |Arguments|, _tailCall_).
         </emu-alg>
         <emu-note>
-          <p>If |OptionalChain| (in <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>) is, in turn, covering the production <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
+          <p>If |OptionalChain| (in <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>) is, in turn, covering the production <emu-grammar>OptionalChain : `?.` `~>` SimpleMemberExpression</emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
           <emu-alg>
-            1. Let _optionalBindThisChain_ be the <emu-grammar>OptionalChain : `?.` `::` SimpleMemberExpression</emu-grammar> that is covered by |OptionalChain|.
+            1. Let _optionalBindThisChain_ be the <emu-grammar>OptionalChain : `?.` `~>` SimpleMemberExpression</emu-grammar> that is covered by |OptionalChain|.
             1. Let _bindThisRHS_ be the |SimpleMemberExpression| of _optionalBindThisChain_.
             1. Let _funcExpr_ be the |MemberExpression| that is covered by _bindThisRHS_.
             1. Let _funcRef_ be the result of evaluating _funcExpr_.
@@ -658,9 +658,9 @@ contributors: J. S. Choi
             1. Return EvaluateCall(_func_, _baseValue_, |Arguments|, _tailCall_).
           </emu-alg>
 
-          <p>If |OptionalChain| (in <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>) is, in turn, covering the production <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
+          <p>If |OptionalChain| (in <emu-grammar>OptionalChain : OptionalChain Arguments</emu-grammar>) is, in turn, covering the production <emu-grammar>OptionalChain : OptionalChain `~>` SimpleMemberExpression</emu-grammar>, then the preceding algorithm is indistinguishable from the following:</p>
           <emu-alg>
-            1. Let _bindThisOptionalChain_ be the <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar> that is covered by |OptionalChain|.
+            1. Let _bindThisOptionalChain_ be the <emu-grammar>OptionalChain : OptionalChain `~>` SimpleMemberExpression</emu-grammar> that is covered by |OptionalChain|.
             1. Let _bindThisRHS_ be the |SimpleMemberExpression| of _bindThisOptionalChain_.
             1. Let _funcExpr_ be the |MemberExpression| that is covered by _bindThisRHS_.
             1. Let _thisRef_ be the result of evaluating ? ChainEvaluation of _thisOptionalChain_ with arguments _baseValue_ and _baseReference_.
@@ -689,7 +689,7 @@ contributors: J. S. Choi
           1. Return ! EvaluatePropertyAccessWithIdentifierKey(_newValue_, |IdentifierName|, _strict_).
         </emu-alg>
         <ins class="block">
-        <emu-grammar>OptionalChain : OptionalChain `::` SimpleMemberExpression</emu-grammar>
+        <emu-grammar>OptionalChain : OptionalChain `~>` SimpleMemberExpression</emu-grammar>
         <emu-note>
           <p>See also the <emu-xref href=#sec-bind-this-operator>bind-this operator</emu-xref>.</p>
         </emu-note>

@@ -24,9 +24,9 @@ The syntax is being bikeshedded in [issue #10][].
 <summary>Tentative syntax</summary>
 
 ```js
-receiver :> fn(arg0, arg1)
-receiver :> ns.fn(arg0, arg1)
-receiver :> (expr)(arg0, arg1)
+receiver~>fn(arg0, arg1)
+receiver~>ns.fn(arg0, arg1)
+receiver~>(expr)(arg0, arg1)
 ```
 
 <dl>
@@ -87,16 +87,16 @@ The syntax is being bikeshedded in [issue #10][].
 
 (A [formal specification][] is available.)
 
-The call-this operator `:>` is a **left-associative** binary operator. It calls
+The call-this operator `~>` is a **left-associative** binary operator. It calls
 its right-hand side (a **function**), binding its `this` value to its left-hand
 side (a **receiver** value), as well well as any given arguments – in the same
 manner as [`Function.prototype.call`][call].
 
-For example, `receiver :> fn(arg0, arg1)` would be equivalent to
+For example, `receiver~>fn(arg0, arg1)` would be equivalent to
 `fn.call(receiver, arg0, arg1)` (except that its behavior does not change if
 code elsewhere reassigns the global method `Function.prototype.call`).
 
-Likewise, `receiver :> (createFn())(arg0, arg1)` would be roughly equivalent to
+Likewise, `receiver~>(createFn())(arg0, arg1)` would be roughly equivalent to
 `createFn().call(receiver)`.
 
 If the operator’s right-hand side does not evaluate to a function during
@@ -111,10 +111,10 @@ short-circuited by optional expressions in its left-hand side.
 
 | Left-hand side                  | Example            | Grouping
 | ------------------------------- | ------------------ | --------------------
-| Member expressions              |`obj.prop :> fn(a)` |`(obj.prop) :> fn(a)`
-| Call expressions                |`obj() :> fn(a)`    |`(obj()) :> fn(a)`
-| Optional expressions            |`obj?.prop :> fn(a)`|`(obj?.prop) :> fn(a)`
-|`new` expressions with arguments |`new C() :> fn(a)`  |`(new C()) :> fn(a)`
+| Member expressions              |`obj.prop~>fn(a)` |`(obj.prop)~>fn(a)`
+| Call expressions                |`obj()~>fn(a)`    |`(obj())~>fn(a)`
+| Optional expressions            |`obj?.prop~>fn(a)`|`(obj?.prop)~>fn(a)`
+|`new` expressions with arguments |`new C()~>fn(a)`  |`(new C())~>fn(a)`
 
 The operator’s **right**-hand side, as with decorators, may be one of
 the following:
@@ -122,27 +122,27 @@ the following:
 * A **chain** of identifiers and/or private fields (like `ns.fn` or `this.ns.#field`).
 * A parenthesized **expression** (like `(createFn())`).
 
-For example, `receiver :> ns.ns.ns.fn` groups as `receiver :> (ns.ns.ns.fn)`.
+For example, `receiver~>ns.ns.ns.fn` groups as `receiver~>(ns.ns.ns.fn)`.
 
 Similarly to the `.` and `?.` operators,
 the call-this operator may be **padded** by whitespace or not.\
-For example, `receiver :> fn`\
-is equivalent to `receiver:>fn`,\
-and `receiver :> (createFn())`\
-is equivalent to `receiver:>(createFn())`.
+For example, `receiver~>fn`\
+is equivalent to `receiver~>fn`,\
+and `receiver~>(createFn())`\
+is equivalent to `receiver~>(createFn())`.
 
-The call-this operator may be optionally chained with `?.` (i.e., `?.:>`):\
-`receiver :> fn` will always result in a bound function,
+The call-this operator may be optionally chained with `?.` (i.e., `?.~>`):\
+`receiver~>fn` will always result in a bound function,
 regardless of whether `receiver` is nullish.\
-`receiver ?.:> fn` will result in `null` or `undefined`
+`receiver ?.~>fn` will result in `null` or `undefined`
 if `receiver` is `null` or `undefined`.\
-`receiver ?.:> fn(arg)` also short-circuits as usual, before `arg` is
+`receiver ?.~>fn(arg)` also short-circuits as usual, before `arg` is
 evaluated, if `receiver` is nullish.
 
 A `new` expression may **not** contain a call-this expression without
-parentheses. `new x :> fn()` is a SyntaxError.
-Otherwise, `new x :> fn()` would be visually ambiguous between\
-`(new x) :> fn()` and `new (x :> fn())`.
+parentheses. `new x~>fn()` is a SyntaxError.
+Otherwise, `new x~>fn()` would be visually ambiguous between\
+`(new x)~>fn()` and `new (x~>fn())`.
 
 </details>
 
@@ -295,37 +295,37 @@ evident when you read them aloud.
 ```js
 // kind-of@6.0.2/index.js
 type = toString.call(val);
-type = val :> toString();
+type = val~>toString();
 
 // debug@4.1.1/src/common.js
 match = formatter.call(self, val);
-match = self :> formatter(val);
+match = self~>formatter(val);
 
 createDebug.formatArgs.call(self, args);
-self :> createDebug.formatArgs(args);
+self~>createDebug.formatArgs(args);
 
 // rxjs@6.5.2/src/internal/operators/every.ts
 result = this.predicate.call(this.thisArg, value, this.index++, this.source);
-result = this.thisArg :> this.predicate(value, this.index++, this.source);
+result = this.thisArg~>this.predicate(value, this.index++, this.source);
 
 // bluebird@3.5.5/js/release/synchronous_inspection.js
 return isPending.call(this._target());
-return this._target() :> isPending();
+return this._target()~>isPending();
 
 var matchesPredicate = tryCatch(item).call(boundTo, e);
-var matchesPredicate = boundTo :> (tryCatch(item))(e);
+var matchesPredicate = boundTo~>(tryCatch(item))(e);
 
 // async@3.0.1/internal/initialParams.js
 var callback = args.pop(); return fn.call(this, args, callback);
-var callback = args.pop(); return this :> fn(args, callback);
+var callback = args.pop(); return this~>fn(args, callback);
 
 // ajv@6.10.0/lib/ajv.js
 validate = macro.call(self, schema, parentSchema, it);
-validate = self :> macro(schema, parentSchema, it);
+validate = self~>macro(schema, parentSchema, it);
 
 // graceful-fs@4.1.15/polyfills.js
 return fs$read.call(fs, fd, buffer, offset, length, position, callback)
-return fs :> fs$read(fd, buffer, offset, length, position, callback)
+return fs~>fs$read(fd, buffer, offset, length, position, callback)
 ```
 
 [noun–verb–noun word order]: https://en.wikipedia.org/wiki/Subject–verb–object
@@ -362,7 +362,7 @@ const { get: $getSize } =
 delete Set; delete Function;
 
 // Our own trusted code, running later.
-new Set([0, 1, 2]) :> $getSize();
+new Set([0, 1, 2])~>$getSize();
 ```
 
 [syntactic salt]: https://en.wikipedia.org/wiki/Syntactic_sugar#Syntactic_salt
@@ -436,7 +436,7 @@ Object.keys(envars)
 // Adapted from chalk@2.4.2/index.js
 return this._styles
   |> (^ ? ^.concat(codes) : [codes])
-  |> this :> build(^, this._empty, key);
+  |> this~>build(^, this._empty, key);
 ```
 
 [pipe repo]: https://github.com/tc39/proposal-pipeline-operator
@@ -445,7 +445,7 @@ return this._styles
 [PFA (partial function application) syntax][PFA] `~()` would tersely create
 partially applied functions.
 
-PFA syntax `~()` and call-this `:>` are also complementary and handle different
+PFA syntax `~()` and call-this `~>` are also complementary and handle different
 use cases.
 
 For example, `obj.method~()` would handle method extraction with implicit
@@ -460,13 +460,13 @@ n.on("click", v.reset~())
 ```
 
 In contrast, call-this changes the receiver of a function call.
-`receiver :> fn()`. (This unbound function might have already been extracted
+`receiver~>fn()`. (This unbound function might have already been extracted
 from another object.) PFA syntax does not address this use case.
 
 ```js
 // bluebird@3.5.5/js/release/synchronous_inspection.js
 isPending.call(this._target())
-this._target() :> isPending()
+this._target()~>isPending()
 ```
 
 [PFA]: https://github.com/tc39/proposal-partial-application
