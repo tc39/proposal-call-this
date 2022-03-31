@@ -378,6 +378,49 @@ return fs$read.call(fs, fd, buffer, offset, length, position, callback)
 return fs~>fs$read(fd, buffer, offset, length, position, callback)
 ```
 
+In short:
+
+**Very common
+× Very clunky
+= Worth improving with syntax**.
+
+## Concerns about ecosystem schism
+> The answer to whether multiple ways or syntaxes of doing something are
+> harmful critically depends on the duplication’s effect on APIs and how viral
+> it is.
+>
+> Suppose we’re considering having two syntaxes 𝘟 and 𝘠 to use APIs. If
+> module or person 𝘈 uses syntax 𝘟 which interoperates better with syntax 𝘟
+> than syntax 𝘠 and that pressures module or person 𝘉 to use syntax 𝘟 in
+> their new APIs to interoperate with person 𝘈’s APIs, that virality
+> encourages ecosystem forking and API wars. Introducing multiple such ways
+> into the language is bad.
+>
+> “On the other hand, if person 𝘈’s choice of syntax [i.e., 𝘟] has no effect
+> on person 𝘉[’s choice of syntax, 𝘠,] and they can interoperate without any
+> hassles, then that’s generally benign.”
+
+[From the 2022-01-27 dataflow meeting](https://github.com/tc39/incubator-agendas/blob/main/notes/2022/01-27.md#tmtowtdi-and-overlap-between-hack-pipes-and-bind-this).
+
+* **𝘟**: Some APIs (like “**functional**” APIs) use non-`this`-based ƒs.
+* **𝘠**: Some APIs (like “**object-oriented**” APIs) use `this`-based ƒs.
+
+This schism between 𝘟 APIs and 𝘠 APIs is already is built into the language.
+The schism is such that prominent APIs like the [Firebase JS SDK have
+switched][] from 𝘠 to 𝘟 (e.g., for module splitting).
+
+[Firebase JS SDK have switched]: https://firebase.blog/posts/2021/08/deep-dive-into-the-new-firebase-js-sdk-design
+
+But the call-this operator, together with the [pipe operator `|>`][pipe
+operator], would make interoperability between 𝘟 and 𝘠 more fluid – and it
+would make the choice between 𝘟 and 𝘠 less viral – bridging the schism:
+
+```js
+import { x0, x1 } from '𝘟';
+import { y0, y1 } from '𝘠';
+input |> x0(@)~>y0() |> x1(@)~>y1();
+```
+
 ## Non-goals
 A goal of this proposal is **simplicity**. Therefore, this proposal
 purposefully does *not* address the following use cases:
@@ -467,6 +510,31 @@ operators:
 
 In contrast, the pipe operator is designed to generally linearize all other
 kinds of expressions.
+
+`|>` does not improve .call’s clunkiness. Here is the clunky (and frequent)
+status quo again:
+
+```js
+fn.call(rec, arg0)
+```
+
+Introducing the [pipe operator `|>`][pipe operator] fixes **word order**, but the result is even **less** readable. Excessive boilerplate separates the function from its receiver and arguments:
+
+```js
+rec |> fn.call(@, arg0) // Less readable.
+```
+
+Only a separate operator can improve the word order without otherwise
+compromising readability:
+
+```js
+rec~>fn(arg0)
+```
+
+The pipe champion group have been investigating whether it is possible to
+modify the pipe operator to address .call’s clunkiness while still addressing
+pipe’s other use cases (e.g., non-this-based, n-ary function calls; async
+function calls). It has still found none except a separate operator.
 
 Just like how the pipe operator coexists with property access:
 ```js
