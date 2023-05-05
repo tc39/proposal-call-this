@@ -4,7 +4,7 @@ ECMAScript Stage-1 Proposal. J. S. Choi, 2021.
 * **[Formal specification][]**
 * Babel plugin: Not yet
 
-[formal specification]: http://jschoi.org/21/es-bind-operator/
+[formal specification]: https://tc39.es/proposal-call-this/
 
 This proposal is a **resurrection** of the old [Stage-0 bind-operator
 proposal][old bind]. It is also an alternative, **competing** proposal to the
