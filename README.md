@@ -173,12 +173,12 @@ downloaded NPM packages.
 | Occurrences | Method      |
 | ----------: | ----------- |
 | 1,016,503   |`.map`       |
+| 701,169     |`.push`      |
 | 315,922     |**`.call`**  |
 | 271,915     |`console.log`|
 | 182,292     |`.slice`     |
 | 170,248     |`.bind`      |
 | 168,872     |`.set`       |
-| 70,116      |`.push`      |
 
 These results suggest that usage of `.call` is comparable to usage of other
 frequently used standard functions. In this dataset, its usage exceeds even
@@ -237,7 +237,7 @@ slim.topcode.1000.txt.lz4
 > ./search.topcode.sh '\.set\b' | awk 'END { print NR }'
 168872
 > ./search.topcode.sh '\.push\b' | awk 'END { print NR }'
-70116
+701169
 ```
 
 Note that, for `.call`, we use `grep` to exclude several irrelevant occurrences
